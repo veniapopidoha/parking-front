@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { MainPage } from './Pages/MainPage';
 import { persistor, store } from './Redux/store';
 
+export const backLink = 'http://localhost:5000'
+
 function App() {
   return (
     <>

@@ -117,7 +117,20 @@ export const Registration = (props) => {
         password: password,
       })
       .then(() => {
-        window.location.replace('');
+        window.location.replace('http://localhost:3000/');
+        dispatch({ type: 'AUTH', payload: true });
+        dispatch({
+          type: 'ADD_USER_DATA',
+          payload: {
+            name,
+            unit,
+            email: userData.email,
+            id: userData.id,
+            status: userData.status,
+            object: userData.object,
+            numberOfRegistration: userData.numberOfRegistration,
+          },
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -142,7 +155,7 @@ export const Registration = (props) => {
     <>
       {loading ? (
         <>loading...</>
-      ) : userData.name ? (
+      ) : userData.name != undefined ? (
         <SignIn />
       ) : (
         <Wrap>

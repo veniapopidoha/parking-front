@@ -14,7 +14,7 @@ export const Auth = () => {
       ) : status === 'employee' ? (
         <>Employee</>
       ) : status === 'client' ? (
-        <Resident />
+        <>Client</>
       ) : (
         <Resident />
       )}

@@ -45,6 +45,7 @@ export const Button = styled.button`
   font-weight: 700;
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.27px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
 export const Error = styled.h3`
