@@ -58,7 +58,7 @@ export const ManagerPage = () => {
             <img
               src={Pencil}
               alt="icon"
-              style={{ width: "27px", height: "23px" }}
+              style={{ width: "34px", height: "34px" }}
             />
           </Button>
           <Button>Car list</Button>
