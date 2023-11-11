@@ -1,44 +1,44 @@
-import { Button, Container, Error, Form, Title, Wrap } from './style';
+import { Button, Container, Error, Form, Title, Wrap } from "./style";
 import {
   Icon,
   IconContainer,
   InputWrap,
   StyledInput,
-} from '../../Components/Input/style';
-import user from '../../images/user.svg';
-import home from '../../images/home.png';
-import passwordIcon from '../../images/password.svg';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { SignIn } from '../SignIn';
-import { useDispatch } from 'react-redux';
+} from "../../Components/Input/style";
+import user from "../../images/user.svg";
+import home from "../../images/home.png";
+import passwordIcon from "../../images/password.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { SignIn } from "../SignIn";
+import { useDispatch } from "react-redux";
 
 export const Registration = (props) => {
   const dispatch = useDispatch();
   const [loading, setloading] = useState(false);
-  const [userData, setUserData] = useState('');
-  const [name, setName] = useState('');
-  const [unit, setUnit] = useState('');
-  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState("");
+  const [name, setName] = useState("");
+  const [unit, setUnit] = useState("");
+  const [password, setPassword] = useState("");
   const [nameEmpty, setNameEmpty] = useState(false);
   const [unitEmpty, setUnitEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
   const [errors, setErrors] = useState({
-    nameError: 'Please fill your name',
-    passwordError: 'Please fill your password',
-    unitError: 'Please fill your unit',
+    nameError: "Please fill your name",
+    passwordError: "Please fill your password",
+    unitError: "Please fill your unit",
   });
   const [formValid, setFormValid] = useState(false);
 
   const blurHandler = (e) => {
     switch (e.target.name) {
-      case 'password':
+      case "password":
         setPasswordEmpty(true);
         break;
-      case 'name':
+      case "name":
         setNameEmpty(true);
         break;
-      case 'unit':
+      case "unit":
         setUnitEmpty(true);
         break;
     }
@@ -53,23 +53,23 @@ export const Registration = (props) => {
   }, [errors]);
 
   const handleName = (e) => {
-    let temp = e.target.value.replace(/[0-9]/g, '');
+    let temp = e.target.value.replace(/[0-9]/g, "");
 
-    if (temp === '') {
-      setErrors({ ...errors, nameError: 'Please fill your name' });
+    if (temp === "") {
+      setErrors({ ...errors, nameError: "Please fill your name" });
     } else {
-      setErrors({ ...errors, nameError: '' });
+      setErrors({ ...errors, nameError: "" });
     }
     setName(temp);
   };
 
   const handleUnit = (e) => {
-    let temp = e.target.value.replace(/[A-z]/g, '');
+    let temp = e.target.value.replace(/[A-z]/g, "");
 
-    if (temp === '') {
-      setErrors({ ...errors, unitError: 'Please fill your name' });
+    if (temp === "") {
+      setErrors({ ...errors, unitError: "Please fill your name" });
     } else {
-      setErrors({ ...errors, unitError: '' });
+      setErrors({ ...errors, unitError: "" });
     }
     setUnit(temp);
   };
@@ -77,32 +77,32 @@ export const Registration = (props) => {
   const handlePassword = (e) => {
     let temp = e.target.value;
 
-    if (temp === '') {
-      setErrors({ ...errors, passwordError: 'Please fill your password' });
+    if (temp === "") {
+      setErrors({ ...errors, passwordError: "Please fill your password" });
     } else if (temp.length < 8) {
-      setErrors({ ...errors, passwordError: 'Password is too short' });
+      setErrors({ ...errors, passwordError: "Password is too short" });
     } else if (/[A-Z]/.test(temp) === false) {
       setErrors({
         ...errors,
-        passwordError: 'Password should have one containe letter',
+        passwordError: "Password should have one containe letter",
       });
     } else if (/[a-z]/.test(temp) === false) {
       setErrors({
         ...errors,
-        passwordError: 'Password should have one small letter',
+        passwordError: "Password should have one small letter",
       });
     } else if (/[$&+,:;=?@#|'<>.^*()%!-]/.test(temp) === false) {
       setErrors({
         ...errors,
-        passwordError: 'Password should have one special character',
+        passwordError: "Password should have one special character",
       });
     } else if (/[0-9]/.test(temp) === false) {
       setErrors({
         ...errors,
-        passwordError: 'Password should have one number',
+        passwordError: "Password should have one number",
       });
     } else {
-      setErrors({ ...errors, passwordError: '' });
+      setErrors({ ...errors, passwordError: "" });
     }
     setPassword(temp);
   };
@@ -117,10 +117,10 @@ export const Registration = (props) => {
         password: password,
       })
       .then(() => {
-        window.location.replace('http://localhost:3000/');
-        dispatch({ type: 'AUTH', payload: true });
+        window.location.replace("http://localhost:3000/");
+        dispatch({ type: "AUTH", payload: true });
         dispatch({
-          type: 'ADD_USER_DATA',
+          type: "ADD_USER_DATA",
           payload: {
             name,
             unit,
@@ -139,11 +139,9 @@ export const Registration = (props) => {
 
   const getUserInfo = async () => {
     setloading(true);
-    await axios
-      .get(`http://localhost:5000/${props.userId}`)
-      .then((response) => {
-        setUserData(response.data);
-      });
+    await axios.get(`http://localhost:5000/123`).then((response) => {
+      setUserData(response.data);
+    });
     setloading(false);
   };
 
@@ -169,8 +167,8 @@ export const Registration = (props) => {
                 <StyledInput
                   onBlur={(e) => blurHandler(e)}
                   onChange={handleName}
-                  placeholder='Name'
-                  name='name'
+                  placeholder="Name"
+                  name="name"
                   value={name}
                 />
               </InputWrap>
@@ -186,8 +184,8 @@ export const Registration = (props) => {
                 <StyledInput
                   onBlur={(e) => blurHandler(e)}
                   onChange={handleUnit}
-                  placeholder='Unit'
-                  name='unit'
+                  placeholder="Unit"
+                  name="unit"
                   value={unit}
                 />
               </InputWrap>
@@ -203,8 +201,8 @@ export const Registration = (props) => {
                 <StyledInput
                   onBlur={(e) => blurHandler(e)}
                   onChange={handlePassword}
-                  placeholder='Password'
-                  name='password'
+                  placeholder="Password"
+                  name="password"
                   value={password}
                 />
               </InputWrap>
@@ -213,7 +211,7 @@ export const Registration = (props) => {
               )}
             </Container>
 
-            <Button disabled={!formValid} type='submit'>
+            <Button disabled={!formValid} type="submit">
               Sign In
             </Button>
           </Form>
