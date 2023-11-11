@@ -3,21 +3,23 @@ import {
   IconContainer,
   InputWrap,
   StyledInput,
-} from '../../Components/Input/style';
-import { Checkbox, CheckboxWrap, Wrap } from './style';
-import mail from '../../images/mail.svg';
-import home from '../../images/home.png';
-import { Button, Container, Error } from '../Registration/style';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+} from "../../Components/Input/style";
+import { Checkbox, CheckboxWrap, Wrap } from "./style";
+import mail from "../../images/mail.svg";
+import home from "../../images/home.png";
+import { Button, Container, Error } from "../Registration/style";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const AddUser = () => {
-  const [status, setStatus] = useState('');
-  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState("");
+  const [object, setObject] = useState("");
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [errors, setErrors] = useState({
-    emailError: 'Please fill your email',
-    checkError: 'Please fill your checkbox',
+    emailError: "Please fill your email",
+    checkError: "Please fill your checkbox",
+    objectError: "Please fill your object",
   });
   const [formValid, setFormValid] = useState(false);
 
@@ -31,7 +33,7 @@ export const AddUser = () => {
 
   const blurHandler = (e) => {
     switch (e.target.name) {
-      case 'email':
+      case "email":
         setEmailEmpty(true);
         break;
     }
@@ -39,35 +41,42 @@ export const AddUser = () => {
 
   const setChecked = (e) => {
     setStatus(e.target.value);
-    setErrors({ ...errors, checkError: '' });
+    setErrors({ ...errors, checkError: "" });
   };
 
   const handleEmail = (e) => {
     let temp = e.target.value;
 
-    if (temp === '') {
-      setErrors({ ...errors, emailError: 'Please fill your email' });
+    if (temp === "") {
+      setErrors({ ...errors, emailError: "Please fill your email" });
     } else if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(temp) === false) {
-      setErrors({ ...errors, emailError: 'Enter valid email' });
+      setErrors({ ...errors, emailError: "Enter valid email" });
     } else {
-      setErrors({ ...errors, emailError: '' });
+      setErrors({ ...errors, emailError: "" });
     }
     setEmail(temp);
   };
 
-  const addUser = () => {
-    axios
-      .post('http://localhost:5000/add-user', {
+  const addUser = async () => {
+    try {
+      await axios
+        .post(`http://localhost:5000/add-object-user`, {
+          body: {
+            objectName: object,
+            email,
+          },
+        })
+        .then(() => {
+          setEmail("");
+          setStatus("");
+        });
+      await axios.post("http://localhost:5000/add-user", {
         email,
         status,
-      })
-      .then(() => {
-        setEmail('')
-        setStatus('')
-      })
-      .catch((error) => {
-        console.log(error);
       });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -75,37 +84,37 @@ export const AddUser = () => {
       <CheckboxWrap>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='manager'
+            value="manager"
           />
           Manager
         </label>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='client'
+            value="client"
           />
           Client
         </label>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='employee'
+            value="employee"
           />
           Employee
         </label>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='resident'
+            value="resident"
           />
           Resident
         </label>
@@ -118,29 +127,31 @@ export const AddUser = () => {
           <StyledInput
             onBlur={(e) => blurHandler(e)}
             onChange={handleEmail}
-            placeholder='Email'
-            name='email'
+            placeholder="Email"
+            name="email"
             value={email}
           />
         </InputWrap>
         {emailEmpty && errors.emailError && <Error>{errors.emailError}</Error>}
       </Container>
-      {/* <Container>
+      <Container>
         <InputWrap>
           <IconContainer>
             <Icon src={home} />
           </IconContainer>
           <StyledInput
-          onBlur={(e) => blurHandler(e)}
-          onChange={handleName}
-          placeholder='Name'
-          name='name'
-          value={name}
+            onBlur={(e) => blurHandler(e)}
+            onChange={(e) => setObject(e.target.value)}
+            placeholder="Object"
+            name="object"
+            value={object}
           />
         </InputWrap>
-        {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>}
-      </Container> */}
-      <Button disabled={!formValid} type='submit'>
+        {object.length < 1 && errors.objectError && (
+          <Error>{errors.objectError}</Error>
+        )}
+      </Container>
+      <Button disabled={!formValid} type="submit">
         Add User
       </Button>
     </Wrap>
