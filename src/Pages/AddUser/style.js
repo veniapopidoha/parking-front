@@ -7,7 +7,7 @@ export const Wrap = styled.form`
   padding: 40px;
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   background-color: rgba(0, 0, 0, 0.2);
-  width: 400px;
+  width: fit-content;
   border-radius: 30px;
   border: 1px solid #000;
 `;

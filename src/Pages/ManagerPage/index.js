@@ -12,6 +12,7 @@ import Bars from "../../images/bars.svg";
 import Pencil from "../../images/pencil.svg";
 import axios from "axios";
 import { useState } from "react";
+import { backLink } from '../../App';
 
 export const ManagerPage = () => {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ export const ManagerPage = () => {
     e.preventDefault();
 
     if (name && address && visitorsPerMonth && duration) {
-      await axios.post("http://localhost:5000/add-object", {
+      await axios.post(`${backLink}/add-object`, {
         name,
         address,
         notes,

@@ -14,15 +14,18 @@ import axios from 'axios';
 export const AddUser = () => {
   const [status, setStatus] = useState('');
   const [email, setEmail] = useState('');
+  const [building, setBuilding] = useState('');
   const [emailEmpty, setEmailEmpty] = useState(false);
+  const [buildingEmpty, setBuildingEmpty] = useState(false);
   const [errors, setErrors] = useState({
     emailError: 'Please fill your email',
+    buildingError: 'Please fill user\'s building',
     checkError: 'Please fill your checkbox',
   });
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-    if (errors.checkError || errors.emailError) {
+    if (errors.checkError || errors.emailError || errors.buildingError) {
       setFormValid(false);
     } else {
       setFormValid(true);
@@ -62,8 +65,8 @@ export const AddUser = () => {
         status,
       })
       .then(() => {
-        setEmail('')
-        setStatus('')
+        setEmail('');
+        setStatus('');
       })
       .catch((error) => {
         console.log(error);
@@ -124,6 +127,27 @@ export const AddUser = () => {
           />
         </InputWrap>
         {emailEmpty && errors.emailError && <Error>{errors.emailError}</Error>}
+        {status === 'resident' || status === 'client' ? (
+          <>
+            <InputWrap>
+              <IconContainer>
+                <Icon src={home} />
+              </IconContainer>
+              <StyledInput
+                onBlur={(e) => blurHandler(e)}
+                // onChange={}
+                placeholder='Building'
+                name='building'
+                // value={}
+              />
+            </InputWrap>
+            {buildingEmpty && errors.buildingError && (
+              <Error>{errors.emailError}</Error>
+            )}
+          </>
+        ) : (
+          <></>
+        )}
       </Container>
       {/* <Container>
         <InputWrap>

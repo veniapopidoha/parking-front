@@ -15,6 +15,8 @@ export const IconContainer = styled.div`
   border-radius: 30px 0 0 30px;
   padding: 9.5px 20px;
   background-color: #fff;
+  margin-top: 5px;
+
 `;
 
 export const StyledInput = styled.input`
@@ -27,4 +29,5 @@ export const StyledInput = styled.input`
   outline: none;
   border: 0;
   background-color: #F4F4F4;
+  margin-top: 5px;
 `;
