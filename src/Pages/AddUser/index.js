@@ -3,24 +3,26 @@ import {
   IconContainer,
   InputWrap,
   StyledInput,
-} from '../../Components/Input/style';
-import { Checkbox, CheckboxWrap, Wrap } from './style';
-import mail from '../../images/mail.svg';
-import home from '../../images/home.png';
-import { Button, Container, Error } from '../Registration/style';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+} from "../../Components/Input/style";
+import { Checkbox, CheckboxWrap, ComboBox, ComboBoxText, Wrap } from "./style";
+import mail from "../../images/mail.svg";
+import home from "../../images/home.png";
+import { Button, Container, Error } from "../Registration/style";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { backLink } from "../../App";
 
 export const AddUser = () => {
-  const [status, setStatus] = useState('');
-  const [email, setEmail] = useState('');
-  const [building, setBuilding] = useState('');
+  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState("");
+  const [building, setBuilding] = useState("");
+  const [buildings, setBuildings] = useState([]);
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [buildingEmpty, setBuildingEmpty] = useState(false);
   const [errors, setErrors] = useState({
-    emailError: 'Please fill your email',
-    buildingError: 'Please fill user\'s building',
-    checkError: 'Please fill your checkbox',
+    emailError: "Please fill your email",
+    buildingError: "Please fill user's building",
+    checkError: "Please fill your checkbox",
   });
   const [formValid, setFormValid] = useState(false);
 
@@ -32,9 +34,33 @@ export const AddUser = () => {
     }
   }, [errors]);
 
+  useEffect(() => {
+    axios
+      .get(`${backLink}/buildings`)
+      .then((res) => {
+        setBuildings(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const filteredBuildings = useMemo(() => {
+    const filteredBuildings = buildings
+      .filter((b) => b.name.toLowerCase().includes(building.toLowerCase()))
+      .map((filteredBuilding) => (
+        <ComboBoxText
+          key={filteredBuilding.name}
+          onClick={() => setBuilding(filteredBuilding.name)}
+        >
+          {filteredBuilding.name}
+        </ComboBoxText>
+      ));
+
+    return filteredBuildings;
+  }, [building]);
+
   const blurHandler = (e) => {
     switch (e.target.name) {
-      case 'email':
+      case "email":
         setEmailEmpty(true);
         break;
     }
@@ -42,31 +68,34 @@ export const AddUser = () => {
 
   const setChecked = (e) => {
     setStatus(e.target.value);
-    setErrors({ ...errors, checkError: '' });
+    setErrors({ ...errors, checkError: "" });
   };
 
   const handleEmail = (e) => {
     let temp = e.target.value;
 
-    if (temp === '') {
-      setErrors({ ...errors, emailError: 'Please fill your email' });
+    if (temp === "") {
+      setErrors({ ...errors, emailError: "Please fill your email" });
     } else if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(temp) === false) {
-      setErrors({ ...errors, emailError: 'Enter valid email' });
+      setErrors({ ...errors, emailError: "Enter valid email" });
     } else {
-      setErrors({ ...errors, emailError: '' });
+      setErrors({ ...errors, emailError: "" });
     }
     setEmail(temp);
   };
 
-  const addUser = () => {
+  const addUser = (e) => {
+    e.preventDefault();
+
     axios
-      .post('http://localhost:5000/add-user', {
+      .post(`${backLink}/add-building-user`, {
         email,
         status,
+        buildingName: building,
       })
       .then(() => {
-        setEmail('');
-        setStatus('');
+        setEmail("");
+        setStatus("");
       })
       .catch((error) => {
         console.log(error);
@@ -78,37 +107,37 @@ export const AddUser = () => {
       <CheckboxWrap>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='manager'
+            value="manager"
           />
           Manager
         </label>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='client'
+            value="client"
           />
           Client
         </label>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='employee'
+            value="employee"
           />
           Employee
         </label>
         <label>
           <Checkbox
-            type='radio'
-            name='status'
+            type="radio"
+            name="status"
             onChange={setChecked}
-            value='resident'
+            value="resident"
           />
           Resident
         </label>
@@ -121,13 +150,13 @@ export const AddUser = () => {
           <StyledInput
             onBlur={(e) => blurHandler(e)}
             onChange={handleEmail}
-            placeholder='Email'
-            name='email'
+            placeholder="Email"
+            name="email"
             value={email}
           />
         </InputWrap>
         {emailEmpty && errors.emailError && <Error>{errors.emailError}</Error>}
-        {status === 'resident' || status === 'client' ? (
+        {status === "resident" || status === "client" ? (
           <>
             <InputWrap>
               <IconContainer>
@@ -135,11 +164,14 @@ export const AddUser = () => {
               </IconContainer>
               <StyledInput
                 onBlur={(e) => blurHandler(e)}
-                // onChange={}
-                placeholder='Building'
-                name='building'
-                // value={}
+                onChange={(e) => setBuilding(e.target.value)}
+                placeholder="Building"
+                name="building"
+                value={building}
               />
+              {building && filteredBuildings.length > 0 && (
+                <ComboBox>{filteredBuildings}</ComboBox>
+              )}
             </InputWrap>
             {buildingEmpty && errors.buildingError && (
               <Error>{errors.emailError}</Error>
@@ -164,9 +196,7 @@ export const AddUser = () => {
         </InputWrap>
         {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>}
       </Container> */}
-      <Button disabled={!formValid} type='submit'>
-        Add User
-      </Button>
+      <Button type="submit">Add User</Button>
     </Wrap>
   );
 };
