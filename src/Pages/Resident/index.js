@@ -1,40 +1,39 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import axios from 'axios';
-import { ConfigProvider, DatePicker, Space } from 'antd';
-import { backLink } from '../../App';
-import { InputWrap } from '../../Components/Input/style';
-import { Container } from '../Registration/style';
-import { Form, Wrap, StyledInput, Title } from './style';
-import { Button } from '../SignIn/style';
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
+import { ConfigProvider, DatePicker, Space } from "antd";
+import { backLink } from "../../App";
+import { InputWrap } from "../../Components/Input/style";
+import { Container } from "../Registration/style";
+import { Form, Wrap, StyledInput, Title } from "./style";
+import { Button } from "../SignIn/style";
 
 export const Resident = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [plate, setPlate] = useState('');
-  const [colour, setColour] = useState('');
-  const [make, setMake] = useState('');
-  const [startDate, setStartDate] = useState('');
+  const [plate, setPlate] = useState("");
+  const [colour, setColour] = useState("");
+  const [make, setMake] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   const id = useSelector((state) => state.data.id);
   const data = useSelector((state) => state.data.visitors);
-  console.log(data)
-
 
   const Submit = (e) => {
     e.preventDefault();
 
     axios
-      .post(`${backLink}/add-visitor`, {
+      .post(`${backLink}/add-building-visitor`, {
         plate,
         colour,
         make,
         startDate,
         residentId: id,
+        buildingName: "Building", //i dont find the name of building in Redux, so we need to put it here
       })
       .then(() => {
         dispatch({
-          type: 'ADD_VISITOR_DATA',
+          type: "ADD_VISITOR_DATA",
           payload: {
             plate,
             colour,
@@ -43,7 +42,7 @@ export const Resident = () => {
             residentId: id,
           },
         });
-        setShow(false)
+        setShow(false);
       })
       .catch((error) => {
         console.log(error);
@@ -65,8 +64,8 @@ export const Resident = () => {
           <Container>
             <InputWrap>
               <StyledInput
-                placeholder='Licence plate'
-                name='plate'
+                placeholder="Licence plate"
+                name="plate"
                 onChange={(e) => {
                   setPlate(e.target.value);
                 }}
@@ -77,8 +76,8 @@ export const Resident = () => {
           <Container>
             <InputWrap>
               <StyledInput
-                placeholder='Make'
-                name='make'
+                placeholder="Make"
+                name="make"
                 onChange={(e) => {
                   setMake(e.target.value);
                 }}
@@ -89,8 +88,8 @@ export const Resident = () => {
           <Container>
             <InputWrap>
               <StyledInput
-                placeholder='Colour'
-                name='colour'
+                placeholder="Colour"
+                name="colour"
                 onChange={(e) => {
                   setColour(e.target.value);
                 }}
@@ -103,29 +102,29 @@ export const Resident = () => {
             theme={{
               components: {
                 DatePicker: {
-                  colorLink: '#FECB21',
-                  colorLinkActive: '#000',
-                  colorPrimary: '#FECB21',
-                  colorLinkHover: '#FECB21',
-                  colorPrimary: '#FECB21',
-                  colorPrimaryHover: '#FECB21',
+                  colorLink: "#FECB21",
+                  colorLinkActive: "#000",
+                  colorPrimary: "#FECB21",
+                  colorLinkHover: "#FECB21",
+                  colorPrimary: "#FECB21",
+                  colorPrimaryHover: "#FECB21",
                 },
               },
             }}
           >
-            <Space direction='vertical' size={12}>
+            <Space direction="vertical" size={12}>
               <DatePicker
                 showTime={{
-                  format: 'HH:mm',
+                  format: "HH:mm",
                 }}
-                format='YYYY-MM-DD HH:mm'
+                format="YYYY-MM-DD HH:mm"
                 onOk={(value) => {
                   setStartDate(value);
                 }}
               />
             </Space>
           </ConfigProvider>
-          <Button type='submit'>Add Visitor</Button>
+          <Button type="submit">Add Visitor</Button>
         </Form>
       )}
     </Wrap>
