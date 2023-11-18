@@ -21,7 +21,6 @@ export const Resident = () => {
 
   const Submit = (e) => {
     e.preventDefault();
-
     axios
       .post(`${backLink}/add-building-visitor`, {
         plate,
@@ -30,6 +29,7 @@ export const Resident = () => {
         startDate,
         residentId: id,
         buildingName: data.building,
+        email: data.email,
       })
       .then(() => {
         dispatch({

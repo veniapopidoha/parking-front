@@ -11,7 +11,7 @@ import { Button, Container, Error } from "../Registration/style";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { backLink } from "../../App";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AddUser = () => {
   const [status, setStatus] = useState("");
@@ -28,6 +28,7 @@ export const AddUser = () => {
   });
   const [formValid, setFormValid] = useState(false);
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.data);
 
   useEffect(() => {
     if (errors.checkError || errors.emailError || errors.buildingError) {
@@ -102,7 +103,10 @@ export const AddUser = () => {
         buildingName: building,
       })
       .then(() => {
-        dispatch({ type: "ADD_USER_DATA", payload: { building } });
+        dispatch({
+          type: "ADD_USER_DATA",
+          payload: { ...data, building },
+        });
         setEmail("");
         setBuilding("");
       })
