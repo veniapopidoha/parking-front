@@ -17,11 +17,10 @@ export const Resident = () => {
   const [startDate, setStartDate] = useState("");
 
   const id = useSelector((state) => state.data.id);
-  const data = useSelector((state) => state.data.visitors);
+  const data = useSelector((state) => state.data);
 
   const Submit = (e) => {
     e.preventDefault();
-
     axios
       .post(`${backLink}/add-building-visitor`, {
         plate,
@@ -29,7 +28,8 @@ export const Resident = () => {
         make,
         startDate,
         residentId: id,
-        buildingName: "Building", //i dont find the name of building in Redux, so we need to put it here
+        buildingName: data.building,
+        email: data.email,
       })
       .then(() => {
         dispatch({

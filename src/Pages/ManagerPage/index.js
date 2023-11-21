@@ -5,6 +5,8 @@ import {
   FormButton,
   Input,
   Label,
+  LimitWrap,
+  RadioButton,
   Textarea,
   Wrap,
 } from "./style";
@@ -52,6 +54,7 @@ const ManagerObject = () => {
   const [notes, setNotes] = useState("");
   const [visitorsPerMonth, setVisitorsPerMonth] = useState("");
   const [duration, setDuration] = useState("");
+  const [limitType, setLimitType] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -62,6 +65,7 @@ const ManagerObject = () => {
         name,
         address,
         notes,
+        limitType,
         visitorsPerMonth,
         duration,
       });
@@ -91,6 +95,28 @@ const ManagerObject = () => {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
+      <LimitWrap>
+        <Label htmlFor="calendar" style={{ margin: 0 }}>
+          Calendar
+        </Label>
+        <RadioButton
+          type="radio"
+          name="calendar"
+          value="Calendar"
+          checked={limitType === "calendar"}
+          onChange={() => setLimitType("calendar")}
+        />
+        <Label htmlFor="rolling" style={{ margin: 0 }}>
+          Rolling
+        </Label>
+        <RadioButton
+          type="radio"
+          name="rolling"
+          value="Rolling"
+          checked={limitType === "rolling"}
+          onChange={() => setLimitType("rolling")}
+        />
+      </LimitWrap>
       <Label htmlFor="visitors">Limits:</Label>
       <Input
         placeholder="Number of Visitors per month"

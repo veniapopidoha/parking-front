@@ -2,6 +2,7 @@ const initialState = {
   isAuth: true,
   data: {
     visitors: [],
+    building: "",
   },
 };
 

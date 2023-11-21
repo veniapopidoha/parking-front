@@ -38,6 +38,20 @@ export const Input = styled.input`
   font-family: Montserrat;
 `;
 
+export const RadioButton = styled.input`
+  font-size: 16px;
+  margin: 0;
+`;
+
+export const LimitWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 15px;
+`;
+
 export const Textarea = styled.textarea`
   padding: 24px 24px 210px;
   width: 100%;

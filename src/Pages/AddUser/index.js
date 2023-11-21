@@ -11,11 +11,13 @@ import { Button, Container, Error } from "../Registration/style";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { backLink } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AddUser = () => {
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [building, setBuilding] = useState("");
+  const [isBuildingsOpen, setIsBuildingsOpen] = useState(false);
   const [buildings, setBuildings] = useState([]);
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [buildingEmpty, setBuildingEmpty] = useState(false);
@@ -25,6 +27,8 @@ export const AddUser = () => {
     checkError: "Please fill your checkbox",
   });
   const [formValid, setFormValid] = useState(false);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.data);
 
   useEffect(() => {
     if (errors.checkError || errors.emailError || errors.buildingError) {
@@ -43,13 +47,18 @@ export const AddUser = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const handleBuildingModal = (buildingName) => {
+    setBuilding(buildingName);
+    setIsBuildingsOpen(false);
+  };
+
   const filteredBuildings = useMemo(() => {
     const filteredBuildings = buildings
       .filter((b) => b.name.toLowerCase().includes(building.toLowerCase()))
       .map((filteredBuilding) => (
         <ComboBoxText
           key={filteredBuilding.name}
-          onClick={() => setBuilding(filteredBuilding.name)}
+          onClick={() => handleBuildingModal(filteredBuilding.name)}
         >
           {filteredBuilding.name}
         </ComboBoxText>
@@ -94,8 +103,12 @@ export const AddUser = () => {
         buildingName: building,
       })
       .then(() => {
+        dispatch({
+          type: "ADD_USER_DATA",
+          payload: { ...data, building },
+        });
         setEmail("");
-        setStatus("");
+        setBuilding("");
       })
       .catch((error) => {
         console.log(error);
@@ -164,12 +177,15 @@ export const AddUser = () => {
               </IconContainer>
               <StyledInput
                 onBlur={(e) => blurHandler(e)}
-                onChange={(e) => setBuilding(e.target.value)}
+                onChange={(e) => {
+                  setBuilding(e.target.value);
+                  setIsBuildingsOpen(true);
+                }}
                 placeholder="Building"
                 name="building"
                 value={building}
               />
-              {building && filteredBuildings.length > 0 && (
+              {isBuildingsOpen && filteredBuildings.length > 0 && (
                 <ComboBox>{filteredBuildings}</ComboBox>
               )}
             </InputWrap>
