@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { backLink } from '../../../../App';
 import { InputWrap } from '../../../../Components/Input/style';
 import { Button, Container, Title, Wrap } from '../../../Registration/style';
@@ -10,6 +10,7 @@ export const AddReport = () => {
   const [reason, setReason] = useState('');
   const [notes, setNotes] = useState('');
   const [attachment, setAttachment] = useState(null);
+  const inputFile = useRef(null); 
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -31,8 +32,13 @@ export const AddReport = () => {
         },
       });
     } catch (error) {
-      console.error('Помилка при відправці файлів:', error);
+      console.error('Error loading files', error);
     }
+
+    inputFile.current.value = ""; 
+    setNotes('');
+    setPlate('');
+    setReason('');
   };
 
   return (
@@ -48,6 +54,7 @@ export const AddReport = () => {
                 placeholder='Licence plate'
                 name='plate'
                 value={plate}
+                required
               />
             </InputWrap>
             {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
@@ -60,6 +67,7 @@ export const AddReport = () => {
                 placeholder='Reason'
                 name='reason'
                 value={reason}
+                required
               />
             </InputWrap>
             {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
@@ -72,6 +80,7 @@ export const AddReport = () => {
                 placeholder='Notes'
                 name='notes'
                 value={notes}
+                required
               />
             </InputWrap>
             {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
@@ -86,7 +95,9 @@ export const AddReport = () => {
                 name='attachment'
                 accept='.jpg,.jpeg,.png,.heic'
                 multiple
+                required
                 onChange={(e) => setAttachment(e.target.files)}
+                ref={inputFile}
               />
             </InputWrap>
             {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
