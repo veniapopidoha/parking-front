@@ -94,6 +94,7 @@ export const SignIn = () => {
     axios
       .post("http://localhost:5000/signin", { email, password })
       .then((res) => {
+        console.log(res.data);
         setErrors(res.data.errors);
         dispatch({
           type: "ADD_USER_DATA",

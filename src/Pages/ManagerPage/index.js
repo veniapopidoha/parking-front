@@ -1,136 +1,75 @@
 import { Button } from "../../Components/Tab/style";
-import {
-  ErrorText,
-  Form,
-  FormButton,
-  Input,
-  Label,
-  LimitWrap,
-  RadioButton,
-  Textarea,
-  Wrap,
-} from "./style";
+import { ManagerWrap, Wrap } from "./style";
 import Bars from "../../images/bars.svg";
 import Pencil from "../../images/pencil.svg";
-import axios from "axios";
 import { useState } from "react";
-import { backLink } from "../../App";
+import { ManagerMain } from "./Components/Manager/index";
+import { AddUserM } from "./Components/AddUser";
+import { Cars } from "./Components/Cars";
+import { Residents } from "./Components/Residents";
+import { Reports } from "./Components/Reports";
+import { Patrols } from "./Components/Patrols";
+import { EditUser } from "./Components/EditUser";
 
 export const ManagerPage = () => {
+  const [managerPage, setManagerPage] = useState("main");
+  const [isBuildings, setIsBuildings] = useState(false);
+
   return (
-    <>
-      <div>
-        <Wrap>
-          <Button>
-            Add User
-            <img
-              src={Bars}
-              alt="icon"
-              style={{ width: "27px", height: "23px" }}
-            />
-          </Button>
-          <Button>
-            Select object
-            <img
-              src={Pencil}
-              alt="icon"
-              style={{ width: "34px", height: "34px" }}
-            />
-          </Button>
-          <Button>Car list</Button>
-          <Button>Resident list</Button>
-          <Button>Patrols completed</Button>
-          <Button>Reports</Button>
-        </Wrap>
-        <ManagerObject />
-      </div>
-    </>
+    <ManagerWrap>
+      <ManagerTabs
+        setManagerPage={setManagerPage}
+        setIsBuildings={setIsBuildings}
+        isBuildings={isBuildings}
+      />
+      {managerPage === "main" || managerPage === "user" ? (
+        <ManagerMain
+          isUser={managerPage === "user"}
+          isBuildings={isBuildings}
+        />
+      ) : (
+        <></>
+      )}
+      {managerPage === "user" && <AddUserM />}
+      {managerPage === "cars" && <Cars />}
+      {managerPage === "residents" && <Residents />}
+      {managerPage === "patrols" && <Patrols />}
+      {managerPage === "reports" && <Reports />}
+    </ManagerWrap>
   );
 };
 
-const ManagerObject = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [notes, setNotes] = useState("");
-  const [visitorsPerMonth, setVisitorsPerMonth] = useState("");
-  const [duration, setDuration] = useState("");
-  const [limitType, setLimitType] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (name && address && visitorsPerMonth && duration) {
-      await axios.post(`${backLink}/add-building`, {
-        name,
-        address,
-        notes,
-        limitType,
-        visitorsPerMonth,
-        duration,
-      });
-      setAddress("");
-      setDuration("");
-      setName("");
-      setNotes("");
-      setVisitorsPerMonth("");
-    } else {
-      setError("Please fill all fields");
-    }
-  };
+const ManagerTabs = ({ setManagerPage, setIsBuildings, isBuildings }) => {
   return (
-    <Form onSubmit={handleSubmit}>
-      <Input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        placeholder="Address"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
-      <Textarea
-        placeholder="Notes"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-      />
-      <LimitWrap>
-        <Label htmlFor="calendar" style={{ margin: 0 }}>
-          Calendar
-        </Label>
-        <RadioButton
-          type="radio"
-          name="calendar"
-          value="Calendar"
-          checked={limitType === "calendar"}
-          onChange={() => setLimitType("calendar")}
+    <Wrap>
+      <Button
+        onClick={() => {
+          setManagerPage("main");
+          setIsBuildings(!isBuildings);
+        }}
+      >
+        Select object
+        <img src={Bars} alt="icon" style={{ width: "27px", height: "23px" }} />
+      </Button>
+      <Button
+        onClick={() => {
+          setManagerPage("user");
+          setIsBuildings(false);
+        }}
+      >
+        Add User
+        <img
+          src={Pencil}
+          alt="icon"
+          style={{ width: "34px", height: "34px" }}
         />
-        <Label htmlFor="rolling" style={{ margin: 0 }}>
-          Rolling
-        </Label>
-        <RadioButton
-          type="radio"
-          name="rolling"
-          value="Rolling"
-          checked={limitType === "rolling"}
-          onChange={() => setLimitType("rolling")}
-        />
-      </LimitWrap>
-      <Label htmlFor="visitors">Limits:</Label>
-      <Input
-        placeholder="Number of Visitors per month"
-        name="visitors"
-        value={visitorsPerMonth}
-        onChange={(e) => setVisitorsPerMonth(e.target.value)}
-      />
-      <Input
-        placeholder="How long? ( 3 - if once in three day)"
-        value={duration}
-        onChange={(e) => setDuration(e.target.value)}
-      />
-      <FormButton type="submit">Complate</FormButton>
-      <ErrorText>{error}</ErrorText>
-    </Form>
+      </Button>
+      <Button onClick={() => setManagerPage("cars")}>Car list</Button>
+      <Button onClick={() => setManagerPage("residents")}>Resident list</Button>
+      <Button onClick={() => setManagerPage("patrols")}>
+        Patrols completed
+      </Button>
+      <Button onClick={() => setManagerPage("reports")}>Reports</Button>
+    </Wrap>
   );
 };

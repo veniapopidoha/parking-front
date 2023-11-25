@@ -6,6 +6,8 @@ export const InputWrap = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: 0;
+  max-width: 360px;
+  width: 100%;
 `;
 
 export const Icon = styled.img`
@@ -22,6 +24,8 @@ export const IconContainer = styled.div`
 export const StyledInput = styled.input`
   border-radius: 0 30px 30px 0;
   padding: 15px 20px;
+  max-width: 360px;
+  width: 100%;
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
   font-weight: 600;

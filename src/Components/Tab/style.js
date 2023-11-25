@@ -14,4 +14,5 @@ export const Button = styled.button`
   line-height: 24px;
   letter-spacing: -0.3px;
   font-family: Montserrat;
+  cursor: pointer;
 `;

@@ -4,16 +4,17 @@ import { SignIn } from "../SignIn";
 import { Registration } from "../Registration";
 import { useSelector } from "react-redux";
 import { Auth } from "../Auth";
+import { ManagerPage } from "../ManagerPage";
 
 export const MainPage = () => {
-  const locationPage = useLocation();
-  const userId = new URLSearchParams(locationPage.search).get("id");
+  // const locationPage = useLocation();
+  // const userId = new URLSearchParams(locationPage.search).get("id");
 
-  const isAuth = useSelector((state) => state.isAuth);
+  // const isAuth = useSelector((state) => state.isAuth);
 
   return (
     <>
-      {isAuth ? (
+      {/* {isAuth ? (
         <Auth />
       ) : userId ? (
         <Registration userId={userId} />
@@ -22,7 +23,8 @@ export const MainPage = () => {
           <AddUser />
           <SignIn />
         </>
-      )}
+      )} */}
+      <ManagerPage />
     </>
   );
 };

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Wrap = styled.form`
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,6 +18,7 @@ export const Wrap = styled.form`
 export const CheckboxWrap = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 15px;
   margin: 10px 0;
   label {
     color: rgba(0, 0, 0, 0.8);
@@ -29,6 +33,7 @@ export const CheckboxWrap = styled.div`
 
 export const Checkbox = styled.input`
   accent-color: #3a3a3a;
+  margin-right: 5px;
 `;
 
 export const ComboBox = styled.div`
