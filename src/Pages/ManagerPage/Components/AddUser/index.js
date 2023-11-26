@@ -7,7 +7,7 @@ export const AddUserM = () => {
     <>
       <Wrap>
         <AddUser />
-        <Image src={bgImg} />
+        <Image src={bgImg} alt="bg" />
       </Wrap>
     </>
   );

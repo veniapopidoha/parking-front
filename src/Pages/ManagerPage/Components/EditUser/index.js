@@ -45,7 +45,7 @@ export const EditUser = () => {
           </InstructionsText>
         </Instructions>
       </Container>
-      <Image src={bgImg} />
+      <Image src={bgImg} alt="bg" />
     </>
   );
 };

@@ -1,4 +1,3 @@
-import bgImage from "../../../../images/bg1.png";
 import {
   TableBody,
   TableData,
@@ -10,9 +9,10 @@ import {
   TableRow,
 } from "../Cars/style";
 import { ImageWrap, WrapContent, BgImage, Image } from "./style";
-import Bell from "../../../../images/bell.svg";
+import bgImage from "../../images/bg1.png";
+import Bell from "../../images/bell.svg";
 
-export const Reports = () => {
+export const Reports = ({ building }) => {
   return (
     <WrapContent>
       <Wrap>
@@ -29,16 +29,20 @@ export const Reports = () => {
             </TableHeader>
           </thead>
           <TableBody>
-            <TableRow>
-              <TableData>СE7248VB</TableData>
-              <TableData>12.10.2023 11:30</TableData>
-              <TableData>Veniamin Vitaliovich</TableData>
-              <TableDataS>Towed</TableDataS>
-              <TableData>
-                <Image src={Bell} alt="icon" />
-              </TableData>
-              <TableData>Notes</TableData>
-            </TableRow>
+            {building.reports.map((report) => {
+              return (
+                <TableRow key={report.plate}>
+                  <TableData>{report.plate}</TableData>
+                  <TableData>{report.startDate}</TableData>
+                  <TableData>{report.name}</TableData>
+                  <TableDataS>{report.status}</TableDataS>
+                  <TableData>
+                    <Image src={Bell} alt="icon" />
+                  </TableData>
+                  <TableData>{report.notes}</TableData>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </table>
       </Wrap>

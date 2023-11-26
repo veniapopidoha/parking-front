@@ -17,9 +17,10 @@ export const TableBody = styled.tbody`
   position: relative;
 `;
 
-export const TableHead = styled.th`
+export const TableHead = styled.td`
   color: #626060;
   border-radius: 30px;
+  text-align: center;
   border: 1px solid rgba(0, 0, 0, 0);
   background: #fecb21;
   font-family: Montserrat;
@@ -37,7 +38,7 @@ export const Icon = styled.img`
   heigth: 42px;
 `;
 
-export const IconWrap = styled.div`
+export const IconWrap = styled.td`
   position: absolute;
   right: -56px;
 `;
@@ -47,7 +48,7 @@ export const Table = styled.table`
   align-items: center;
 `;
 
-export const TableHeader = styled.thead`
+export const TableHeader = styled.tr`
   display: flex;
   align-items: center;
   gap: 99px;

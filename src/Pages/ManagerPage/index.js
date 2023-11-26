@@ -5,11 +5,11 @@ import Pencil from "../../images/pencil.svg";
 import { useState } from "react";
 import { ManagerMain } from "./Components/Manager/index";
 import { AddUserM } from "./Components/AddUser";
-import { Cars } from "./Components/Cars";
-import { Residents } from "./Components/Residents";
-import { Reports } from "./Components/Reports";
-import { Patrols } from "./Components/Patrols";
 import { EditUser } from "./Components/EditUser";
+import { Cars } from "../../Components/Cars";
+import { Residents } from "../../Components/Residents";
+import { Patrols } from "../../Components/Patrols";
+import { Reports } from "../../Components/Reports";
 
 export const ManagerPage = () => {
   const [managerPage, setManagerPage] = useState("main");

@@ -1,9 +1,9 @@
 import { Image, TableBody, TableData, TableDataS, Title } from "../Cars/style";
-import bgImg from "../../../../images/bg4.png";
+import bgImg from "../../images/bg4.png";
 import { TableHeader, TableHead } from "../Cars/style";
 import { TableRow, Wrap } from "./style";
 
-export const Patrols = () => {
+export const Patrols = ({ building }) => {
   return (
     <>
       <Wrap>
@@ -17,19 +17,23 @@ export const Patrols = () => {
             </TableHeader>
           </thead>
           <TableBody>
-            <TableRow>
-              <TableDataS style={{ marginRight: "132px" }}>
-                Andrii Smaluniuk
-              </TableDataS>
-              <TableData style={{ marginRight: "44px" }}>
-                12.10.2023 11:30
-              </TableData>
-              <TableData>12.10.2023 11:30</TableData>
-            </TableRow>
+            {building.patrols.map((patrol) => {
+              return (
+                <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
+                  <TableDataS style={{ marginRight: "132px" }}>
+                    {patrol.name}
+                  </TableDataS>
+                  <TableData style={{ marginRight: "44px" }}>
+                    {patrol.startDate}
+                  </TableData>
+                  <TableData>{patrol.endDate}</TableData>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </table>
       </Wrap>
-      <Image src={bgImg} />
+      <Image src={bgImg} alt="bg" />
     </>
   );
 };

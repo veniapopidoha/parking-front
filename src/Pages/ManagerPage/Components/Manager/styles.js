@@ -54,5 +54,6 @@ export const Status = styled.p`
 export const Image = styled.img`
   transform: rotate(180deg);
   max-height: 690px;
+  height:100%
   width: 100%;
 `;
