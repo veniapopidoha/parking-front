@@ -16,6 +16,8 @@ export const AddVisitor = () => {
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const { RangePicker } = DatePicker;
 
   const id = useSelector((state) => state.data.id);
   const data = useSelector((state) => state.data);
@@ -28,6 +30,7 @@ export const AddVisitor = () => {
         colour,
         make,
         startDate,
+        endDate,
         residentId: id,
         buildingName: data.building,
         email: data.email,
@@ -108,13 +111,14 @@ export const AddVisitor = () => {
               }}
             >
               <Space direction="vertical" size={12}>
-                <DatePicker
+                <RangePicker
                   showTime={{
                     format: "HH:mm",
                   }}
                   format="YYYY-MM-DD HH:mm"
                   onOk={(value) => {
-                    setStartDate(value);
+                    setStartDate(value[0]);
+                    setEndDate(value[1]);
                   }}
                 />
               </Space>

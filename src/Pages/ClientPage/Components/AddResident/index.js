@@ -64,9 +64,10 @@ export const AddResident = () => {
     e.preventDefault();
 
     axios
-      .post(`${backLink}/add-building-user`, {
+      .post(`${backLink}/add-user`, {
         email,
         status,
+        userEmail: data.email,
         buildingName: data.building,
       })
       .then(() => {

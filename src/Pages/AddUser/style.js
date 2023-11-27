@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrap = styled.form`
-  position: relative;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   display: flex;

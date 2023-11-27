@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import { Close } from "../../Components/Close";
 import { Resident } from "../Resident";
 import { ManagerPage } from "../ManagerPage";
-import { EmployeePage } from '../EmployeePage';
+import { EmployeePage } from "../EmployeePage";
 
 export const Auth = () => {
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => state);
   const status = data.status;
 
   return (
@@ -14,7 +14,7 @@ export const Auth = () => {
       {status === "manager" ? (
         <ManagerPage />
       ) : status === "employee" ? (
-         <EmployeePage/>
+        <EmployeePage />
       ) : status === "client" ? (
         <>Client</>
       ) : (
