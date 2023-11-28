@@ -11,7 +11,7 @@ import {
   TableBody,
 } from "./style";
 
-export const Residents = ({ building }) => {
+export const Residents = () => {
   return (
     <>
       <Wrap>
@@ -25,26 +25,16 @@ export const Residents = ({ building }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {building.users
-              .filter((user) => user.status === "resident")
-              .map((resident) => {
-                return (
-                  <>
-                    <TableRow key={resident.email}>
-                      <TableDataS>{resident.name}</TableDataS>
-                      <TableData>{resident.unit}</TableData>
-                      <TableDataS style={{ paddingLeft: "30px" }}>
-                        {resident.numberOfVisitors}
-                      </TableDataS>
-                    </TableRow>
-                    <tr style={{ display: "flex", alignItems: "center" }}>
-                      <IconWrap>
-                        <Icon src={Bell} alt="bell" />
-                      </IconWrap>
-                    </tr>
-                  </>
-                );
-              })}
+            <TableRow>
+              <TableDataS>Andrii Smaluniuk</TableDataS>
+              <TableData>455555555555555555555</TableData>
+              <TableDataS style={{ paddingLeft: "30px" }}>24</TableDataS>
+            </TableRow>
+            <tr style={{ display: "flex", alignItems: "center" }}>
+              <IconWrap>
+                <Icon src={Bell} alt="bell" />
+              </IconWrap>
+            </tr>
           </TableBody>
         </table>
       </Wrap>

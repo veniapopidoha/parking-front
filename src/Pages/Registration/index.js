@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { SignIn } from "../SignIn";
 import { useDispatch } from "react-redux";
+import { backLink } from '../../App';
 
 export const Registration = (props) => {
   const dispatch = useDispatch();
@@ -111,7 +112,7 @@ export const Registration = (props) => {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:5000/add-user-info/${props.userId}`, {
+      .put(`${backLink}/add-user-info/${props.userId}`, {
         name: name,
         unit: unit,
         password: password,

@@ -4,7 +4,7 @@ import { Cars } from "../../Components/Cars";
 import { Residents } from "../../Components/Residents";
 import { Patrols } from "../../Components/Patrols";
 import { Reports } from "../../Components/Reports";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ClientMain } from "./Components/ClientMain";
 import { AddVisitor } from "./Components/AddVisitor";
 import { AddResident } from "./Components/AddResident";
@@ -15,18 +15,6 @@ import Pencil from "../../images/pencil.svg";
 
 export const ClientPage = () => {
   const [clientPage, setClientPage] = useState("main");
-  const [building, setBuilding] = useState([]);
-  const user = useSelector((state) => state.data);
-
-  useEffect(() => {
-    axios
-      .get(`${backLink}/building/${user.building}`)
-      .then((res) => {
-        setBuilding(res.data);
-      })
-      .catch((err) => console.log(err));
-  });
-
   return (
     <>
       <ClientTabs setClientPage={setClientPage} />
@@ -34,10 +22,10 @@ export const ClientPage = () => {
         {clientPage === "main" && <ClientMain />}
         {clientPage === "visitor" && <AddVisitor />}
         {clientPage === "resident" && <AddResident />}
-        {clientPage === "cars" && <Cars building={building} />}
-        {clientPage === "residents" && <Residents building={building} />}
-        {clientPage === "patrols" && <Patrols building={building} />}
-        {clientPage === "reports" && <Reports building={building} />}
+        {clientPage === "cars" && <Cars />}
+        {clientPage === "residents" && <Residents />}
+        {clientPage === "patrols" && <Patrols />}
+        {clientPage === "reports" && <Reports />}
       </div>
     </>
   );
