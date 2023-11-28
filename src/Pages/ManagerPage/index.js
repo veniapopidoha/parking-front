@@ -2,7 +2,7 @@ import { Button } from "../../Components/Tab/style";
 import { ManagerWrap, Wrap } from "./style";
 import Bars from "../../images/bars.svg";
 import Pencil from "../../images/pencil.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ManagerMain } from "./Components/Manager/index";
 import { AddUserM } from "./Components/AddUser";
 import { EditUser } from "./Components/EditUser";
@@ -10,10 +10,20 @@ import { Cars } from "../../Components/Cars";
 import { Residents } from "../../Components/Residents";
 import { Patrols } from "../../Components/Patrols";
 import { Reports } from "../../Components/Reports";
+import axios from "axios";
+import { backLink } from "../../App";
 
 export const ManagerPage = () => {
   const [managerPage, setManagerPage] = useState("main");
   const [isBuildings, setIsBuildings] = useState(false);
+  const [buildings, setBuildings] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${backLink}/buildings`)
+      .then((res) => setIsBuildings(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <ManagerWrap>
@@ -31,10 +41,10 @@ export const ManagerPage = () => {
         <></>
       )}
       {managerPage === "user" && <AddUserM />}
-      {managerPage === "cars" && <Cars />}
-      {managerPage === "residents" && <Residents />}
-      {managerPage === "patrols" && <Patrols />}
-      {managerPage === "reports" && <Reports />}
+      {managerPage === "cars" && <Cars buildings={buildings} />}
+      {managerPage === "residents" && <Residents buildings={buildings} />}
+      {managerPage === "patrols" && <Patrols buildings={buildings} />}
+      {managerPage === "reports" && <Reports buildings={buildings} />}
     </ManagerWrap>
   );
 };

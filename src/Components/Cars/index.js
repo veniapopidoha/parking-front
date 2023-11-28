@@ -27,7 +27,7 @@ export const Cars = ({ building }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {building.carList.map((car) => {
+            {building.visitors.map((car) => {
               return (
                 <TableRow key={car.plate}>
                   <TableData>{car.plate}</TableData>
