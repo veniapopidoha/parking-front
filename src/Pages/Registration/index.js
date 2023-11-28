@@ -140,9 +140,11 @@ export const Registration = (props) => {
 
   const getUserInfo = async () => {
     setloading(true);
-    await axios.get(`http://localhost:5000/123`).then((response) => {
-      setUserData(response.data);
-    });
+    await axios
+      .get(`http://localhost:5000/${props.userId}`)
+      .then((response) => {
+        setUserData(response.data);
+      });
     setloading(false);
   };
 

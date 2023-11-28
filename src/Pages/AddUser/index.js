@@ -28,7 +28,7 @@ export const AddUser = () => {
   });
   const [formValid, setFormValid] = useState(false);
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => state);
 
   useEffect(() => {
     if (errors.checkError || errors.emailError || errors.buildingError) {
@@ -101,8 +101,9 @@ export const AddUser = () => {
     e.preventDefault();
 
     axios
-      .post(`${backLink}/add-building-user`, {
+      .post(`${backLink}/add-user`, {
         email,
+        userEmail: data.email,
         status,
         buildingName: building,
       })

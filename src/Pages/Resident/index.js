@@ -16,8 +16,8 @@ export const Resident = () => {
   const [make, setMake] = useState("");
   const [startDate, setStartDate] = useState("");
 
-  const id = useSelector((state) => state.data.id);
-  const data = useSelector((state) => state.data);
+  const id = useSelector((state) => state.id);
+  const data = useSelector((state) => state);
 
   const Submit = (e) => {
     e.preventDefault();

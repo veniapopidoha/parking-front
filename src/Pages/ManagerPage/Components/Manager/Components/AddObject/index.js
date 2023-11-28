@@ -27,7 +27,7 @@ export const AddObject = ({ setIsAddBuild }) => {
 
     if (name && address && visitorsPerMonth && duration) {
       await axios.post(`${backLink}/add-building`, {
-        name,
+        buildingName: name,
         address,
         notes,
         limitType,

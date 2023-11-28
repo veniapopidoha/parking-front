@@ -22,7 +22,7 @@ export const SignIn = () => {
     passwordError: "Please fill your password",
   });
   const [formValid, setFormValid] = useState(false);
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => state);
 
   const blurHandler = (e) => {
     switch (e.target.name) {
@@ -92,9 +92,12 @@ export const SignIn = () => {
   const Submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/signin", { email, password })
+      .post("http://localhost:5000/signin", {
+        email,
+        password,
+        buildinName: data.unit,
+      })
       .then((res) => {
-        console.log(res.data);
         setErrors(res.data.errors);
         dispatch({
           type: "ADD_USER_DATA",
