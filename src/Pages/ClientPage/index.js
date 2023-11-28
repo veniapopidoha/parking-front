@@ -1,6 +1,5 @@
 import { Button } from "../../Components/Tab/style";
 import { Wrap } from "./style";
-import Pencil from "../../images/pencil.svg";
 import { Cars } from "../../Components/Cars";
 import { Residents } from "../../Components/Residents";
 import { Patrols } from "../../Components/Patrols";
@@ -12,6 +11,7 @@ import { AddResident } from "./Components/AddResident";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { backLink } from "../../App";
+import Pencil from "../../images/pencil.svg";
 
 export const ClientPage = () => {
   const [clientPage, setClientPage] = useState("main");
