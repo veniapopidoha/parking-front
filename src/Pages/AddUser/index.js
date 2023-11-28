@@ -54,7 +54,11 @@ export const AddUser = () => {
 
   const filteredBuildings = useMemo(() => {
     const filteredBuildings = buildings
-      .filter((b) => b.name.toLowerCase().includes(building.toLowerCase()))
+      .filter((b) => {
+        if (b.name) {
+          b.name.toLowerCase().includes(building.toLowerCase());
+        }
+      })
       .map((filteredBuilding) => (
         <ComboBoxText
           key={filteredBuilding.name}
@@ -176,7 +180,6 @@ export const AddUser = () => {
                 <Icon src={home} />
               </IconContainer>
               <StyledInput
-                onBlur={(e) => blurHandler(e)}
                 onChange={(e) => {
                   setBuilding(e.target.value);
                   setIsBuildingsOpen(true);

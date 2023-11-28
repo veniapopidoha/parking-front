@@ -1,13 +1,21 @@
 import styled from "styled-components";
 
+export const Image = styled.img`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+`;
+
 export const Wrap = styled.form`
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  padding: 40px 89px;
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   background-color: rgba(0, 0, 0, 0.2);
   width: fit-content;

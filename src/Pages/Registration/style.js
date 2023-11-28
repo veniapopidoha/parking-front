@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import bg2 from '../../images/bg2.png';
+import styled from "styled-components";
+import bg2 from "../../images/bg2.png";
 
 export const Wrap = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const Wrap = styled.div`
 export const Title = styled.h1`
   color: #3f3d56;
   text-shadow: -3px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 45px;
   font-style: normal;
   font-weight: 700;
@@ -37,11 +37,11 @@ export const Form = styled.form`
 export const Button = styled.button`
   border-radius: 30px;
   border: none;
-  padding: 10px 80px;
-  background-color: ${({ disabled }) => (disabled ? '#D3D8E1' : '#fecb21')};
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  padding: 15px 100px;
+  background-color: ${({ disabled }) => (disabled ? "#D3D8E1" : "#fecb21")};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   color: #626060;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -51,7 +51,7 @@ export const Button = styled.button`
 
 export const Error = styled.h3`
   color: red;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 500;
   max-width: 250px;

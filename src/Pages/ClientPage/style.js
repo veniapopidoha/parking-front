@@ -10,16 +10,5 @@ export const Wrap = styled.div`
   max-width: 1546px;
   margin: 0 auto;
   width: 100%;
-`;
-
-export const ManagerWrap = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Container = styled.div`
-  max-width: 1546px;
-  margin: 0 auto;
-  width: 100%;
+  heigth: 100vh;
 `;
