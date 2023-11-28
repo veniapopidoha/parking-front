@@ -11,7 +11,7 @@ import {
 } from "./style";
 import bgImg from "../../images/bg4.png";
 
-export const Cars = () => {
+export const Cars = ({ building }) => {
   return (
     <>
       <Wrap>

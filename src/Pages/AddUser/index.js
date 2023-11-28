@@ -208,13 +208,15 @@ export const AddUser = () => {
           </IconContainer>
           <StyledInput
             onBlur={(e) => blurHandler(e)}
-            onChange={(e) => setObject(e.target.value)}
-            placeholder="Object"
-            name="object"
-            value={object}
+            onChange={(e) => setBuilding(e.target.value)}
+            placeholder="Building"
+            name="building"
+            value={building}
           />
         </InputWrap>
-        {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>}
+        {buildingEmpty && errors.buildingError && (
+          <Error>{errors.buildingError}</Error>
+        )}
       </Container>
       <Button type="submit">Add User</Button>
     </Wrap>

@@ -13,6 +13,8 @@ export const Wrap = styled.div`
 
 export const TableBody = styled.tbody`
   display: flex;
+  flex-direction: column;
+  gap: 16px;
   align-items: center;
   position: relative;
 `;
@@ -38,10 +40,7 @@ export const Icon = styled.img`
   heigth: 42px;
 `;
 
-export const IconWrap = styled.td`
-  position: absolute;
-  right: -56px;
-`;
+export const IconWrap = styled.td``;
 
 export const Table = styled.table`
   display: flex;
@@ -55,13 +54,30 @@ export const TableHeader = styled.tr`
   margin-bottom: 50px;
 `;
 
-export const TableRow = styled.tr`
+export const TableRow = styled.td`
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0);
   flex: 1;
+  width: 100%;
   background: #fff;
   padding: 18px 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   text-align: center;
+`;
+
+export const TableData = styled.div`
+  color: #626060;
+  font-family: Jost;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 116%;
+`;
+
+export const TableDataS = styled.div`
+  color: #626060;
+  font-family: Jost;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 116%;
 `;

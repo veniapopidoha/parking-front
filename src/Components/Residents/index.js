@@ -1,4 +1,4 @@
-import { Image, TableData, TableDataS, Title } from "../Cars/style";
+import { Image, Title } from "../Cars/style";
 import bgImg from "../../images/bg4.png";
 import Bell from "../../images/bell.svg";
 import {
@@ -8,10 +8,13 @@ import {
   Wrap,
   TableHead,
   TableRow,
+  TableData,
+  TableDataS,
   TableBody,
 } from "./style";
+import React from "react";
 
-export const Residents = () => {
+export const Residents = ({ building }) => {
   return (
     <>
       <Wrap>
@@ -25,16 +28,32 @@ export const Residents = () => {
             </TableHeader>
           </thead>
           <TableBody>
-            <TableRow>
-              <TableDataS>Andrii Smaluniuk</TableDataS>
-              <TableData>455555555555555555555</TableData>
-              <TableDataS style={{ paddingLeft: "30px" }}>24</TableDataS>
-            </TableRow>
-            <tr style={{ display: "flex", alignItems: "center" }}>
-              <IconWrap>
-                <Icon src={Bell} alt="bell" />
-              </IconWrap>
-            </tr>
+            {building.users
+              .filter((user) => user.status === "resident")
+              .map((resident) => {
+                return (
+                  <tr
+                    key={resident.email}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "36px",
+                      width: "100%",
+                    }}
+                  >
+                    <TableRow>
+                      <TableDataS>{resident.name}</TableDataS>
+                      <TableData>{resident.unit}</TableData>
+                      <TableDataS style={{ paddingLeft: "30px" }}>
+                        {resident.numberOfVisitors}
+                      </TableDataS>
+                    </TableRow>
+                    <IconWrap>
+                      <Icon src={Bell} alt="bell" />
+                    </IconWrap>
+                  </tr>
+                );
+              })}
           </TableBody>
         </table>
       </Wrap>
