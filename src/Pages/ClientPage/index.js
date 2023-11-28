@@ -20,7 +20,7 @@ export const ClientPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${backLink}/building/123`)
+      .get(`${backLink}/building/${user.building}`)
       .then((res) => {
         setBuilding(res.data);
       })

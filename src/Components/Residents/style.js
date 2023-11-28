@@ -36,8 +36,9 @@ export const TableHead = styled.td`
 `;
 
 export const Icon = styled.img`
-  width: 42px;
-  heigth: 42px;
+  width: 36px;
+  heigth: 36px;
+  cursor: pointer;
 `;
 
 export const IconWrap = styled.td``;

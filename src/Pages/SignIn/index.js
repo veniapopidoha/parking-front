@@ -95,7 +95,7 @@ export const SignIn = () => {
       .post("http://localhost:5000/signin", {
         email,
         password,
-        buildinName: data.unit,
+        buildingName: data.unit || "",
       })
       .then((res) => {
         setErrors(res.data.errors);

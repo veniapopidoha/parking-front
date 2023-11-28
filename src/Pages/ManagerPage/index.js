@@ -21,7 +21,7 @@ export const ManagerPage = () => {
   useEffect(() => {
     axios
       .get(`${backLink}/buildings`)
-      .then((res) => setIsBuildings(res.data))
+      .then((res) => setBuildings(res.data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -41,10 +41,18 @@ export const ManagerPage = () => {
         <></>
       )}
       {managerPage === "user" && <AddUserM />}
-      {managerPage === "cars" && <Cars buildings={buildings} />}
-      {managerPage === "residents" && <Residents buildings={buildings} />}
-      {managerPage === "patrols" && <Patrols buildings={buildings} />}
-      {managerPage === "reports" && <Reports buildings={buildings} />}
+      {managerPage === "cars" && (
+        <Cars building={buildings} buildings={buildings} />
+      )}
+      {managerPage === "residents" && (
+        <Residents building={buildings} buildings={buildings} />
+      )}
+      {managerPage === "patrols" && (
+        <Patrols building={buildings} buildings={buildings} />
+      )}
+      {managerPage === "reports" && (
+        <Reports building={buildings} buildings={buildings} />
+      )}
     </ManagerWrap>
   );
 };

@@ -194,28 +194,11 @@ export const AddUser = () => {
               )}
             </InputWrap>
             {buildingEmpty && errors.buildingError && (
-              <Error>{errors.emailError}</Error>
+              <Error>{errors.buildingError}</Error>
             )}
           </>
         ) : (
           <></>
-        )}
-      </Container>
-      <Container>
-        <InputWrap>
-          <IconContainer>
-            <Icon src={home} />
-          </IconContainer>
-          <StyledInput
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => setBuilding(e.target.value)}
-            placeholder="Building"
-            name="building"
-            value={building}
-          />
-        </InputWrap>
-        {buildingEmpty && errors.buildingError && (
-          <Error>{errors.buildingError}</Error>
         )}
       </Container>
       <Button type="submit">Add User</Button>

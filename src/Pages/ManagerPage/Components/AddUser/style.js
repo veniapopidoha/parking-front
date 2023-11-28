@@ -14,5 +14,5 @@ export const Wrap = styled.div`
 
 export const Image = styled.img`
   width: 100%;
-  max-heigth: 340px;
+  max-height: 340px;
 `;

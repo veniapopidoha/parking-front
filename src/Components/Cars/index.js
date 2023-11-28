@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Image,
   TableBody,
@@ -11,7 +12,8 @@ import {
 } from "./style";
 import bgImg from "../../images/bg4.png";
 
-export const Cars = ({ building }) => {
+export const Cars = ({ building, buildings }) => {
+  console.log(buildings, building);
   return (
     <>
       <Wrap>
@@ -21,22 +23,30 @@ export const Cars = ({ building }) => {
             <TableHeader>
               <TableHead>License plate</TableHead>
               <TableHead>Model</TableHead>
-              <TableHead>Colour</TableHead>
               <TableHead>Start Date</TableHead>
               <TableHead>End Date</TableHead>
             </TableHeader>
           </thead>
           <TableBody>
-            {building.visitors.map((car) => {
-              return (
-                <TableRow key={car.plate}>
-                  <TableData>{car.plate}</TableData>
-                  <TableDataS>{car.model}</TableDataS>
-                  <TableDataS>{car.startDate}</TableDataS>
-                  <TableData>{car.endDate}</TableData>
-                </TableRow>
-              );
-            })}
+            {buildings
+              ? buildings.map((building) =>
+                  building.visitors.map((car) => (
+                    <TableRow key={car.plate}>
+                      <TableData>{car.plate}</TableData>
+                      <TableDataS>{car.model}</TableDataS>
+                      <TableDataS>{car.startDate}</TableDataS>
+                      <TableData>{car.endDate}</TableData>
+                    </TableRow>
+                  ))
+                )
+              : building.visitors.map((car) => (
+                  <TableRow key={car.plate}>
+                    <TableData>{car.plate}</TableData>
+                    <TableDataS>{car.model}</TableDataS>
+                    <TableDataS>{car.startDate}</TableDataS>
+                    <TableData>{car.endDate}</TableData>
+                  </TableRow>
+                ))}
           </TableBody>
         </table>
       </Wrap>
