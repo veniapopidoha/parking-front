@@ -30,7 +30,7 @@ export const Cars = ({ building }) => {
             {building.visitors.map((car) => (
               <TableRow key={car.plate}>
                 <TableData>{car.plate}</TableData>
-                <TableDataS>{car.model}</TableDataS>
+                <TableDataS>{car.make}</TableDataS>
                 <TableDataS>{car.startDate}</TableDataS>
                 <TableData>{car.endDate}</TableData>
               </TableRow>

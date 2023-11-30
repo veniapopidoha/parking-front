@@ -22,8 +22,8 @@ export const MainPage = () => {
         <Registration userId={userId} />
       ) : (
         <>
-          <AddUser />
           <SignIn />
+          <AddUser />
         </>
       )} */}
 
