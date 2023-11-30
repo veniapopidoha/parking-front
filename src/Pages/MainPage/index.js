@@ -5,6 +5,7 @@ import { Registration } from "../Registration";
 import { useSelector } from "react-redux";
 import { Auth } from "../Auth";
 import { ManagerPage } from "../ManagerPage";
+import { EmployeePage } from '../EmployeePage';
 
 export const MainPage = () => {
   const locationPage = useLocation();
@@ -25,7 +26,7 @@ export const MainPage = () => {
         </>
       )} */}
 
-      <ManagerPage />
+      <EmployeePage />
     </>
   );
 };
