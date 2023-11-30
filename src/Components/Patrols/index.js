@@ -3,7 +3,7 @@ import bgImg from "../../images/bg4.png";
 import { TableHeader, TableHead } from "../Cars/style";
 import { TableRow, Wrap } from "./style";
 
-export const Patrols = ({ building, buildings }) => {
+export const Patrols = ({ building }) => {
   return (
     <>
       <Wrap>
@@ -17,30 +17,19 @@ export const Patrols = ({ building, buildings }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {buildings
-              ? buildings.map((building) =>
-                  building.visitors.map((car) => (
-                    <TableRow key={car.plate}>
-                      <TableData>{car.plate}</TableData>
-                      <TableDataS>{car.model}</TableDataS>
-                      <TableDataS>{car.startDate}</TableDataS>
-                      <TableData>{car.endDate}</TableData>
-                    </TableRow>
-                  ))
-                )
-              : building.patrols.map((patrol) => {
-                  return (
-                    <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
-                      <TableDataS style={{ marginRight: "132px" }}>
-                        {patrol.name}
-                      </TableDataS>
-                      <TableData style={{ marginRight: "44px" }}>
-                        {patrol.startDate}
-                      </TableData>
-                      <TableData>{patrol.endDate}</TableData>
-                    </TableRow>
-                  );
-                })}
+            {building.patrols.map((patrol) => {
+              return (
+                <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
+                  <TableDataS style={{ marginRight: "132px" }}>
+                    {patrol.name}
+                  </TableDataS>
+                  <TableData style={{ marginRight: "44px" }}>
+                    {patrol.startDate}
+                  </TableData>
+                  <TableData>{patrol.endDate}</TableData>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </table>
       </Wrap>

@@ -1,6 +1,5 @@
 import { Button } from "../../Components/Tab/style";
 import { ManagerWrap, Wrap } from "./style";
-import Bars from "../../images/bars.svg";
 import Pencil from "../../images/pencil.svg";
 import { useEffect, useState } from "react";
 import { ManagerMain } from "./Components/Manager/index";
@@ -12,63 +11,83 @@ import { Patrols } from "../../Components/Patrols";
 import { Reports } from "../../Components/Reports";
 import axios from "axios";
 import { backLink } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import { BuildComboBox } from "../../Components/BuildComboBox";
 
 export const ManagerPage = () => {
   const [managerPage, setManagerPage] = useState("main");
   const [isBuildings, setIsBuildings] = useState(false);
-  const [buildings, setBuildings] = useState([]);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state);
+  const [buildingValue, setBuildingValue] = useState(data.building.name || "");
+  const [selectedBuilding, setSelectedBuilding] = useState(data.building || []);
+  const [isAddBuild, setIsAddBuild] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`${backLink}/buildings`)
-      .then((res) => setBuildings(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+    if (buildingValue) {
+      axios
+        .get(`${backLink}/building/${buildingValue}`)
+        .then((res) => {
+          setSelectedBuilding(res.data);
+          dispatch({
+            type: "ADD_USER_DATA",
+            payload: {
+              building: res.data,
+            },
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [buildingValue]);
 
   return (
     <ManagerWrap>
       <ManagerTabs
         setManagerPage={setManagerPage}
         setIsBuildings={setIsBuildings}
-        isBuildings={isBuildings}
+        buildingValue={buildingValue}
+        setBuildingValue={setBuildingValue}
+        isAddBuild={isAddBuild}
+        setIsAddBuild={setIsAddBuild}
       />
-      {managerPage === "main" || managerPage === "user" ? (
+      {selectedBuilding.name && managerPage !== "main" ? (
+        <>
+          {managerPage === "user" && <AddUserM />}
+          {managerPage === "cars" && <Cars building={selectedBuilding} />}
+          {managerPage === "residents" && (
+            <EditUser building={selectedBuilding} />
+          )}
+          {managerPage === "patrols" && <Patrols building={selectedBuilding} />}
+          {managerPage === "reports" && <Reports building={selectedBuilding} />}
+        </>
+      ) : (
         <ManagerMain
           isUser={managerPage === "user"}
-          isBuildings={isBuildings}
+          isAddBuild={isAddBuild}
+          setIsAddBuild={setIsAddBuild}
         />
-      ) : (
-        <></>
-      )}
-      {managerPage === "user" && <AddUserM />}
-      {managerPage === "cars" && (
-        <Cars building={buildings} buildings={buildings} />
-      )}
-      {managerPage === "residents" && (
-        <Residents building={buildings} buildings={buildings} />
-      )}
-      {managerPage === "patrols" && (
-        <Patrols building={buildings} buildings={buildings} />
-      )}
-      {managerPage === "reports" && (
-        <Reports building={buildings} buildings={buildings} />
       )}
     </ManagerWrap>
   );
 };
 
-const ManagerTabs = ({ setManagerPage, setIsBuildings, isBuildings }) => {
+const ManagerTabs = ({
+  setManagerPage,
+  setIsBuildings,
+  buildingValue,
+  setBuildingValue,
+  setIsAddBuild,
+  isAddBuild,
+}) => {
   return (
     <Wrap>
-      <Button
-        onClick={() => {
-          setManagerPage("main");
-          setIsBuildings(!isBuildings);
-        }}
-      >
-        Select object
-        <img src={Bars} alt="icon" style={{ width: "27px", height: "23px" }} />
-      </Button>
+      <BuildComboBox
+        buildingValue={buildingValue}
+        setBuilding={setBuildingValue}
+        setManagerPage={setManagerPage}
+        isAddBuild={isAddBuild}
+        setIsAddBuild={setIsAddBuild}
+      />
       <Button
         onClick={() => {
           setManagerPage("user");

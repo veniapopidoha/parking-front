@@ -16,11 +16,11 @@ import { backLink } from "../../App";
 export const ClientPage = () => {
   const [clientPage, setClientPage] = useState("main");
   const [building, setBuilding] = useState([]);
-  const user = useSelector((state) => state.data);
+  const data = useSelector((state) => state.building);
 
   useEffect(() => {
     axios
-      .get(`${backLink}/building/${user.building}`)
+      .get(`${backLink}/building/${data.name}`)
       .then((res) => {
         setBuilding(res.data);
       })
@@ -29,7 +29,7 @@ export const ClientPage = () => {
 
   return (
     <>
-      <ClientTabs setClientPage={setClientPage} />
+      <ClientTabs setClientPage={setClientPage} building={building} />
       <div>
         {clientPage === "main" && <ClientMain />}
         {clientPage === "visitor" && <AddVisitor />}
@@ -43,7 +43,7 @@ export const ClientPage = () => {
   );
 };
 
-export const ClientTabs = ({ setClientPage }) => {
+export const ClientTabs = ({ setClientPage, building }) => {
   return (
     <Wrap>
       <Button onClick={() => setClientPage("visitor")}>
@@ -64,10 +64,22 @@ export const ClientTabs = ({ setClientPage }) => {
       </Button>
       <Button onClick={() => setClientPage("cars")}>Car list</Button>
       <Button onClick={() => setClientPage("residents")}>Resident list</Button>
-      <Button onClick={() => setClientPage("patrols")}>
+      <Button
+        onClick={() => setClientPage("patrols")}
+        style={
+          building.patrolsAllowed ? { display: "block" } : { display: "none" }
+        }
+      >
         Patrols completed
       </Button>
-      <Button onClick={() => setClientPage("reports")}>Reports</Button>
+      <Button
+        onClick={() => setClientPage("reports")}
+        style={
+          building.reportsAllowed ? { display: "block" } : { display: "none" }
+        }
+      >
+        Reports
+      </Button>
     </Wrap>
   );
 };
