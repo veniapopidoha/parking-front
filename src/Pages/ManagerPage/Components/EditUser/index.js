@@ -9,43 +9,85 @@ import {
   PencilIcon,
   Image,
   InstructionsText,
+  TextArea,
+  Button,
 } from "./style";
 import { Container } from "../../style";
 import Pencil from "../../../../images/pencil.svg";
 import bgImg from "../../../../images/bg4.png";
 import { Checkbox } from "./Components/Checkbox";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { backLink } from "../../../../App";
 
-export const EditUser = () => {
+export const EditUser = ({ building }) => {
   const user = useSelector((state) => state);
+  const [isToEdit, setIsToEdit] = useState(false);
+  const [value, setValue] = useState("");
+  const [isSubmited, setIsSubmited] = useState(false);
+
+  useEffect(() => {
+    axios
+      .patch(`${backLink}/building-instructions`, {
+        buildingName: building.name,
+        instructions: value,
+      })
+      .then((res) => setValue(res.data.instructions));
+  }, [isSubmited]);
 
   return (
     <>
       <Container>
         <DropDown>
-          <Checkbox text={"See reports"} />
-          <Checkbox text={"See patrol reports"} />
+          <Checkbox
+            text={"See reports"}
+            value={"reports"}
+            building={building}
+          />
+          <Checkbox
+            text={"See patrol reports"}
+            value={"patrols"}
+            building={building}
+          />
         </DropDown>
         <TextWrap>
-          <Title>{user?.status}Veniamin Vitaliovich</Title>
-          <Status>{user?.name}Manager</Status>
+          <Title>{user?.name}</Title>
+          <Status>{user?.status}</Status>
         </TextWrap>
         <Instructions>
           <InstructionsWrap>
             <InstructionsText>Special instructions </InstructionsText>
-            <PencilIcon src={Pencil} />
+            <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
           </InstructionsWrap>
-          <InstructionsText style={{ lineHeight: "24px" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </InstructionsText>
+          {isToEdit ? (
+            <>
+              <TextAreaComponent value={value} setValue={setValue} />
+              <Button
+                onClick={() => {
+                  setIsSubmited(!isSubmited);
+                  setIsToEdit(false);
+                }}
+              >
+                Edit
+              </Button>
+            </>
+          ) : (
+            <InstructionsText style={{ lineHeight: "24px" }}>
+              {value || building.instructions}
+            </InstructionsText>
+          )}
         </Instructions>
       </Container>
       <Image src={bgImg} alt="bg" />
     </>
+  );
+};
+
+export const TextAreaComponent = ({ value, setValue }) => {
+  return (
+    <TextArea
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    ></TextArea>
   );
 };

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Auth } from "../Auth";
 import { ManagerPage } from "../ManagerPage";
 import { EmployeePage } from '../EmployeePage';
+import { ClientPage } from "../ClientPage";
 
 export const MainPage = () => {
   const locationPage = useLocation();

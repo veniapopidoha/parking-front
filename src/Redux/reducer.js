@@ -1,7 +1,6 @@
 const initialState = {
   isAuth: true,
-  visitors: [],
-  building: "",
+  building: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -9,7 +8,10 @@ export const reducer = (state = initialState, action) => {
     case "AUTH":
       return { ...state, isAuth: action.payload };
     case "ADD_USER_DATA":
-      return { ...state };
+      return {
+        ...state,
+        building: action.payload.building,
+      };
     case "ADD_VISITOR_DATA":
       return {
         ...state,

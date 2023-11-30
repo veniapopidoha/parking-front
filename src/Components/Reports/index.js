@@ -12,7 +12,7 @@ import { ImageWrap, WrapContent, BgImage, Image } from "./style";
 import bgImage from "../../images/bg1.png";
 import Bell from "../../images/bell.svg";
 
-export const Reports = ({ building, buildings }) => {
+export const Reports = ({ building }) => {
   return (
     <WrapContent>
       <Wrap>
@@ -29,31 +29,20 @@ export const Reports = ({ building, buildings }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {buildings
-              ? buildings.map((building) =>
-                  building.visitors.map((car) => (
-                    <TableRow key={car.plate}>
-                      <TableData>{car.plate}</TableData>
-                      <TableDataS>{car.model}</TableDataS>
-                      <TableDataS>{car.startDate}</TableDataS>
-                      <TableData>{car.endDate}</TableData>
-                    </TableRow>
-                  ))
-                )
-              : building.reports.map((report) => {
-                  return (
-                    <TableRow key={report.plate}>
-                      <TableData>{report.plate}</TableData>
-                      <TableData>{report.startDate}</TableData>
-                      <TableData>{report.name}</TableData>
-                      <TableDataS>{report.status}</TableDataS>
-                      <TableData>
-                        <Image src={Bell} alt="icon" />
-                      </TableData>
-                      <TableData>{report.notes}</TableData>
-                    </TableRow>
-                  );
-                })}
+            {building.reports.map((report) => {
+              return (
+                <TableRow key={report.plate}>
+                  <TableData>{report.plate}</TableData>
+                  <TableData>{report.startDate}</TableData>
+                  <TableData>{report.name}</TableData>
+                  <TableDataS>{report.status}</TableDataS>
+                  <TableData>
+                    <Image src={Bell} alt="icon" />
+                  </TableData>
+                  <TableData>{report.notes}</TableData>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </table>
       </Wrap>

@@ -10,7 +10,6 @@ export const ComboBoxText = styled.p`
 export const InputWrap = styled.div`
   display: flex;
   position: relative;
-  top: -55px;
   z-index: 25;
   flex-direction: row;
   align-items: center;
@@ -21,18 +20,19 @@ export const InputWrap = styled.div`
 
 export const Icon = styled.img`
   height: 26px;
+  cursor: pointer;
 `;
 
 export const IconContainer = styled.div`
   border-radius: 30px 0 0 30px;
-  padding: 9.5px 20px;
-  background-color: #fff;
+  padding: 12.5px 20px;
+  background-color: #fecb21;
   margin-top: 5px;
 `;
 
 export const StyledInput = styled.input`
   border-radius: 0 30px 30px 0;
-  padding: 15px 20px;
+  padding: 18px 20px;
   max-width: 360px;
   width: 100%;
   font-family: "Montserrat", sans-serif;
@@ -41,7 +41,7 @@ export const StyledInput = styled.input`
   width: 100%;
   outline: none;
   border: 0;
-  background-color: #f4f4f4;
+  background-color: #fecb21;
   margin-top: 5px;
 `;
 

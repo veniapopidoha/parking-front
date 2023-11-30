@@ -8,6 +8,7 @@ export const Wrap = styled.div`
   align-items: center;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 100;
 `;
 
 export const Form = styled.form`

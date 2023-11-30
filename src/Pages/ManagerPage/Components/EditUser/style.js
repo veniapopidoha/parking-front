@@ -54,6 +54,7 @@ export const Label = styled.label`
   font-weight: 600;
   line-height: 24px;
   letter-spacing: -0.3px;
+  max-width: 220px;
 `;
 
 export const StyledCheckbox = styled.div`
@@ -82,12 +83,27 @@ export const Input = styled.input`
   acity: 1;
 `;
 
+export const TextArea = styled.textarea`
+  min-height: 200px;
+  width: 100%;
+  border-radius: 5px;
+  background: #ddd;
+  padding: 15px;
+  font-size: 20px;
+  max-height: 400px;
+  resize: vertical;
+  border: none;
+  outline: none;
+  appearance: none;
+`;
+
 export const Instructions = styled.div`
   border-radius: 31px;
   background-color: rgba(255, 255, 255, 0.5);
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   padding: 32px 37px;
   height: 559px;
+  overflow: hidden;
   max-width: 540px;
 `;
 
@@ -118,4 +134,19 @@ export const Image = styled.img`
   right: 0;
   bottom: 0;
   z-index: -1;
+`;
+
+export const Button = styled.button`
+  background-color: #fecb21;
+  color: #616467;
+  padding: 16px 42px;
+  max-height: 60px;
+  border-radius: 24px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  font-family: Montserrat;
+  cursor: pointer;
+  margin-top: 20px;
 `;

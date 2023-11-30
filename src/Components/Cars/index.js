@@ -12,8 +12,7 @@ import {
 } from "./style";
 import bgImg from "../../images/bg4.png";
 
-export const Cars = ({ building, buildings }) => {
-  console.log(buildings, building);
+export const Cars = ({ building }) => {
   return (
     <>
       <Wrap>
@@ -28,25 +27,14 @@ export const Cars = ({ building, buildings }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {buildings
-              ? buildings.map((building) =>
-                  building.visitors.map((car) => (
-                    <TableRow key={car.plate}>
-                      <TableData>{car.plate}</TableData>
-                      <TableDataS>{car.model}</TableDataS>
-                      <TableDataS>{car.startDate}</TableDataS>
-                      <TableData>{car.endDate}</TableData>
-                    </TableRow>
-                  ))
-                )
-              : building.visitors.map((car) => (
-                  <TableRow key={car.plate}>
-                    <TableData>{car.plate}</TableData>
-                    <TableDataS>{car.model}</TableDataS>
-                    <TableDataS>{car.startDate}</TableDataS>
-                    <TableData>{car.endDate}</TableData>
-                  </TableRow>
-                ))}
+            {building.visitors.map((car) => (
+              <TableRow key={car.plate}>
+                <TableData>{car.plate}</TableData>
+                <TableDataS>{car.model}</TableDataS>
+                <TableDataS>{car.startDate}</TableDataS>
+                <TableData>{car.endDate}</TableData>
+              </TableRow>
+            ))}
           </TableBody>
         </table>
       </Wrap>

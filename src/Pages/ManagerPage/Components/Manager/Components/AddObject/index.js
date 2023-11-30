@@ -20,6 +20,7 @@ export const AddObject = ({ setIsAddBuild }) => {
   const [visitorsPerMonth, setVisitorsPerMonth] = useState("");
   const [duration, setDuration] = useState("");
   const [limitType, setLimitType] = useState("");
+  const [limitPerUse, setLimitPerUse] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -31,6 +32,8 @@ export const AddObject = ({ setIsAddBuild }) => {
         address,
         notes,
         limitType,
+        limitPerUse,
+        instructions: "",
         visitorsPerMonth,
         duration,
       });
@@ -81,6 +84,28 @@ export const AddObject = ({ setIsAddBuild }) => {
             value="Rolling"
             checked={limitType === "rolling"}
             onChange={() => setLimitType("rolling")}
+          />
+        </LimitWrap>
+        <LimitWrap>
+          <Label htmlFor="calendar" style={{ margin: 0 }}>
+            Per Use
+          </Label>
+          <RadioButton
+            type="radio"
+            name="use"
+            value="Use"
+            checked={limitPerUse === true}
+            onChange={() => setLimitPerUse(true)}
+          />
+          <Label htmlFor="rolling" style={{ margin: 0 }}>
+            Per Day
+          </Label>
+          <RadioButton
+            type="radio"
+            name="day"
+            value="Day"
+            checked={limitPerUse === false}
+            onChange={() => setLimitPerUse(false)}
           />
         </LimitWrap>
         <Label htmlFor="visitors">Limits:</Label>
