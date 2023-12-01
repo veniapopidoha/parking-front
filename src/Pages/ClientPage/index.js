@@ -10,6 +10,7 @@ import { backLink } from "../../App";
 export const ClientPage = () => {
   const [clientPage, setClientPage] = useState("main");
   const [building, setBuilding] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
   const data = useSelector((state) => state.building);
 
   useEffect(() => {
@@ -19,12 +20,17 @@ export const ClientPage = () => {
         setBuilding(res.data);
       })
       .catch((err) => console.log(err));
-  });
+  }, [isDeleted]);
 
   return (
     <>
       <ClientTabs setClientPage={setClientPage} building={building} />
-      <ClientMain building={building} clientPage={clientPage} />
+      <ClientMain
+        building={building}
+        clientPage={clientPage}
+        isDeleted={isDeleted}
+        setIsDeleted={setIsDeleted}
+      />
     </>
   );
 };
