@@ -24,7 +24,7 @@ export const AddResident = () => {
   });
   const [formValid, setFormValid] = useState(false);
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => state);
 
   useEffect(() => {
     if (errors.checkError || errors.emailError) {
@@ -84,7 +84,6 @@ export const AddResident = () => {
 
   return (
     <>
-      <ClientInfo isUser={true} />
       <Wrap onSubmit={addUser}>
         <CheckboxWrap>
           <label>

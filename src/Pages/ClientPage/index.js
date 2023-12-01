@@ -1,14 +1,8 @@
 import { Button } from "../../Components/Tab/style";
 import { Wrap } from "./style";
 import Pencil from "../../images/pencil.svg";
-import { Cars } from "../../Components/Cars";
-import { Residents } from "../../Components/Residents";
-import { Patrols } from "../../Components/Patrols";
-import { Reports } from "../../Components/Reports";
 import { useEffect, useState } from "react";
 import { ClientMain } from "./Components/ClientMain";
-import { AddVisitor } from "./Components/AddVisitor";
-import { AddResident } from "./Components/AddResident";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { backLink } from "../../App";
@@ -30,15 +24,7 @@ export const ClientPage = () => {
   return (
     <>
       <ClientTabs setClientPage={setClientPage} building={building} />
-      <div>
-        {clientPage === "main" && <ClientMain />}
-        {clientPage === "visitor" && <AddVisitor />}
-        {clientPage === "resident" && <AddResident />}
-        {clientPage === "cars" && <Cars building={building} />}
-        {clientPage === "residents" && <Residents building={building} />}
-        {clientPage === "patrols" && <Patrols building={building} />}
-        {clientPage === "reports" && <Reports building={building} />}
-      </div>
+      <ClientMain building={building} clientPage={clientPage} />
     </>
   );
 };

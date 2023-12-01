@@ -26,7 +26,7 @@ export const MainPage = () => {
         </>
       )} */}
 
-      <ManagerPage />
+      <ClientPage />
     </>
   );
 };

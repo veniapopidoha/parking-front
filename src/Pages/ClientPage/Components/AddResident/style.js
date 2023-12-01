@@ -8,10 +8,6 @@ export const Image = styled.img`
 `;
 
 export const Wrap = styled.form`
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +17,7 @@ export const Wrap = styled.form`
   width: fit-content;
   border-radius: 30px;
   border: 1px solid #000;
+  margin-left: 50px;
 `;
 
 export const CheckboxWrap = styled.div`

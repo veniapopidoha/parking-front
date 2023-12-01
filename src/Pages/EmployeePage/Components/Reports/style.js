@@ -11,3 +11,10 @@ export const Table = styled.table`
     text-decoration: none;
   }
 `;
+
+export const Image = styled.img`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+`;
