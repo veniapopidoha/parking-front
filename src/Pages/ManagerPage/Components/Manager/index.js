@@ -1,23 +1,55 @@
 import { useSelector } from "react-redux";
-import bgImg from "../../../../images/bg1.png";
-import { Image, ImageWrap, Status, TextWrap, Title, Wrap } from "./styles";
+import { Status, TextWrap, Title, Wrap, WrapContent } from "./styles";
 import { Container } from "../../style";
-import { AddObject } from "./Components/AddObject";
+import { Cars } from "../../../../Components/Cars";
+import { Patrols } from "../../../../Components/Patrols";
+import { AddUserM } from "../AddUser/index";
+import { EditUser } from "../EditUser/index";
+import { AddObject } from "./Components/AddObject/index";
+import { Residents } from "../../../../Components/Residents";
+import { ReportsPage } from "../../../EmployeePage/Components/Reports";
+import { useState } from "react";
 
-export const ManagerMain = ({ isUser, setIsAddBuild, isAddBuild }) => {
+export const ManagerMain = ({
+  setIsAddBuild,
+  isAddBuild,
+  managerPage,
+  selectedBuilding,
+  isDeleted,
+  setIsDeleted,
+}) => {
   const user = useSelector((state) => state);
 
   return (
     <Wrap>
       <Container>
-        <TextWrap>
-          <Title>{user?.name}</Title>
-          <Status>{user?.status}</Status>
-        </TextWrap>
+        <WrapContent>
+          <div style={{ minWidth: "500px", marginRight: "40px" }}>
+            <EditUser building={selectedBuilding} />
+            <TextWrap>
+              <Title>{user?.name}</Title>
+              <Status>{user?.status}</Status>
+            </TextWrap>
+          </div>
+          {selectedBuilding.name && (
+            <>
+              {managerPage === "user" && <AddUserM />}
+              {managerPage === "cars" && <Cars building={selectedBuilding} />}
+              {managerPage === "residents" && (
+                <Residents
+                  building={selectedBuilding}
+                  isDeleted={isDeleted}
+                  setIsDeleted={setIsDeleted}
+                />
+              )}
+              {managerPage === "patrols" && (
+                <Patrols building={selectedBuilding} />
+              )}
+              {managerPage === "reports" && <ReportsPage />}
+            </>
+          )}
+        </WrapContent>
       </Container>
-      <ImageWrap style={isUser ? { display: "none" } : { display: "block" }}>
-        <Image src={bgImg} alt="img" />
-      </ImageWrap>
       {isAddBuild && <AddObject setIsAddBuild={setIsAddBuild} />}
     </Wrap>
   );

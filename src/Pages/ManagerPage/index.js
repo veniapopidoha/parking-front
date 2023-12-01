@@ -3,12 +3,6 @@ import { ManagerWrap, Wrap } from "./style";
 import Pencil from "../../images/pencil.svg";
 import { useEffect, useState } from "react";
 import { ManagerMain } from "./Components/Manager/index";
-import { AddUserM } from "./Components/AddUser";
-import { EditUser } from "./Components/EditUser";
-import { Cars } from "../../Components/Cars";
-import { Residents } from "../../Components/Residents";
-import { Patrols } from "../../Components/Patrols";
-import { Reports } from "../../Components/Reports";
 import axios from "axios";
 import { backLink } from "../../App";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +16,7 @@ export const ManagerPage = () => {
   const [buildingValue, setBuildingValue] = useState(data.building.name || "");
   const [selectedBuilding, setSelectedBuilding] = useState(data.building || []);
   const [isAddBuild, setIsAddBuild] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     if (buildingValue) {
@@ -38,7 +33,7 @@ export const ManagerPage = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [buildingValue]);
+  }, [buildingValue, isDeleted]);
 
   return (
     <ManagerWrap>
@@ -50,23 +45,14 @@ export const ManagerPage = () => {
         isAddBuild={isAddBuild}
         setIsAddBuild={setIsAddBuild}
       />
-      {selectedBuilding.name && managerPage !== "main" ? (
-        <>
-          {managerPage === "user" && <AddUserM />}
-          {managerPage === "cars" && <Cars building={selectedBuilding} />}
-          {managerPage === "residents" && (
-            <EditUser building={selectedBuilding} />
-          )}
-          {managerPage === "patrols" && <Patrols building={selectedBuilding} />}
-          {managerPage === "reports" && <Reports building={selectedBuilding} />}
-        </>
-      ) : (
-        <ManagerMain
-          isUser={managerPage === "user"}
-          isAddBuild={isAddBuild}
-          setIsAddBuild={setIsAddBuild}
-        />
-      )}
+      <ManagerMain
+        isAddBuild={isAddBuild}
+        setIsAddBuild={setIsAddBuild}
+        managerPage={managerPage}
+        selectedBuilding={selectedBuilding}
+        isDeleted={isDeleted}
+        setIsDeleted={setIsDeleted}
+      />
     </ManagerWrap>
   );
 };

@@ -38,45 +38,43 @@ export const EditUser = ({ building }) => {
   return (
     <>
       <Container>
-        <DropDown>
-          <Checkbox
-            text={"See reports"}
-            value={"reports"}
-            building={building}
-          />
-          <Checkbox
-            text={"See patrol reports"}
-            value={"patrols"}
-            building={building}
-          />
-        </DropDown>
-        <TextWrap>
-          <Title>{user?.name}</Title>
-          <Status>{user?.status}</Status>
-        </TextWrap>
-        <Instructions>
-          <InstructionsWrap>
-            <InstructionsText>Special instructions </InstructionsText>
-            <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
-          </InstructionsWrap>
-          {isToEdit ? (
-            <>
-              <TextAreaComponent value={value} setValue={setValue} />
-              <Button
-                onClick={() => {
-                  setIsSubmited(!isSubmited);
-                  setIsToEdit(false);
-                }}
-              >
-                Edit
-              </Button>
-            </>
-          ) : (
-            <InstructionsText style={{ lineHeight: "24px" }}>
-              {value || building.instructions}
-            </InstructionsText>
-          )}
-        </Instructions>
+        <div>
+          <DropDown>
+            <Checkbox
+              text={"See reports"}
+              value={"reports"}
+              building={building}
+            />
+            <Checkbox
+              text={"See patrol reports"}
+              value={"patrols"}
+              building={building}
+            />
+          </DropDown>
+          <Instructions>
+            <InstructionsWrap>
+              <InstructionsText>Special instructions </InstructionsText>
+              <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
+            </InstructionsWrap>
+            {isToEdit ? (
+              <>
+                <TextAreaComponent value={value} setValue={setValue} />
+                <Button
+                  onClick={() => {
+                    setIsSubmited(!isSubmited);
+                    setIsToEdit(false);
+                  }}
+                >
+                  Edit
+                </Button>
+              </>
+            ) : (
+              <InstructionsText style={{ lineHeight: "24px" }}>
+                {value || building.instructions}
+              </InstructionsText>
+            )}
+          </Instructions>
+        </div>
       </Container>
       <Image src={bgImg} alt="bg" />
     </>

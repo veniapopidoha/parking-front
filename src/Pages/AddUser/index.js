@@ -99,11 +99,9 @@ export const AddUser = () => {
 
   const addUser = (e) => {
     e.preventDefault();
-
     axios
-      .post(`${backLink}/add-user`, {
+      .post(`${backLink}/add-building-user`, {
         email,
-        userEmail: data.email,
         status,
         buildingName: building,
       })

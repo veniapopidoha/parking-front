@@ -7,16 +7,17 @@ export const Wrap = styled.div`
   justify-content: space-between;
 `;
 
-export const ImageWrap = styled.div`
+export const WrapContent = styled.div`
   display: flex;
-  justify-content: center;
-  width: 100%;
+  align-items: start;
+  justify-content: space-between;
 `;
 
 export const TextWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 46px;
+  margin-top: 40px;
 `;
 
 export const Title = styled.h2`
@@ -49,11 +50,4 @@ export const Status = styled.p`
     bottom: 0;
     background-color: black;
   }
-`;
-
-export const Image = styled.img`
-  transform: rotate(180deg);
-  max-height: 690px;
-  height: 100%;
-  width: 100%;
 `;

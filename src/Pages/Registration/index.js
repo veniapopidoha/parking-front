@@ -11,8 +11,8 @@ import passwordIcon from "../../images/password.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { SignIn } from "../SignIn";
-import { useDispatch } from "react-redux";
-import { backLink } from '../../App';
+import { useDispatch, useSelector } from "react-redux";
+import { backLink } from "../../App";
 
 export const Registration = (props) => {
   const dispatch = useDispatch();
@@ -30,6 +30,9 @@ export const Registration = (props) => {
     unitError: "Please fill your unit",
   });
   const [formValid, setFormValid] = useState(false);
+  const data = useSelector((state) => state);
+
+  console.log(data);
 
   const blurHandler = (e) => {
     switch (e.target.name) {

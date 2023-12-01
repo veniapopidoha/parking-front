@@ -8,8 +8,7 @@ import {
   Wrap,
   TableRow,
 } from "../Cars/style";
-import { ImageWrap, WrapContent, BgImage, Image } from "./style";
-import bgImage from "../../images/bg1.png";
+import { WrapContent, Image } from "./style";
 import Bell from "../../images/bell.svg";
 
 export const Reports = ({ building }) => {
@@ -46,9 +45,6 @@ export const Reports = ({ building }) => {
           </TableBody>
         </table>
       </Wrap>
-      <ImageWrap>
-        <BgImage src={bgImage} alt="img" />
-      </ImageWrap>
     </WrapContent>
   );
 };

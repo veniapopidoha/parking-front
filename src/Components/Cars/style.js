@@ -11,9 +11,20 @@ export const Wrap = styled.div`
   margin: 0 auto;
 `;
 
+export const Table = styled.table`
+  width: 100%;
+
+  a {
+    text-decoration: none;
+  }
+`;
+
 export const TableHeader = styled.tr`
   display: flex;
   align-items: center;
+  overflow-x: auto;
+  max-width: 1200px;
+  padding: 0 20px;
   gap: 25px;
   margin-bottom: 50px;
 `;
@@ -24,10 +35,11 @@ export const TableHead = styled.th`
   border: 1px solid rgba(0, 0, 0, 0);
   background: #fecb21;
   font-family: Montserrat;
+  text-align: center;
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-  padding: 18px 90px;
+  padding: 18px 0px;
   letter-spacing: -0.27px;
   white-space: nowrap;
 `;
@@ -42,14 +54,15 @@ export const TableRow = styled.tr`
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0);
   background: #fff;
-  padding: 18px 92px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 25px;
 `;
 
 export const TableData = styled.td`
   color: #626060;
+  text-align: center;
   font-family: Jost;
   font-size: 20px;
   font-weight: 600;
