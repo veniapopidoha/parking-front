@@ -8,7 +8,11 @@ export const Wrap = styled.div`
   gap: 46px;
   padding: 68px 0;
   max-width: 1546px;
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
   heigth: 100vh;
+
+  @media only screen and (max-width: 1340px) {
+    overflow-x: scroll;
+  }
 `;

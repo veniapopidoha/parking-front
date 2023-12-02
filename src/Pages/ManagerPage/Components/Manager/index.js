@@ -8,7 +8,6 @@ import { EditUser } from "../EditUser/index";
 import { AddObject } from "./Components/AddObject/index";
 import { Residents } from "../../../../Components/Residents";
 import { ReportsPage } from "../../../EmployeePage/Components/Reports";
-import { useState } from "react";
 
 export const ManagerMain = ({
   setIsAddBuild,

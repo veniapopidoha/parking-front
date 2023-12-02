@@ -27,21 +27,26 @@ export const AddObject = ({ setIsAddBuild }) => {
     e.preventDefault();
 
     if (name && address && visitorsPerMonth && duration) {
-      await axios.post(`${backLink}/add-building`, {
-        buildingName: name,
-        address,
-        notes,
-        limitType,
-        limitPerUse,
-        instructions: "",
-        visitorsPerMonth,
-        duration,
-      });
-      setAddress("");
-      setDuration("");
-      setName("");
-      setNotes("");
-      setVisitorsPerMonth("");
+      try {
+        await axios.post(`${backLink}/add-building`, {
+          buildingName: name,
+          address,
+          notes,
+          limitType,
+          limitPerUse,
+          instructions: "",
+          visitorsPerMonth,
+          duration,
+        });
+        setAddress("");
+        setDuration("");
+        setName("");
+        setNotes("");
+        setVisitorsPerMonth("");
+      } catch (error) {
+        setError(error.response.data.message);
+        console.log(error);
+      }
     } else {
       setError("Please fill all fields");
     }

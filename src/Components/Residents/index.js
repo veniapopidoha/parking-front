@@ -28,45 +28,44 @@ export const Residents = ({ building, isDeleted, setIsDeleted }) => {
     <>
       <Wrap>
         <Title>Resident list</Title>
-        <table>
+        <table width="100%">
           <thead>
             <TableHeader>
-              <TableHead>Name</TableHead>
-              <TableHead>Unit</TableHead>
-              <TableHead>Number of visitors</TableHead>
+              <TableHead width="45%">Name</TableHead>
+              <TableHead width="10%">Unit</TableHead>
+              <TableHead width="45%">Number of visitors</TableHead>
             </TableHeader>
           </thead>
           <TableBody>
-            {building.users
-              .filter((user) => user.status === "resident")
-              .map((resident) => {
-                return (
-                  <tr
-                    key={resident.email}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "36px",
-                      width: "100%",
-                    }}
-                  >
-                    <TableRow>
-                      <TableDataS>{resident.name}</TableDataS>
-                      <TableData>{resident.unit}</TableData>
-                      <TableDataS style={{ paddingLeft: "30px" }}>
-                        {resident.numberOfVisitors}
-                      </TableDataS>
-                    </TableRow>
-                    <IconWrap>
-                      <Icon
-                        src={Bin}
-                        alt="bucket"
-                        onClick={() => deleteResident(resident.email)}
-                      />
-                    </IconWrap>
-                  </tr>
-                );
-              })}
+            {building.users.map((resident) => {
+              return (
+                <tr
+                  key={resident.email}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "36px",
+                    width: "100%",
+                    maxWidth: "1000px",
+                  }}
+                >
+                  <TableRow>
+                    <TableDataS width="45%">{resident.name}</TableDataS>
+                    <TableData width="10%">{resident.unit}</TableData>
+                    <TableDataS width="45%">
+                      {resident.numberOfVisitors}
+                    </TableDataS>
+                  </TableRow>
+                  <IconWrap>
+                    <Icon
+                      src={Bin}
+                      alt="bucket"
+                      onClick={() => deleteResident(resident.email)}
+                    />
+                  </IconWrap>
+                </tr>
+              );
+            })}
           </TableBody>
         </table>
       </Wrap>

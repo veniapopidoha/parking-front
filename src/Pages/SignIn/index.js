@@ -21,6 +21,7 @@ export const SignIn = () => {
     emailError: "Please fill your email",
     passwordError: "Please fill your password",
   });
+  const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
   const data = useSelector((state) => state);
 
@@ -101,10 +102,11 @@ export const SignIn = () => {
         setErrors(res.data.errors);
         dispatch({
           type: "ADD_USER_DATA",
-          payload: { ...data, ...res.data.data },
+          payload: { ...data, ...res.data },
         });
         dispatch({ type: "AUTH", payload: res.data.isAuth });
-      });
+      })
+      .catch((error) => setError(error.response.data.message));
   };
 
   return (
@@ -149,6 +151,7 @@ export const SignIn = () => {
         <Button disabled={!formValid} type="submit">
           Sign In
         </Button>
+        <Error>{error}</Error>
       </Form>
     </Wrap>
   );

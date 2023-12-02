@@ -22,6 +22,7 @@ export const AddResident = () => {
     emailError: "Please fill your email",
     checkError: "Please fill your checkbox",
   });
+  const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
@@ -64,11 +65,10 @@ export const AddResident = () => {
     e.preventDefault();
 
     axios
-      .post(`${backLink}/add-user`, {
+      .post(`${backLink}/add-building-user`, {
         email,
         status,
-        userEmail: data.email,
-        buildingName: data.building,
+        buildingName: data.building.name,
       })
       .then(() => {
         dispatch({
@@ -76,9 +76,10 @@ export const AddResident = () => {
           payload: { ...data, building: data.building },
         });
         setEmail("");
+        setError("");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.response.data.message);
       });
   };
 
@@ -121,6 +122,7 @@ export const AddResident = () => {
           {emailEmpty && errors.emailError && (
             <Error>{errors.emailError}</Error>
           )}
+          <Error>{error}</Error>
         </Container>
         <Button type="submit">Add User</Button>
       </Wrap>

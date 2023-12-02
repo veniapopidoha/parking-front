@@ -8,25 +8,21 @@ export const Patrols = ({ building }) => {
     <>
       <Wrap>
         <Title>Patrols completed</Title>
-        <table>
+        <table width="100%">
           <thead>
             <TableHeader>
-              <TableHead style={{ padding: "18px 121px" }}>Name</TableHead>
-              <TableHead style={{ padding: "20px 53px" }}>Start</TableHead>
-              <TableHead style={{ padding: "20px 53px" }}>End</TableHead>
+              <TableHead width="33%">Name</TableHead>
+              <TableHead width="33%">Start</TableHead>
+              <TableHead width="33%">End</TableHead>
             </TableHeader>
           </thead>
           <TableBody>
             {building.patrols.map((patrol) => {
               return (
                 <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
-                  <TableDataS style={{ marginRight: "132px" }}>
-                    {patrol.name}
-                  </TableDataS>
-                  <TableData style={{ marginRight: "44px" }}>
-                    {patrol.startDate}
-                  </TableData>
-                  <TableData>{patrol.endDate}</TableData>
+                  <TableDataS width="33%">{patrol.name}</TableDataS>
+                  <TableData width="33%">{patrol.startDate}</TableData>
+                  <TableData width="33%">{patrol.endDate}</TableData>
                 </TableRow>
               );
             })}

@@ -8,6 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Wrap,
 } from "../../../../Components/Cars/style";
 import bgImg from "../../../../images/bg4.png";
 
@@ -29,7 +30,7 @@ export const ReportsPage = () => {
   }, []);
 
   return (
-    <>
+    <Wrap>
       <Table>
         <thead>
           <TableHeader>
@@ -68,7 +69,6 @@ export const ReportsPage = () => {
           </tbody>
         )}
       </Table>
-      <Image src={bgImg} alt="bg" />
-    </>
+    </Wrap>
   );
 };

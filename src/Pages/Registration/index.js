@@ -29,10 +29,9 @@ export const Registration = (props) => {
     passwordError: "Please fill your password",
     unitError: "Please fill your unit",
   });
+  const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
   const data = useSelector((state) => state);
-
-  console.log(data);
 
   const blurHandler = (e) => {
     switch (e.target.name) {
@@ -113,12 +112,14 @@ export const Registration = (props) => {
 
   const setUser = (e) => {
     e.preventDefault();
-
     axios
       .put(`${backLink}/add-user-info/${props.userId}`, {
         name: name,
+        buildingName: userData.buildingName,
         unit: unit,
         password: password,
+        email: userData.email,
+        status: userData.status,
       })
       .then(() => {
         window.location.replace("http://localhost:3000/");
@@ -131,13 +132,13 @@ export const Registration = (props) => {
             email: userData.email,
             id: userData.id,
             status: userData.status,
-            object: userData.object,
+            object: userData.buildingName,
             numberOfRegistration: userData.numberOfRegistration,
           },
         });
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.response.data.message);
       });
   };
 
@@ -220,6 +221,7 @@ export const Registration = (props) => {
             <Button disabled={!formValid} type="submit">
               Sign In
             </Button>
+            <Error>{error}</Error>
           </Form>
         </Wrap>
       )}

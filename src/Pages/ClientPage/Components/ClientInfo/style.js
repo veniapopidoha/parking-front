@@ -3,7 +3,22 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   padding: 42px 0 0 97px;
   font-family: Montserrat;
-  min-width: 500px;
+  min-width: 400px;
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0;
+    max-width: 500px;
+    min-width: 300px;
+  }
+
+  @media only screen and (max-width: 550px) {
+    padding: 0;
+    max-width: 300px;
+    min-width: 200px;
+  }
 `;
 
 export const Title = styled.h3`

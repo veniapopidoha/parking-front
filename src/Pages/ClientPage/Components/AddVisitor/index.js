@@ -19,6 +19,8 @@ export const AddVisitor = () => {
   const [endDate, setEndDate] = useState("");
   const { RangePicker } = DatePicker;
 
+  console.log(startDate.$d, endDate);
+
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
 
@@ -29,10 +31,10 @@ export const AddVisitor = () => {
         plate,
         colour,
         make,
-        startDate,
-        endDate,
+        startDate: startDate.$d,
+        endDate: endDate.$d,
         residentId: id,
-        buildingName: data.building,
+        buildingName: data.building.name,
         email: data.email,
       })
       .then(() => {

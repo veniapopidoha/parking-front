@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   DescriptionD,
   DescriptionT,
@@ -7,12 +8,15 @@ import {
   Wrap,
 } from "./style";
 
-export const ClientInfo = ({ isUser }) => {
+export const ClientInfo = () => {
+  const user = useSelector((state) => state);
   return (
     <>
-      <Wrap isUser={isUser}>
-        <Title>Veniamin Vitaliovich</Title>
-        <Status>Client</Status>
+      <Wrap>
+        <Title>
+          {user.name}sadsadddddddddddddddddddddddddddddddddddddddddddddd
+        </Title>
+        <Status>{user.status}dddddddddddddddddddd</Status>
         <dl>
           <DescriptionWrap>
             <DescriptionT>Licence plate</DescriptionT>

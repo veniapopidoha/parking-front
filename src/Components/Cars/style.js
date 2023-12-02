@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
-  padding: 45px 64px 0 35px;
-  min-height: 844px;
+  padding: 45px 64px 45px 35px;
   border-radius: 30px;
-  max-width: 1812px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
 `;
@@ -48,6 +47,7 @@ export const TableBody = styled.tbody`
   display: flex;
   flex-direction: column;
   gap: 17px;
+  max-width: 1200px;
 `;
 
 export const TableRow = styled.tr`
@@ -62,6 +62,7 @@ export const TableRow = styled.tr`
 
 export const TableData = styled.td`
   color: #626060;
+  overflow: hidden;
   text-align: center;
   font-family: Jost;
   font-size: 20px;
@@ -72,6 +73,7 @@ export const TableData = styled.td`
 export const TableDataS = styled.td`
   color: #626060;
   font-family: Jost;
+  text-align: center;
   font-size: 15px;
   font-weight: 500;
   line-height: 116%;
@@ -92,4 +94,8 @@ export const Image = styled.img`
   right: 0;
   bottom: 0;
   z-index: -1;
+
+  @media only screen and (max-width: 768px) {
+    max-width: 400px;
+  }
 `;

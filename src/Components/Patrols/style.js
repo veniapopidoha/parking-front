@@ -4,7 +4,6 @@ export const Wrap = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   padding: 45px 64px 0 35px;
-  min-height: 844px;
   border-radius: 30px;
   max-width: 980px;
   width: 100%;

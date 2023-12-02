@@ -26,6 +26,7 @@ export const AddUser = () => {
     buildingError: "Please fill user's building",
     checkError: "Please fill your checkbox",
   });
+  const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
@@ -80,6 +81,7 @@ export const AddUser = () => {
   };
 
   const setChecked = (e) => {
+    setError("");
     setStatus(e.target.value);
     setErrors({ ...errors, checkError: "" });
   };
@@ -112,9 +114,10 @@ export const AddUser = () => {
         });
         setEmail("");
         setBuilding("");
+        setError("");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.response.data.message);
       });
   };
 
@@ -191,13 +194,11 @@ export const AddUser = () => {
                 <ComboBox>{filteredBuildings}</ComboBox>
               )}
             </InputWrap>
-            {buildingEmpty && errors.buildingError && (
-              <Error>{errors.buildingError}</Error>
-            )}
           </>
         ) : (
           <></>
         )}
+        <Error>{error}</Error>
       </Container>
       <Button type="submit">Add User</Button>
     </Wrap>

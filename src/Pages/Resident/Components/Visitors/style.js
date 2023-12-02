@@ -5,26 +5,38 @@ export const Wrap = styled.div`
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   padding: 45px 64px 45px 35px;
   border-radius: 30px;
-  max-width: 1350px;
+  max-width: 1400px;
   width: 100%;
-  margin-bottom: 30px;
+  margin: 0 auto;
 `;
 
-export const TableBody = styled.tbody`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
+export const Table = styled.table`
+  width: 100%;
   position: relative;
+  max-width: 1200px;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
-export const TableHead = styled.td`
+export const TableHeader = styled.tr`
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  gap: 25px;
+  margin-bottom: 50px;
+`;
+
+export const TableHead = styled.th`
   color: #626060;
   border-radius: 30px;
-  text-align: center;
   border: 1px solid rgba(0, 0, 0, 0);
   background: #fecb21;
   font-family: Montserrat;
+  text-align: center;
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
@@ -33,48 +45,28 @@ export const TableHead = styled.td`
   white-space: nowrap;
 `;
 
-export const Icon = styled.img`
-  width: 36px;
-  heigth: 36px;
-  cursor: pointer;
-`;
-
-export const IconWrap = styled.td`
-  position: absolute;
-  right: -45px;
-`;
-
-export const Table = styled.table`
+export const TableBody = styled.tbody`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 17px;
+  max-width: 1200px;
 `;
 
-export const TableHeader = styled.tr`
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 50px;
-`;
-
-export const TableRow = styled.td`
-  gap: 20px;
+export const TableRow = styled.tr`
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0);
-  flex: 1;
-  width: 100%;
   background: #fff;
   padding: 18px 20px;
   display: flex;
   align-items: center;
-  text-align: center;
+  gap: 25px;
 `;
 
 export const TableData = styled.td`
   color: #626060;
-  font-family: Jost;
   overflow: hidden;
   text-align: center;
-
+  font-family: Jost;
   font-size: 20px;
   font-weight: 600;
   line-height: 116%;
@@ -83,9 +75,29 @@ export const TableData = styled.td`
 export const TableDataS = styled.td`
   color: #626060;
   font-family: Jost;
-  overflow: hidden;
   text-align: center;
   font-size: 15px;
   font-weight: 500;
   line-height: 116%;
+`;
+
+export const Title = styled.h3`
+  color: #616467;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.54px;
+  margin-bottom: 47px;
+`;
+
+export const Image = styled.img`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  @media only screen and (max-width: 768px) {
+    max-width: 400px;
+  }
 `;
