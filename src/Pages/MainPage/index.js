@@ -16,7 +16,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {/* {isAuth ? (
+      {isAuth ? (
         <Auth />
       ) : userId ? (
         <Registration userId={userId} />
@@ -25,9 +25,9 @@ export const MainPage = () => {
           <SignIn />
           <AddUser />
         </>
-      )} */}
+      )}
 
-      <EmployeePage />
+      {/* <EmployeePage /> */}
     </>
   );
 };

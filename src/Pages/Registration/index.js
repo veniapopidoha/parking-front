@@ -116,6 +116,8 @@ export const Registration = (props) => {
         name: name,
         unit: unit,
         password: password,
+        status: userData.status,
+        buildingName: userData.building
       })
       .then(() => {
         window.location.replace("http://localhost:3000/");
@@ -128,7 +130,7 @@ export const Registration = (props) => {
             email: userData.email,
             id: userData.id,
             status: userData.status,
-            object: userData.object,
+            buildingName: userData.buildingName,
             numberOfRegistration: userData.numberOfRegistration,
           },
         });
@@ -141,12 +143,13 @@ export const Registration = (props) => {
   const getUserInfo = async () => {
     setloading(true);
     await axios
-      .get(`http://localhost:5000/${props.userId}`)
+      .get(`${backLink}/${props.userId}`)
       .then((response) => {
         setUserData(response.data);
       });
     setloading(false);
   };
+
 
   useEffect(() => {
     getUserInfo();
