@@ -19,8 +19,8 @@ export const AddVisitor = () => {
   const [endDate, setEndDate] = useState("");
   const { RangePicker } = DatePicker;
 
-  const id = useSelector((state) => state.data.id);
-  const data = useSelector((state) => state.data);
+  const id = useSelector((state) => state.id);
+  const data = useSelector((state) => state);
 
   const Submit = (e) => {
     e.preventDefault();
@@ -55,7 +55,6 @@ export const AddVisitor = () => {
   return (
     <>
       <Wrap>
-        <ClientInfo />
         <Form onSubmit={Submit}>
           <Title>Visitor car:</Title>
           <div>

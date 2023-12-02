@@ -1,10 +1,18 @@
-import axios from 'axios';
-import { backLink } from '../../../../App';
-import { useEffect, useState } from 'react';
-import { Table } from './style';
+import axios from "axios";
+import { backLink } from "../../../../App";
+import { useEffect, useState } from "react";
+import { Image, Table } from "./style";
+import {
+  TableBody,
+  TableData,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../../../Components/Cars/style";
+import bgImg from "../../../../images/bg4.png";
 
 export const ReportsPage = () => {
-  const building = 'Building';
+  const building = "Building";
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,34 +32,34 @@ export const ReportsPage = () => {
     <>
       <Table>
         <thead>
-          <tr>
-            <th width="10%">Plate</th>
-            <th width="25px">Reason</th>
-            <th width="45%">Notes</th>
-            <th width="20%">Attachment</th>
-          </tr>
+          <TableHeader>
+            <TableHead width="10%">Plate</TableHead>
+            <TableHead width="25%">Reason</TableHead>
+            <TableHead width="45%">Notes</TableHead>
+            <TableHead width="20%">Attachment</TableHead>
+          </TableHeader>
         </thead>
         {!loading ? (
-          <tbody>
+          <TableBody>
             {Array.from(reports).map((item, index) => {
               return (
-                <tr key={index}>
-                  <td>{item.plate}</td>
-                  <td>{item.reason}</td>
-                  <td>{item.notes}</td>
-                  <td>
+                <TableRow key={index}>
+                  <TableData width="10%">{item.plate}</TableData>
+                  <TableData width="25%">{item.reason}</TableData>
+                  <TableData width="45%">{item.notes}</TableData>
+                  <TableData width="20%">
                     {Array.from(item.imageUrls).map((link, index) => {
                       return (
-                        <a key={index} href={link} target='_blank'>
+                        <a key={index} href={link} target="_blank">
                           photo {index + 1} &nbsp;
                         </a>
                       );
                     })}
-                  </td>
-                </tr>
+                  </TableData>
+                </TableRow>
               );
             })}
-          </tbody>
+          </TableBody>
         ) : (
           <tbody>
             <tr>
@@ -60,6 +68,7 @@ export const ReportsPage = () => {
           </tbody>
         )}
       </Table>
+      <Image src={bgImg} alt="bg" />
     </>
   );
 };

@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   height: 100%;
   width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: absolute;
   z-index: 20;

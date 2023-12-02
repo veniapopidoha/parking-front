@@ -12,9 +12,18 @@ import {
   TableDataS,
   TableBody,
 } from "./style";
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { backLink } from "../../App";
 
-export const Residents = ({ building, buildings }) => {
+export const Residents = ({ building, isDeleted, setIsDeleted }) => {
+  const deleteResident = (email) => {
+    axios
+      .delete(
+        `${backLink}/delete-resident?buildingName=${building.name}&email=${email}`
+      )
+      .then(() => setIsDeleted(!isDeleted));
+  };
   return (
     <>
       <Wrap>
@@ -28,43 +37,36 @@ export const Residents = ({ building, buildings }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {buildings
-              ? buildings.map((building) =>
-                  building.visitors.map((car) => (
-                    <TableRow key={car.plate}>
-                      <TableData>{car.plate}</TableData>
-                      <TableDataS>{car.model}</TableDataS>
-                      <TableDataS>{car.startDate}</TableDataS>
-                      <TableData>{car.endDate}</TableData>
+            {building.users
+              .filter((user) => user.status === "resident")
+              .map((resident) => {
+                return (
+                  <tr
+                    key={resident.email}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "36px",
+                      width: "100%",
+                    }}
+                  >
+                    <TableRow>
+                      <TableDataS>{resident.name}</TableDataS>
+                      <TableData>{resident.unit}</TableData>
+                      <TableDataS style={{ paddingLeft: "30px" }}>
+                        {resident.numberOfVisitors}
+                      </TableDataS>
                     </TableRow>
-                  ))
-                )
-              : building.users
-                  .filter((user) => user.status === "resident")
-                  .map((resident) => {
-                    return (
-                      <tr
-                        key={resident.email}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "36px",
-                          width: "100%",
-                        }}
-                      >
-                        <TableRow>
-                          <TableDataS>{resident.name}</TableDataS>
-                          <TableData>{resident.unit}</TableData>
-                          <TableDataS style={{ paddingLeft: "30px" }}>
-                            {resident.numberOfVisitors}
-                          </TableDataS>
-                        </TableRow>
-                        <IconWrap>
-                          <Icon src={Bin} alt="bell" />
-                        </IconWrap>
-                      </tr>
-                    );
-                  })}
+                    <IconWrap>
+                      <Icon
+                        src={Bin}
+                        alt="bucket"
+                        onClick={() => deleteResident(resident.email)}
+                      />
+                    </IconWrap>
+                  </tr>
+                );
+              })}
           </TableBody>
         </table>
       </Wrap>

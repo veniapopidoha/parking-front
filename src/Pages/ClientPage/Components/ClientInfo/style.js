@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  padding: ${(props) => (props.isUser ? `0 0 0 97px` : `42px 0 0 97px`)};
+  padding: 42px 0 0 97px;
   font-family: Montserrat;
-  position: ${(props) => (props.isUser ? "relative" : "static")};
-  transform: ${(props) => (props.isUser ? "translateY(50%)" : "")};
+  min-width: 500px;
 `;
 
 export const Title = styled.h3`

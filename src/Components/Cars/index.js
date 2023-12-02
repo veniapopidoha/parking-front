@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Image,
+  Table,
   TableBody,
   TableData,
   TableDataS,
@@ -17,26 +18,26 @@ export const Cars = ({ building }) => {
     <>
       <Wrap>
         <Title>Car List</Title>
-        <table>
+        <Table>
           <thead>
             <TableHeader>
-              <TableHead>License plate</TableHead>
-              <TableHead>Model</TableHead>
-              <TableHead>Start Date</TableHead>
-              <TableHead>End Date</TableHead>
+              <TableHead width="20%">License plate</TableHead>
+              <TableHead width="20%">Model</TableHead>
+              <TableHead width="30%">Start Date</TableHead>
+              <TableHead width="30%">End Date</TableHead>
             </TableHeader>
           </thead>
           <TableBody>
             {building.visitors.map((car) => (
               <TableRow key={car.plate}>
-                <TableData>{car.plate}</TableData>
-                <TableDataS>{car.make}</TableDataS>
-                <TableDataS>{car.startDate}</TableDataS>
-                <TableData>{car.endDate}</TableData>
+                <TableData width="20%">{car.plate}</TableData>
+                <TableDataS width="20%">{car.make}</TableDataS>
+                <TableDataS width="30%">{car.startDate}</TableDataS>
+                <TableData width="30%">{car.endDate}</TableData>
               </TableRow>
             ))}
           </TableBody>
-        </table>
+        </Table>
       </Wrap>
       <Image src={bgImg} alt="bg" />
     </>

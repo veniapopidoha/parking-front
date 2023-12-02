@@ -8,7 +8,6 @@ export const Wrap = styled.div`
   border-radius: 30px;
   max-width: 1350px;
   width: 100%;
-  margin-left: 60px;
 `;
 
 export const TableBody = styled.tbody`
