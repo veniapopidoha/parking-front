@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Table,
@@ -16,6 +16,24 @@ import { useDispatch } from "react-redux";
 
 export const Visitors = ({ visitors }) => {
   const dispatch = useDispatch();
+  const [filteredVisitors, setFilteredVisitors] = useState([]);
+
+  useEffect(() => {
+    const lessThanADayAgo = (date) => {
+      const currentTime = new Date();
+      const startDate = new Date(date);
+      const timeDifference = currentTime - startDate;
+      const hoursDifference = timeDifference / (1000 * 3600);
+
+      return hoursDifference < 24;
+    };
+
+    const filteredVisitors = visitors.filter((visitor) =>
+      lessThanADayAgo(visitor.startDate)
+    );
+
+    setFilteredVisitors(filteredVisitors);
+  }, [visitors]);
   return (
     <>
       <Wrap>
@@ -29,7 +47,7 @@ export const Visitors = ({ visitors }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {visitors.map((visitor) => (
+            {filteredVisitors.map((visitor) => (
               <TableRow key={visitor.plate}>
                 <TableData width="33%">{visitor.plate}</TableData>
                 <TableDataS width="33%">{visitor.make}</TableDataS>

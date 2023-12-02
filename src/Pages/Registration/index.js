@@ -115,13 +115,12 @@ export const Registration = (props) => {
     axios
       .put(`${backLink}/add-user-info/${props.userId}`, {
         name: name,
-        buildingName: userData.buildingName,
         unit: unit,
         password: password,
         email: userData.email,
         status: userData.status,
-        status: userData.status,
         buildingName: userData.building.name,
+        userId: userData._id,
       })
       .then(() => {
         window.location.replace("http://localhost:3000/");
