@@ -120,6 +120,8 @@ export const Registration = (props) => {
         password: password,
         email: userData.email,
         status: userData.status,
+        status: userData.status,
+        buildingName: userData.building.name,
       })
       .then(() => {
         window.location.replace("http://localhost:3000/");
@@ -132,7 +134,7 @@ export const Registration = (props) => {
             email: userData.email,
             id: userData.id,
             status: userData.status,
-            object: userData.buildingName,
+            buildingName: userData.buildingName,
             numberOfRegistration: userData.numberOfRegistration,
           },
         });
@@ -144,11 +146,9 @@ export const Registration = (props) => {
 
   const getUserInfo = async () => {
     setloading(true);
-    await axios
-      .get(`http://localhost:5000/${props.userId}`)
-      .then((response) => {
-        setUserData(response.data);
-      });
+    await axios.get(`${backLink}/${props.userId}`).then((response) => {
+      setUserData(response.data);
+    });
     setloading(false);
   };
 

@@ -5,6 +5,7 @@ import { Registration } from "../Registration";
 import { useSelector } from "react-redux";
 import { Auth } from "../Auth";
 import { ManagerPage } from "../ManagerPage";
+import { EmployeePage } from "../EmployeePage";
 import { ClientPage } from "../ClientPage";
 import { Resident } from "../Resident";
 
@@ -16,18 +17,16 @@ export const MainPage = () => {
 
   return (
     <>
-      {/* {isAuth ? (
+      {isAuth ? (
         <Auth />
       ) : userId ? (
         <Registration userId={userId} />
       ) : (
         <>
-          <AddUser />
           <SignIn />
+          <AddUser />
         </>
-      )} */}
-
-      <Resident />
+      )}
     </>
   );
 };
