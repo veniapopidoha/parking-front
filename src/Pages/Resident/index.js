@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { ConfigProvider, DatePicker, Space } from "antd";
 import { backLink } from "../../App";
@@ -19,7 +19,6 @@ export const Resident = () => {
   const [startDate, setStartDate] = useState("");
   const [favoriteValue, setFavoriteValue] = useState("");
   const [favorite, setFavorite] = useState({});
-  console.log(favorite);
 
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
@@ -55,6 +54,12 @@ export const Resident = () => {
       });
   };
 
+  useEffect(() => {
+    setPlate(favorite.plate);
+    setMake(favorite.make);
+    setColour(favorite.colour);
+  }, [favorite]);
+
   return (
     <Wrap>
       <TopWrap>
@@ -81,7 +86,7 @@ export const Resident = () => {
                 <StyledInput
                   placeholder="Licence plate"
                   name="plate"
-                  value={favorite.plate || plate}
+                  value={plate}
                   onChange={(e) => {
                     setPlate(e.target.value);
                   }}
@@ -94,7 +99,7 @@ export const Resident = () => {
                 <StyledInput
                   placeholder="Make"
                   name="make"
-                  value={favorite.make || make}
+                  value={make}
                   onChange={(e) => {
                     setMake(e.target.value);
                   }}
@@ -107,7 +112,7 @@ export const Resident = () => {
                 <StyledInput
                   placeholder="Colour"
                   name="colour"
-                  value={favorite.colour || colour}
+                  value={colour}
                   onChange={(e) => {
                     setColour(e.target.value);
                   }}
@@ -135,7 +140,6 @@ export const Resident = () => {
                   showTime={{
                     format: "HH:mm",
                   }}
-                  value={startDate ? new Date(startDate) : null}
                   format="YYYY-MM-DD HH:mm"
                   onOk={(value) => {
                     setStartDate(value);

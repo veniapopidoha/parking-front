@@ -8,6 +8,7 @@ import { ManagerPage } from "../ManagerPage";
 import { EmployeePage } from "../EmployeePage";
 import { ClientPage } from "../ClientPage";
 import { Resident } from "../Resident";
+import { Residents } from "../../Components/Residents";
 
 export const MainPage = () => {
   const locationPage = useLocation();

@@ -30,9 +30,12 @@ export const EditUser = ({ building }) => {
     axios
       .patch(`${backLink}/building-instructions`, {
         buildingName: building.name,
-        instructions: value,
+        instructions: localStorage.getItem("instructions") || value,
       })
       .then((res) => setValue(res.data.instructions));
+    if (value) {
+      localStorage.setItem("instructions", value);
+    }
   }, [isSubmited]);
 
   return (
