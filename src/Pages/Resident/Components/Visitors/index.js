@@ -61,7 +61,7 @@ export const Visitors = ({ visitors }) => {
                       },
                     });
                   }}
-                  style={{ position: "absolute", right: "-45px" }}
+                  style={{ position: "absolute", right: "-15px" }}
                 >
                   Toggle Favorite
                 </button>

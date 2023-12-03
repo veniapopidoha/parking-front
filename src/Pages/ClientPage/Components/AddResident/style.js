@@ -5,9 +5,14 @@ export const Image = styled.img`
   right: 0;
   bottom: 0;
   z-index: -1;
+  max-width: 500px;
+
+  @media only screen and (max-width: 1024px) {
+    max-width: 400px;
+  }
 
   @media only screen and (max-width: 768px) {
-    max-width: 400px;
+    max-width: 300px;
   }
 `;
 
@@ -21,7 +26,15 @@ export const Wrap = styled.form`
   width: fit-content;
   border-radius: 30px;
   border: 1px solid #000;
-  margin-left: 50px;
+  margin-left: 30px;
+
+  @media only screen and (max-width: 1200px) {
+    margin-left: 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 20px 60px;
+  }
 `;
 
 export const CheckboxWrap = styled.div`
@@ -37,6 +50,10 @@ export const CheckboxWrap = styled.div`
     font-weight: 600;
     line-height: 24px; /* 160% */
     letter-spacing: -0.225px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 

@@ -19,8 +19,6 @@ export const AddVisitor = () => {
   const [endDate, setEndDate] = useState("");
   const { RangePicker } = DatePicker;
 
-  console.log(startDate.$d, endDate);
-
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
 
@@ -124,14 +122,7 @@ export const AddVisitor = () => {
                 />
               </Space>
             </ConfigProvider>
-            <Button
-              type="submit"
-              style={{
-                display: "block",
-                marginTop: "22px",
-                padding: "15px 100px",
-              }}
-            >
+            <Button style={{ display: "block" }} type="submit">
               Add Visitor
             </Button>
           </div>

@@ -1,5 +1,5 @@
 import { Button } from "../../Components/Tab/style";
-import { Wrap } from "./style";
+import { ClientWrap, Wrap } from "./style";
 import Pencil from "../../images/pencil.svg";
 import { useEffect, useState } from "react";
 import { ClientMain } from "./Components/ClientMain";
@@ -20,10 +20,10 @@ export const ClientPage = () => {
         setBuilding(res.data);
       })
       .catch((err) => console.log(err));
-  }, [isDeleted]);
+  }, [isDeleted, data]);
 
   return (
-    <>
+    <ClientWrap>
       <ClientTabs setClientPage={setClientPage} building={building} />
       <ClientMain
         building={building}
@@ -31,7 +31,7 @@ export const ClientPage = () => {
         isDeleted={isDeleted}
         setIsDeleted={setIsDeleted}
       />
-    </>
+    </ClientWrap>
   );
 };
 

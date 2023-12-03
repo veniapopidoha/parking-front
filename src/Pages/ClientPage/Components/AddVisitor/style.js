@@ -11,14 +11,18 @@ export const Image = styled.img`
   right: 0;
   bottom: 0;
   z-index: -1;
+  max-width: 500px;
+
+  @media only screen and (max-width: 1024px) {
+    max-width: 400px;
+  }
 
   @media only screen and (max-width: 768px) {
-    max-width: 400px;
+    max-width: 300px;
   }
 `;
 
 export const Form = styled.form`
-  padding-top: 42px;
   display: flex;
   align-items: start;
   gap: 26px;
@@ -31,6 +35,10 @@ export const Title = styled.h2`
   font-size: 29px;
   font-weight: 600;
   line-height: 116%;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+  }
 `;
 
 export const DateTitle = styled.h4`
@@ -53,4 +61,9 @@ export const StyledInput = styled.input`
   outline: none;
   border: 0;
   background-color: #eae9e9;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 14px;
+    padding: 13px 23px;
+  }
 `;

@@ -7,6 +7,7 @@ export const Wrap = styled.div`
   border-radius: 30px;
   max-width: 980px;
   width: 100%;
+  margin-bottom: 50px;
 `;
 
 export const TableRow = styled.tr`

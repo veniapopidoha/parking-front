@@ -30,7 +30,6 @@ export const TableHead = styled.td`
   line-height: 24px;
   padding: 18px 0px;
   letter-spacing: -0.27px;
-  white-space: nowrap;
 `;
 
 export const Icon = styled.img`
@@ -54,6 +53,11 @@ export const TableHeader = styled.tr`
   align-items: center;
   gap: 40px;
   margin-bottom: 50px;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+    margin-bottom: 20px;
+  }
 `;
 
 export const TableRow = styled.td`
@@ -72,7 +76,8 @@ export const TableRow = styled.td`
 export const TableData = styled.td`
   color: #626060;
   font-family: Jost;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   text-align: center;
 
   font-size: 20px;
@@ -83,7 +88,8 @@ export const TableData = styled.td`
 export const TableDataS = styled.td`
   color: #626060;
   font-family: Jost;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   text-align: center;
   font-size: 15px;
   font-weight: 500;

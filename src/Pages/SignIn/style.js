@@ -47,6 +47,12 @@ export const Button = styled.button`
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.27px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 14px;
+    padding: 10px 40px;
+    font-size: 16px;
+  }
 `;
 
 export const Error = styled.h3`

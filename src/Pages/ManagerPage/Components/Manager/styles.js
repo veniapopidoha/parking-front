@@ -1,23 +1,47 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
 `;
 
 export const WrapContent = styled.div`
   display: flex;
   align-items: start;
-  justify-content: space-between;
+  height: 100%;
+
+  @media only screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
 `;
 
 export const TextWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 46px;
-  margin-top: 40px;
+  margin-bottom: 40px;
+  overflow: hidden;
+
+  @media only screen and (max-width: 1200px) {
+    gap: 16px;
+  }
+`;
+
+export const Leftside = styled.div`
+  margin-right: 50px;
+  margin-bottom: 50px;
+  max-width: 500px;
+  width: 100%;
+
+  @media only screen and (max-width: 768px) {
+    max-width: 400px;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    max-width: 300px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -28,6 +52,10 @@ export const Title = styled.h2`
   font-weight: 600;
   line-height: 24px;
   letter-spacing: -0.525px;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+  }
 `;
 
 export const Status = styled.p`
@@ -49,5 +77,9 @@ export const Status = styled.p`
     left: 0;
     bottom: 0;
     background-color: black;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 16px;
   }
 `;

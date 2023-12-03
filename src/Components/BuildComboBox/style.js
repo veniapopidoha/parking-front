@@ -15,6 +15,7 @@ export const InputWrap = styled.div`
   align-items: center;
   margin-bottom: 0;
   max-width: 360px;
+  min-width: 200px;
   width: 100%;
 `;
 

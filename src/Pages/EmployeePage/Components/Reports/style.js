@@ -5,6 +5,16 @@ export const Table = styled.table`
 
   a {
     text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 480px) {
+      font-size: 12px;
+    }
   }
 `;
 

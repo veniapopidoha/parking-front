@@ -10,6 +10,10 @@ export const Wrap = styled.form`
   width: fit-content;
   border-radius: 30px;
   border: 1px solid #000;
+
+  @media only screen and (max-width: 480px) {
+    padding: 20px;
+  }
 `;
 
 export const CheckboxWrap = styled.div`
@@ -25,6 +29,16 @@ export const CheckboxWrap = styled.div`
     font-weight: 600;
     line-height: 24px; /* 160% */
     letter-spacing: -0.225px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 380px;
+    margin: 10px;
   }
 `;
 

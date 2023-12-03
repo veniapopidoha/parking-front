@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Button = styled.button`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   background-color: #fecb21;
   color: #616467;
@@ -15,4 +16,8 @@ export const Button = styled.button`
   letter-spacing: -0.3px;
   font-family: Montserrat;
   cursor: pointer;
+
+  @media only screen and (max-width: 1024px) {
+    min-width: 220px;
+  }
 `;

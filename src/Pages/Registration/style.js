@@ -47,6 +47,14 @@ export const Button = styled.button`
   font-weight: 700;
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.27px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 15px 50px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    padding: 15px 30px;
+  }
 `;
 
 export const Error = styled.h3`

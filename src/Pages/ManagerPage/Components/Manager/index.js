@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Status, TextWrap, Title, Wrap, WrapContent } from "./styles";
+import { Leftside, Status, TextWrap, Title, Wrap, WrapContent } from "./styles";
 import { Container } from "../../style";
 import { Cars } from "../../../../Components/Cars";
 import { Patrols } from "../../../../Components/Patrols";
@@ -23,13 +23,13 @@ export const ManagerMain = ({
     <Wrap>
       <Container>
         <WrapContent>
-          <div style={{ minWidth: "500px", marginRight: "40px" }}>
-            <EditUser building={selectedBuilding} />
+          <Leftside>
             <TextWrap>
-              <Title>{user?.name}</Title>
-              <Status>{user?.status}</Status>
+              <Title>{user?.name}cccccccccccccccccccccccccccccc</Title>
+              <Status>{user?.status}dddddddddddddddddddddd</Status>
             </TextWrap>
-          </div>
+            <EditUser building={selectedBuilding} />
+          </Leftside>
           {selectedBuilding.name && (
             <>
               {managerPage === "user" && <AddUserM />}

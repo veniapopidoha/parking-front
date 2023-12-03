@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  height: 100vh;
   max-width: 1546px;
+  position: relative;
+  padding: 20px 94px 29px 94px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 export const Form = styled.form`
@@ -54,5 +59,8 @@ export const BottomWrap = styled.div`
   justify-content: center;
   width: 100%;
   gap: 80px;
-  margin-bottom: 50px;
+
+  @media only screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
 `;

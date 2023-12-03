@@ -40,7 +40,7 @@ export const EditUser = ({ building }) => {
 
   return (
     <>
-      <Container>
+      <>
         <div>
           <DropDown>
             <Checkbox
@@ -78,7 +78,7 @@ export const EditUser = ({ building }) => {
             )}
           </Instructions>
         </div>
-      </Container>
+      </>
       <Image src={bgImg} alt="bg" />
     </>
   );

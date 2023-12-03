@@ -78,7 +78,7 @@ export const Input = styled.input`
   overflow: hidden;
   padding: 0;
   position: absolute;
-  white-space: nowrap;
+
   width: 1px;
   acity: 1;
 `;
@@ -103,7 +103,6 @@ export const Instructions = styled.div`
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   padding: 32px 37px;
   height: 559px;
-  overflow: hidden;
   max-width: 540px;
 `;
 
@@ -127,6 +126,13 @@ export const InstructionsText = styled.p`
   font-weight: 700;
   line-height: 27px;
   letter-spacing: -0.24px;
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+
+  @media only screen and (max-width: 360px) {
+    font-size: 14px;
+  }
 `;
 
 export const Image = styled.img`
@@ -134,6 +140,15 @@ export const Image = styled.img`
   right: 0;
   bottom: 0;
   z-index: -1;
+  max-width: 500px;
+
+  @media only screen and (max-width: 1024px) {
+    max-width: 400px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    max-width: 300px;
+  }
 `;
 
 export const Button = styled.button`

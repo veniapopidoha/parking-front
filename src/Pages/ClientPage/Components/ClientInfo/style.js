@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  padding: 42px 0 0 97px;
   font-family: Montserrat;
   min-width: 400px;
   max-width: 600px;
@@ -28,6 +27,11 @@ export const Title = styled.h3`
   line-height: 24px;
   letter-spacing: -0.525px;
   margin-bottom: 46px;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
 `;
 
 export const Status = styled.p`
@@ -49,6 +53,10 @@ export const Status = styled.p`
     bottom: 0;
     background-color: black;
   }
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
 `;
 
 export const DescriptionT = styled.dt`
@@ -58,6 +66,10 @@ export const DescriptionT = styled.dt`
   font-weight: 300;
   line-height: 116%;
   margin-right: 20px;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+  }
 `;
 
 export const DescriptionD = styled.dd`
@@ -67,13 +79,21 @@ export const DescriptionD = styled.dd`
   font-weight: 600;
   line-height: 116%;
   min-width: 150px;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+  }
 `;
 
 export const DescriptionWrap = styled.div`
   display: flex;
-  align-item: center;
+  align-items: center;
   justify-content: space-between;
   max-width: 360px;
   width: 100%;
   margin-bottom: 12px;
+
+  @media only screen and (max-width: 1200px) {
+    max-width: 280px;
+  }
 `;
