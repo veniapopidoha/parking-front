@@ -5,7 +5,7 @@ export const Wrap = styled.div`
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   padding: 45px 30px;
   border-radius: 30px;
-  max-width: 1400px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   margin-bottom: 50px;
@@ -14,33 +14,37 @@ export const Wrap = styled.div`
     margin-bottom: 50px;
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (max-width: 768px) {
     padding: 45px 64px 45px 35px;
+    overflow-x: scroll;
   }
 `;
 
 export const Table = styled.table`
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
 
   a {
     text-decoration: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    min-width: 700px;
+    overflow-x: scroll;
   }
 `;
 
 export const TableHeader = styled.tr`
   display: flex;
   align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-width: 1200px;
   padding: 0 20px;
   gap: 25px;
   margin-bottom: 50px;
-
   @media only screen and (max-width: 768px) {
     display: none;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    gap: 10px;
   }
 `;
 
@@ -56,6 +60,11 @@ export const TableHead = styled.th`
   line-height: 24px;
   padding: 18px 0px;
   letter-spacing: -0.27px;
+
+  @media only screen and (max-width: 1400px) {
+    font-size: 12px;
+    padding: 10px 0;
+  }
 `;
 
 export const TableBody = styled.tbody`
@@ -65,24 +74,12 @@ export const TableBody = styled.tbody`
   max-width: 1200px;
   width: 100%;
 
+  @media only screen and (max-width: 920px) {
+    max-width: 1000px;
+  }
+
   @media only screen and (max-width: 768px) {
-    max-width: 500px;
-  }
-
-  @media only screen and (max-width: 590px) {
-    max-width: 400px;
-  }
-
-  @media only screen and (max-width: 480px) {
-    max-width: 320px;
-  }
-
-  @media only screen and (max-width: 400px) {
-    max-width: 250px;
-  }
-
-  @media only screen and (max-width: 360px) {
-    max-width: 220px;
+    max-width: 800px;
   }
 `;
 
@@ -107,8 +104,6 @@ export const TableData = styled.td`
   font-size: 20px;
   font-weight: 600;
   line-height: 116%;
-  overflow-x: auto;
-  overflow-y: hidden;
 
   @media only screen and (max-width: 768px) {
     font-size: 14px;
@@ -126,8 +121,6 @@ export const TableDataS = styled.td`
   font-size: 15px;
   font-weight: 500;
   line-height: 116%;
-  overflow-x: auto;
-  overflow-y: hidden;
 
   @media only screen and (max-width: 768px) {
     font-size: 12px;

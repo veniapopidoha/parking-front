@@ -1,7 +1,6 @@
 import axios from "axios";
 import { backLink } from "../../../../App";
 import { useEffect, useState } from "react";
-import { Image, Table } from "./style";
 import {
   TableBody,
   TableData,
@@ -9,8 +8,8 @@ import {
   TableHeader,
   TableRow,
   Wrap,
+  Table,
 } from "../../../../Components/Cars/style";
-import bgImg from "../../../../images/bg4.png";
 
 export const ReportsPage = () => {
   const building = "Building";

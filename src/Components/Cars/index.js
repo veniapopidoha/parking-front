@@ -12,6 +12,7 @@ import {
   Wrap,
 } from "./style";
 import bgImg from "../../images/bg4.png";
+import { formatDate } from "../../utils/formatDate";
 
 export const Cars = ({ building }) => {
   const filteredCars = building.visitors.filter((car) => {
@@ -47,8 +48,8 @@ export const Cars = ({ building }) => {
               <TableRow key={car.plate}>
                 <TableData width="25%">{car.plate}</TableData>
                 <TableDataS width="25%">{car.make}</TableDataS>
-                <TableDataS width="25%">{car.startDate}</TableDataS>
-                <TableData width="25%">{car.endDate}</TableData>
+                <TableDataS width="25%">{formatDate(car.startDate)}</TableDataS>
+                <TableDataS width="25%">{formatDate(car.endDate)}</TableDataS>
               </TableRow>
             ))}
           </TableBody>

@@ -1,9 +1,6 @@
-import { Image, Title } from "../Cars/style";
-import bgImg from "../../images/bg4.png";
-import Bin from "../../images/bin.png";
 import {
-  Icon,
-  IconWrap,
+  Image,
+  Title,
   TableHeader,
   Wrap,
   TableHead,
@@ -11,7 +8,10 @@ import {
   TableData,
   TableDataS,
   TableBody,
-} from "./style";
+} from "../Cars/style";
+import bgImg from "../../images/bg4.png";
+import Bin from "../../images/bin.png";
+import { Icon, IconWrap } from "./style";
 import React, { useState } from "react";
 import axios from "axios";
 import { backLink } from "../../App";
