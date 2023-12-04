@@ -23,10 +23,11 @@ export const Visitors = ({ visitors }) => {
 
   useEffect(() => {
     const lessThanADayAgo = (date) => {
-      const currentTime = new Date();
       const startDate = new Date(date);
+      const currentTime = new Date();
+
       const timeDifference = currentTime - startDate;
-      const hoursDifference = timeDifference / (1000 * 3600);
+      const hoursDifference = Math.abs(timeDifference) / (1000 * 3600);
 
       return hoursDifference < 24;
     };
@@ -37,6 +38,7 @@ export const Visitors = ({ visitors }) => {
 
     setFilteredVisitors(filteredVisitors);
   }, [visitors]);
+
   return (
     <>
       <Wrap>

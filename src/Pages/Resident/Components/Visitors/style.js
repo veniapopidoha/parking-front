@@ -7,6 +7,7 @@ export const Wrap = styled.div`
   border-radius: 30px;
   max-width: 1400px;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 
   @media only screen and (max-width: 1340px) {
@@ -147,7 +148,7 @@ export const Title = styled.h3`
   margin-bottom: 47px;
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.td`
   position: absolute;
   right: 45px;
   background: transparent;

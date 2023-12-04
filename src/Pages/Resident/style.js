@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Wrap = styled.div`
   max-width: 1546px;
-  position: relative;
   padding: 20px 94px 29px 94px;
   width: 100%;
   margin: 0 auto;
@@ -52,6 +51,12 @@ export const TopWrap = styled.div`
   gap: 20px;
   margin-bottom: 50px;
   align-self: start;
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: start;
+    margin: 20px 0;
+  }
 `;
 
 export const BottomWrap = styled.div`

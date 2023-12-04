@@ -64,7 +64,7 @@ export const Resident = () => {
     <Wrap>
       <TopWrap>
         <Button
-          style={{ marginTop: "0", padding: "14px 50px" }}
+          style={{ marginTop: "0", padding: "14px 50px", minWidth: "200px" }}
           onClick={() => {
             setShow(!show);
           }}
