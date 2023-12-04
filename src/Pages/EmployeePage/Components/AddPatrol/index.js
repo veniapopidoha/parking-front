@@ -9,15 +9,19 @@ export const AddPatrol = () => {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   // const data = useSelector((state) => state);
-  const name = "userName"
+  const name = 'userName';
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const buildingName = 'Building';
-    console.log(buildingName, startTime, endTime, name)
 
     try {
-      const response = await axios.post(`${backLink}/add-patrol`, {});
+      const response = await axios.post(`${backLink}/add-patrol`, {
+        buildingName,
+        startTime,
+        endTime,
+        name,
+      });
     } catch (error) {
       console.error('Error loading files', error);
     }

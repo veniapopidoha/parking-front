@@ -38,7 +38,7 @@ export const Cars = ({ building }) => {
           <thead>
             <TableHeader>
               <TableHead width="25%">License plate</TableHead>
-              <TableHead width="25%">Model</TableHead>
+              <TableHead width="25%">Make</TableHead>
               <TableHead width="25%">Start Date</TableHead>
               <TableHead width="25%">End Date</TableHead>
             </TableHeader>
