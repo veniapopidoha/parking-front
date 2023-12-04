@@ -147,6 +147,36 @@ export const Title = styled.h3`
   margin-bottom: 47px;
 `;
 
+export const ToggleButton = styled.button`
+  position: absolute;
+  right: 45px;
+  background: transparent;
+  border: none;
+
+  @media only screen and (max-width: 480px) {
+    right: 32px;
+  }
+
+  @media only screen and (max-width: 360px) {
+    right: 12px;
+  }
+`;
+
+export const ToggleImage = styled.img`
+  width: 42px;
+  height: 42px;
+
+  @media only screen and (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    width: 22px;
+    height: 22px;
+  }
+`;
+
 export const Image = styled.img`
   position: absolute;
   right: 0;

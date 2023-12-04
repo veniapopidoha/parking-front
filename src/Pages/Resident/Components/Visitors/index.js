@@ -9,9 +9,12 @@ import {
   TableHeader,
   TableRow,
   Title,
+  ToggleButton,
+  ToggleImage,
   Wrap,
 } from "./style";
 import bgImg from "../../../../images/bg4.png";
+import heart from "../../../../images/heart.png";
 import { useDispatch } from "react-redux";
 
 export const Visitors = ({ visitors }) => {
@@ -52,7 +55,7 @@ export const Visitors = ({ visitors }) => {
                 <TableData width="33%">{visitor.plate}</TableData>
                 <TableDataS width="33%">{visitor.make}</TableDataS>
                 <TableDataS width="33%">{visitor.startDate}</TableDataS>
-                <button
+                <ToggleButton
                   onClick={() => {
                     dispatch({
                       type: "TOGGLE_FAVORITE",
@@ -61,10 +64,12 @@ export const Visitors = ({ visitors }) => {
                       },
                     });
                   }}
-                  style={{ position: "absolute", right: "-15px" }}
+                  style={
+                    visitor.favorite ? { opacity: "1" } : { opacity: "0.5" }
+                  }
                 >
-                  Toggle Favorite
-                </button>
+                  <ToggleImage src={heart} alt="icon" />
+                </ToggleButton>
               </TableRow>
             ))}
           </TableBody>

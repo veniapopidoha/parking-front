@@ -63,7 +63,14 @@ export const Resident = () => {
   return (
     <Wrap>
       <TopWrap>
-        {/* <Button>Visitors</Button> */}
+        <Button
+          style={{ marginTop: "0", padding: "14px 50px" }}
+          onClick={() => {
+            setShow(!show);
+          }}
+        >
+          Add Visitor
+        </Button>
         <FavoriteComboBox
           favoriteValue={favoriteValue}
           setFavoriteValue={setFavoriteValue}
@@ -71,13 +78,6 @@ export const Resident = () => {
         />
       </TopWrap>
       <BottomWrap>
-        <button
-          onClick={() => {
-            setShow(!show);
-          }}
-        >
-          Add Visitor
-        </button>
         {show && (
           <Form onSubmit={Submit}>
             <Title>Visitor car</Title>

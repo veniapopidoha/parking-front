@@ -48,6 +48,7 @@ export const StyledInput = styled.input`
 export const TopWrap = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 20px;
   margin-bottom: 50px;
   align-self: start;
