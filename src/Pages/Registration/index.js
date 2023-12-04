@@ -31,7 +31,6 @@ export const Registration = (props) => {
   });
   const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
-  const data = useSelector((state) => state);
 
   const blurHandler = (e) => {
     switch (e.target.name) {
@@ -119,8 +118,7 @@ export const Registration = (props) => {
         password: password,
         email: userData.email,
         status: userData.status,
-        buildingName: userData.building.name,
-        userId: userData._id,
+        buildingName: userData.buildingName,
       })
       .then(() => {
         window.location.replace("http://localhost:3000/");
@@ -133,20 +131,20 @@ export const Registration = (props) => {
             email: userData.email,
             id: userData.id,
             status: userData.status,
-            buildingName: userData.building.name,
+            buildingName: userData.buildingName,
             numberOfRegistration: userData.numberOfRegistration,
           },
         });
       })
       .catch((error) => {
-        setError(error.response.data.message);
+        console.log(error);
       });
   };
 
   const getUserInfo = async () => {
     setloading(true);
     await axios.get(`${backLink}/${props.userId}`).then((response) => {
-      setUserData(response.data);
+      setUserData(response.data[0] || response.data);
     });
     setloading(false);
   };
@@ -159,7 +157,7 @@ export const Registration = (props) => {
     <>
       {loading ? (
         <>loading...</>
-      ) : userData.name != undefined ? (
+      ) : userData?.name != undefined ? (
         <SignIn />
       ) : (
         <Wrap>

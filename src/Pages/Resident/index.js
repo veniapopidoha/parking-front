@@ -20,6 +20,8 @@ export const Resident = () => {
   const [favoriteValue, setFavoriteValue] = useState("");
   const [favorite, setFavorite] = useState({});
 
+  console.log(startDate);
+
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
 
@@ -32,7 +34,7 @@ export const Resident = () => {
         make,
         startDate,
         residentId: data.id,
-        buildingName: data.building.name,
+        buildingName: "Building",
         email: data.email,
       })
       .then(() => {

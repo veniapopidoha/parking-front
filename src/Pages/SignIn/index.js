@@ -96,17 +96,18 @@ export const SignIn = () => {
       .post("http://localhost:5000/signin", {
         email,
         password,
-        buildingName: data.buildingName || "",
+        buildingName: data.buildingName,
+        status: data.status,
       })
       .then((res) => {
         setErrors(res.data.errors);
         dispatch({
           type: "ADD_USER_DATA",
-          payload: { ...res.data },
+          payload: { ...res.data.data },
         });
         dispatch({ type: "AUTH", payload: res.data.isAuth });
       })
-      .catch((error) => setError(error.response.data.message));
+      .catch((error) => console.log(error));
   };
 
   return (

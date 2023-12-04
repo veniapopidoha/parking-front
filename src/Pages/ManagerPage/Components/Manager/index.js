@@ -25,8 +25,8 @@ export const ManagerMain = ({
         <WrapContent>
           <Leftside>
             <TextWrap>
-              <Title>{user?.name}cccccccccccccccccccccccccccccc</Title>
-              <Status>{user?.status}dddddddddddddddddddddd</Status>
+              <Title>{user?.name}</Title>
+              <Status>{user?.status}</Status>
             </TextWrap>
             <EditUser building={selectedBuilding} />
           </Leftside>

@@ -5,7 +5,8 @@ export const Wrap = styled.div`
   z-index: 25;
   display: flex;
   align-items: center;
-  gap: 46px;
+  flex-wrap: wrap;
+  gap: 16px;
   padding: 68px 94px;
   max-width: 1546px;
   width: 100%;

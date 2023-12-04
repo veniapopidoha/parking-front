@@ -8,5 +8,5 @@ export const Icon = styled.img`
 
 export const IconWrap = styled.td`
   position: absolute;
-  right: -45px;
+  right: 0px;
 `;

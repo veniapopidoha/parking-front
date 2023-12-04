@@ -11,11 +11,11 @@ export const ClientPage = () => {
   const [clientPage, setClientPage] = useState("main");
   const [building, setBuilding] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
-  const data = useSelector((state) => state.building);
+  const data = useSelector((state) => state);
 
   useEffect(() => {
     axios
-      .get(`${backLink}/building/${data.name}`)
+      .get(`${backLink}/building/Building`)
       .then((res) => {
         setBuilding(res.data);
       })

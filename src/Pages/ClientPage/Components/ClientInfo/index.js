@@ -13,10 +13,8 @@ export const ClientInfo = () => {
   return (
     <>
       <Wrap>
-        <Title>
-          {user.name}sadsadddddddddddddddddddddddddddddddddddddddddddddd
-        </Title>
-        <Status>{user.status}dddddddddddddddddddd</Status>
+        <Title>{user.name}</Title>
+        <Status>{user.status}</Status>
         <dl>
           <DescriptionWrap>
             <DescriptionT>Licence plate</DescriptionT>

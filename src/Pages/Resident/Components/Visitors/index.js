@@ -16,6 +16,7 @@ import {
 import bgImg from "../../../../images/bg4.png";
 import heart from "../../../../images/heart.png";
 import { useDispatch } from "react-redux";
+import { formatDate } from "../../../../utils/formatDate";
 
 export const Visitors = ({ visitors }) => {
   const dispatch = useDispatch();
@@ -56,7 +57,9 @@ export const Visitors = ({ visitors }) => {
               <TableRow key={visitor.plate}>
                 <TableData width="33%">{visitor.plate}</TableData>
                 <TableDataS width="33%">{visitor.make}</TableDataS>
-                <TableDataS width="33%">{visitor.startDate}</TableDataS>
+                <TableDataS width="33%">
+                  {formatDate(visitor.startDate)}
+                </TableDataS>
                 <ToggleButton
                   onClick={() => {
                     dispatch({

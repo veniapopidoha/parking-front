@@ -8,15 +8,11 @@ export const Wrap = styled.div`
   overflow: hidden;
 
   @media only screen and (max-width: 768px) {
-    padding: 0;
     max-width: 500px;
-    min-width: 300px;
   }
 
   @media only screen and (max-width: 550px) {
-    padding: 0;
     max-width: 300px;
-    min-width: 200px;
   }
 `;
 
@@ -24,7 +20,7 @@ export const Title = styled.h3`
   color: #616467;
   font-size: 35px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 37px;
   letter-spacing: -0.525px;
   margin-bottom: 46px;
 

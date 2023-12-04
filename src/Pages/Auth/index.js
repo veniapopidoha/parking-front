@@ -3,6 +3,7 @@ import { Close } from "../../Components/Close";
 import { Resident } from "../Resident";
 import { ManagerPage } from "../ManagerPage";
 import { EmployeePage } from "../EmployeePage";
+import { ClientPage } from "../ClientPage";
 
 export const Auth = () => {
   const data = useSelector((state) => state);
@@ -16,7 +17,9 @@ export const Auth = () => {
       ) : status === "employee" ? (
         <EmployeePage />
       ) : status === "client" ? (
-        <>Client</>
+        <>
+          <ClientPage />
+        </>
       ) : (
         <Resident />
       )}

@@ -75,11 +75,11 @@ export const TableBody = styled.tbody`
   width: 100%;
 
   @media only screen and (max-width: 920px) {
-    max-width: 1000px;
+    max-width: 800px;
   }
 
   @media only screen and (max-width: 768px) {
-    max-width: 800px;
+    max-width: 600px;
   }
 `;
 
@@ -87,6 +87,7 @@ export const TableRow = styled.tr`
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0);
   background: #fff;
+  width: 100%;
   padding: 18px 20px;
   display: flex;
   align-items: center;
@@ -104,6 +105,10 @@ export const TableData = styled.td`
   font-size: 20px;
   font-weight: 600;
   line-height: 116%;
+
+  @media only screen and (max-width: 920px) {
+    font-size: 15px;
+  }
 
   @media only screen and (max-width: 768px) {
     font-size: 14px;
