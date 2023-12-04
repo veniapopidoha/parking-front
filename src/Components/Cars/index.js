@@ -16,14 +16,15 @@ import bgImg from "../../images/bg4.png";
 export const Cars = ({ building }) => {
   const filteredCars = building.visitors.filter((car) => {
     const now = new Date();
-
     const startDate = new Date(car.startDate);
+
     const isAddedLessThanDayAgo = now - startDate < 24 * 60 * 60 * 1000;
 
     const nextDayStartDate = new Date(startDate);
     nextDayStartDate.setDate(startDate.getDate() + 1);
-    const isStartDateAt8AMNextDay =
-      nextDayStartDate.getHours() === 8 && nextDayStartDate.getMinutes() === 0;
+    nextDayStartDate.setHours(8, 0, 0, 0);
+
+    const isStartDateAt8AMNextDay = now.getTime() < nextDayStartDate.getTime();
 
     return isAddedLessThanDayAgo || isStartDateAt8AMNextDay;
   });

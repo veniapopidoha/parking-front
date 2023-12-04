@@ -133,7 +133,7 @@ export const Registration = (props) => {
             email: userData.email,
             id: userData.id,
             status: userData.status,
-            buildingName: userData.buildingName,
+            buildingName: userData.building.name,
             numberOfRegistration: userData.numberOfRegistration,
           },
         });

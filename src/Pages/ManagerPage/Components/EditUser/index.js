@@ -27,15 +27,15 @@ export const EditUser = ({ building }) => {
   const [isSubmited, setIsSubmited] = useState(false);
 
   useEffect(() => {
+    if (value) {
+      localStorage.setItem("instructions", value);
+    }
     axios
       .patch(`${backLink}/building-instructions`, {
         buildingName: building.name,
         instructions: localStorage.getItem("instructions") || value,
       })
       .then((res) => setValue(res.data.instructions));
-    if (value) {
-      localStorage.setItem("instructions", value);
-    }
   }, [isSubmited]);
 
   return (

@@ -30,6 +30,6 @@ export const MainPage = () => {
     //   )}
     // </>
 
-    <Resident />
+    <ManagerPage />
   );
 };
