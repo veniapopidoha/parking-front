@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   top: 50%;
@@ -16,6 +16,8 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   position: absolute;
+  height: 100vh;
+  overflow-y: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

@@ -20,4 +20,10 @@ export const Button = styled.button`
   @media only screen and (max-width: 1024px) {
     min-width: 220px;
   }
+
+  @media only screen and (max-width: 768px) {
+    padding: 12px 18px;
+    font-size: 16px;
+    min-width: 180px;
+  }
 `;

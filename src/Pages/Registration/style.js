@@ -6,6 +6,7 @@ export const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 100vh;
   justify-content: center;
 `;
 
@@ -18,6 +19,7 @@ export const Title = styled.h1`
   font-weight: 700;
   line-height: 24px; /* 53.333% */
   letter-spacing: -0.675px;
+  margin-bottom: 30px;
 `;
 
 export const Form = styled.form`
@@ -28,6 +30,10 @@ export const Form = styled.form`
   border-radius: 31px;
   background: rgba(0, 0, 0, 0.3);
   box-shadow: -3px 5px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @media only screen and (max-width: 768px) {
+    padding: 40px;
+  }
 `;
 
 export const Button = styled.button`

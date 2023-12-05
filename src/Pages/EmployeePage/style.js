@@ -18,5 +18,6 @@ export const Wrap = styled.div`
 
   @media only screen and (max-width: 768px) {
     padding: 38px 20px;
+    gap: 15px;
   }
 `;

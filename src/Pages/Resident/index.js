@@ -17,10 +17,8 @@ export const Resident = () => {
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [favoriteValue, setFavoriteValue] = useState("");
   const [favorite, setFavorite] = useState({});
-
-  console.log(startDate);
+  const [isAllVisitors, setIsAllVisitors] = useState([]);
 
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
@@ -73,11 +71,7 @@ export const Resident = () => {
         >
           Add Visitor
         </Button>
-        <FavoriteComboBox
-          favoriteValue={favoriteValue}
-          setFavoriteValue={setFavoriteValue}
-          setFavorite={setFavorite}
-        />
+        <FavoriteComboBox setFavorite={setFavorite} />
       </TopWrap>
       <BottomWrap>
         {show && (
@@ -152,7 +146,11 @@ export const Resident = () => {
             <Button type="submit">Add Visitor</Button>
           </Form>
         )}
-        <Visitors visitors={data.visitors} />
+        <Visitors
+          visitors={data.visitors}
+          isAllVisitors={isAllVisitors}
+          setIsAllVisitors={setIsAllVisitors}
+        />
       </BottomWrap>
     </Wrap>
   );

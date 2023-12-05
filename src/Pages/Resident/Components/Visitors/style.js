@@ -29,6 +29,16 @@ export const Table = styled.table`
   }
 `;
 
+export const TopWrap = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
 export const TableHeader = styled.tr`
   display: flex;
   align-items: center;
@@ -143,16 +153,29 @@ export const Title = styled.h3`
   font-family: Montserrat;
   font-size: 36px;
   font-weight: 600;
-  line-height: 33px;
+  line-height: 32px;
   letter-spacing: -0.54px;
   margin-bottom: 47px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const ToggleButton = styled.td`
   position: absolute;
-  right: 45px;
   background: transparent;
   border: none;
+  right: 45px;
+
+  @media only screen and (max-width: 1520px) {
+    right: 20px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    right: 30px;
+  }
 
   @media only screen and (max-width: 480px) {
     right: 32px;

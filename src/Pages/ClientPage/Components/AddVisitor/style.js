@@ -52,10 +52,10 @@ export const DateTitle = styled.h4`
 
 export const StyledInput = styled.input`
   border-radius: 23px;
-  padding: 26px 46px;
+  padding: 20px 32px;
   color: #000;
   font-family: Jost;
-  font-size: 29px;
+  font-size: 25px;
   font-weight: 600;
   line-height: 116%;
   outline: none;

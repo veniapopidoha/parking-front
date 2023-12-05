@@ -7,20 +7,22 @@ export const Wrap = styled.div`
   border-radius: 30px;
   max-width: 1200px;
   width: 100%;
+  overflow-x: auto;
   margin: 0 auto;
+  margin-bottom: 30px;
 
   @media only screen and (max-width: 1200px) {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   @media only screen and (max-width: 768px) {
     padding: 45px 64px 45px 35px;
-    overflow-x: scroll;
   }
 `;
 
 export const Table = styled.table`
   width: 100%;
+  min-width: 1000px;
 
   a {
     text-decoration: none;
@@ -70,8 +72,6 @@ export const TableBody = styled.tbody`
   display: flex;
   flex-direction: column;
   gap: 17px;
-  max-width: 1200px;
-  width: 100%;
 
   @media only screen and (max-width: 920px) {
     max-width: 800px;
@@ -139,6 +139,11 @@ export const Title = styled.h3`
   line-height: 32px;
   letter-spacing: -0.54px;
   margin-bottom: 47px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Image = styled.img`
