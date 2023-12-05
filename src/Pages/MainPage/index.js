@@ -17,19 +17,17 @@ export const MainPage = () => {
   const isAuth = useSelector((state) => state.isAuth);
 
   return (
-    // <>
-    //   {isAuth ? (
-    //     <Auth />
-    //   ) : userId ? (
-    //     <Registration userId={userId} />
-    //   ) : (
-    //     <>
-    //       <SignIn />
-    //       <AddUser />
-    //     </>
-    //   )}
-    // </>
-
-    <ManagerPage />
+    <>
+      {isAuth ? (
+        <Auth />
+      ) : userId ? (
+        <Registration userId={userId} />
+      ) : (
+        <>
+          <SignIn />
+          <AddUser />
+        </>
+      )}
+    </>
   );
 };

@@ -96,8 +96,6 @@ export const SignIn = () => {
       .post("http://localhost:5000/signin", {
         email,
         password,
-        buildingName: data.buildingName,
-        status: data.status,
       })
       .then((res) => {
         setErrors(res.data.errors);
