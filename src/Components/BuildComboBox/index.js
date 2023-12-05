@@ -51,14 +51,6 @@ export const BuildComboBox = ({
           key={filteredBuilding.name}
           onClick={() => {
             handleBuildingModal(filteredBuilding.name);
-            if (user.building.name !== undefined) {
-              dispatch({
-                type: "ADD_USER_DATA",
-                payload: {
-                  building: { ...user.building, name: buildingValue },
-                },
-              });
-            }
           }}
         >
           {filteredBuilding.name}

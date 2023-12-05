@@ -29,12 +29,11 @@ export const AddObject = ({ setIsAddBuild }) => {
     if (name && address && visitorsPerMonth && duration) {
       try {
         await axios.post(`${backLink}/add-building`, {
-          buildingName: name,
+          name,
           address,
-          notes,
+          instructions: notes,
           limitType,
           limitPerUse,
-          instructions: "",
           visitorsPerMonth,
           duration,
         });

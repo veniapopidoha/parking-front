@@ -20,6 +20,7 @@ export const Title = styled.h1`
   font-weight: 700;
   line-height: 24px; /* 53.333% */
   letter-spacing: -0.675px;
+  margin-bottom: 30px;
 `;
 
 export const Form = styled.form`
@@ -30,6 +31,10 @@ export const Form = styled.form`
   border-radius: 31px;
   background: rgba(255, 255, 255, 0.3);
   box-shadow: -3px 5px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @media only screen and (max-width: 768px) {
+    padding: 40px;
+  }
 `;
 
 export const Button = styled.button`

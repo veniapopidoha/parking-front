@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const Wrap = styled.div`
   display: flex;
   height: 100%;
@@ -12,6 +11,18 @@ export const WrapContent = styled.div`
 
   @media only screen and (max-width: 1200px) {
     flex-direction: column;
+  }
+`;
+
+export const Container = styled.div`
+  max-width: 1546px;
+  margin: 0 auto;
+  padding: 0 94px;
+  width: 100%;
+  height: 100%;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0px 20px;
   }
 `;
 
@@ -32,10 +43,14 @@ export const Leftside = styled.div`
   max-width: 500px;
   width: 100%;
 
+  @media only screen and (max-width: 1200px) {
+    margin-bottom: 30px;
+    order: 2;
+  }
+
   @media only screen and (max-width: 768px) {
     max-width: 400px;
     margin-right: 0px;
-    margin-bottom: 20px;
     margin-left: 0px;
   }
 

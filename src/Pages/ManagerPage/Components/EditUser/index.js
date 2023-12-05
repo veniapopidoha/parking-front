@@ -23,35 +23,34 @@ export const EditUser = ({ building }) => {
   const [isSubmited, setIsSubmited] = useState(false);
 
   useEffect(() => {
-    if (value) {
+    if (value !== "") {
       localStorage.setItem("instructions", value);
+      axios
+        .patch(`${backLink}/building-instructions`, {
+          buildingName: building.name,
+          instructions: localStorage.getItem("instructions") || value,
+        })
+        .then((res) => setValue(res.data.instructions));
     }
-    axios
-      .patch(`${backLink}/building-instructions`, {
-        buildingName: building.name,
-        instructions: localStorage.getItem("instructions") || value,
-      })
-      .then((res) => setValue(res.data.instructions));
   }, [isSubmited]);
 
   return (
     <>
       <div>
-        {user.status === "manager" ||
-          (user.status === "employee" && (
-            <DropDown>
-              <Checkbox
-                text={"See reports"}
-                value={"reports"}
-                building={building}
-              />
-              <Checkbox
-                text={"See patrol reports"}
-                value={"patrols"}
-                building={building}
-              />
-            </DropDown>
-          ))}
+        {user.status === "manager" && (
+          <DropDown>
+            <Checkbox
+              text={"See reports"}
+              value={"reports"}
+              building={building}
+            />
+            <Checkbox
+              text={"See patrol reports"}
+              value={"patrols"}
+              building={building}
+            />
+          </DropDown>
+        )}
         <Instructions>
           <InstructionsWrap>
             <InstructionsText>Special instructions </InstructionsText>

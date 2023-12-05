@@ -11,14 +11,16 @@ import {
   Title,
   ToggleButton,
   ToggleImage,
+  TopWrap,
   Wrap,
 } from "./style";
 import bgImg from "../../../../images/bg4.png";
 import heart from "../../../../images/heart.png";
 import { useDispatch } from "react-redux";
 import { formatDate } from "../../../../utils/formatDate";
+import { Button } from "../../../../Components/Tab/style";
 
-export const Visitors = ({ visitors }) => {
+export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
   const dispatch = useDispatch();
   const [filteredVisitors, setFilteredVisitors] = useState([]);
 
@@ -40,10 +42,35 @@ export const Visitors = ({ visitors }) => {
     setFilteredVisitors(filteredVisitors);
   }, [visitors]);
 
+  const dataToDisplay = isAllVisitors ? visitors : filteredVisitors;
+
   return (
     <>
       <Wrap>
-        <Title>Visitors List</Title>
+        <TopWrap>
+          <Title>Visitors List</Title>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px",
+              marginBottom: "10px",
+            }}
+          >
+            <Button
+              style={{ minWidth: "unset" }}
+              onClick={() => setIsAllVisitors(true)}
+            >
+              All
+            </Button>
+            <Button
+              style={{ minWidth: "unset" }}
+              onClick={() => setIsAllVisitors(false)}
+            >
+              Active
+            </Button>
+          </div>
+        </TopWrap>
         <Table>
           <thead>
             <TableHeader>
@@ -53,7 +80,7 @@ export const Visitors = ({ visitors }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {filteredVisitors.map((visitor) => (
+            {dataToDisplay.map((visitor) => (
               <TableRow key={visitor.plate}>
                 <TableData width="33%">{visitor.plate}</TableData>
                 <TableDataS width="33%">{visitor.make}</TableDataS>
