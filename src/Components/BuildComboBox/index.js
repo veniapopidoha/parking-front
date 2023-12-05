@@ -86,9 +86,11 @@ export const BuildComboBox = ({
         {buildingValue && isBuildingsOpen && filteredBuildings.length > 0 && (
           <ComboBox>
             {filteredBuildings}
-            <Button onClick={() => setIsAddBuild(!isAddBuild)}>
-              Add object
-            </Button>
+            {user.status === "manager" && (
+              <Button onClick={() => setIsAddBuild(!isAddBuild)}>
+                Add object
+              </Button>
+            )}
           </ComboBox>
         )}
       </InputWrap>

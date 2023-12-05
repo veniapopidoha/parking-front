@@ -45,7 +45,7 @@ export const Cars = ({ building }) => {
           </thead>
           <TableBody>
             {filteredCars.map((car) => (
-              <TableRow key={car.plate}>
+              <TableRow key={`car.plate ${Math.random() * 999}`}>
                 <TableData width="25%">{car.plate}</TableData>
                 <TableDataS width="25%">{car.make}</TableDataS>
                 <TableDataS width="25%">{formatDate(car.startDate)}</TableDataS>

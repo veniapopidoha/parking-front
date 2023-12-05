@@ -8,10 +8,9 @@ export const Wrap = styled.div`
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 50px;
 
-  @media only screen and (max-width: 1340px) {
-    margin-bottom: 50px;
+  @media only screen and (max-width: 1200px) {
+    margin-bottom: 20px;
   }
 
   @media only screen and (max-width: 768px) {
@@ -137,7 +136,7 @@ export const Title = styled.h3`
   font-family: Montserrat;
   font-size: 36px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 32px;
   letter-spacing: -0.54px;
   margin-bottom: 47px;
 `;

@@ -1,18 +1,87 @@
-import { useState } from 'react';
-// import { BuildComboBox } from '../ManagerPage/Components/Manager/Components/BuildComboBox';
-import { AddReport } from './Components/AddReport';
-import { ReportsPage } from './Components/Reports';
-import { AddPatrol } from './Components/AddPatrol';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BuildComboBox } from "../../Components/BuildComboBox";
+import { Button } from "../../Components/Tab/style";
+import { Wrap } from "./style";
+import Pencil from "../../images/pencil.svg";
+import axios from "axios";
+import { backLink } from "../../App";
+import { EmployeeMain } from "./Components/Employee";
 
 export const EmployeePage = () => {
   const [isAddBuild, setIsAddBuild] = useState(false);
+  const user = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [employeePage, setEmployeePage] = useState("main");
+  const [buildingValue, setBuildingValue] = useState(user.buildingName || "");
+  const [selectedBuilding, setSelectedBuilding] = useState(user.building || []);
+
+  useEffect(() => {
+    if (buildingValue) {
+      axios
+        .get(`${backLink}/building/${buildingValue}`)
+        .then((res) => {
+          setSelectedBuilding(res.data);
+          dispatch({
+            type: "ADD_USER_DATA",
+            payload: {
+              building: res.data,
+            },
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [buildingValue]);
 
   return (
     <>
-      <AddPatrol/>
-      <AddReport />
-      {/* <BuildComboBox setIsAddBuild={setIsAddBuild} isAddBuild={isAddBuild} /> */}
-      <ReportsPage />
+      <EmployeeTabs
+        setEmployeePage={setEmployeePage}
+        buildingValue={buildingValue}
+        setBuildingValue={setBuildingValue}
+        setIsAddBuild={setIsAddBuild}
+        isAddBuild={isAddBuild}
+      />
+      <EmployeeMain
+        employeePage={employeePage}
+        selectedBuilding={selectedBuilding}
+      />
     </>
+  );
+};
+
+const EmployeeTabs = ({
+  setEmployeePage,
+  buildingValue,
+  setBuildingValue,
+  setIsAddBuild,
+  isAddBuild,
+}) => {
+  return (
+    <Wrap>
+      <BuildComboBox
+        buildingValue={buildingValue}
+        setBuilding={setBuildingValue}
+        setEmployeePage={setEmployeePage}
+        isAddBuild={isAddBuild}
+        setIsAddBuild={setIsAddBuild}
+      />
+      <Button
+        onClick={() => {
+          setEmployeePage("start");
+        }}
+      >
+        Start
+        <img
+          src={Pencil}
+          alt="icon"
+          style={{ width: "34px", height: "34px" }}
+        />
+      </Button>
+      <Button onClick={() => setEmployeePage("cars")}>Car list</Button>
+      <Button onClick={() => setEmployeePage("reports")}>Reports</Button>
+      <Button onClick={() => setEmployeePage("report")}>Add Report</Button>
+      <Button onClick={() => setEmployeePage("patrol")}>Add Patrol</Button>
+    </Wrap>
   );
 };

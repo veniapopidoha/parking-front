@@ -10,7 +10,6 @@ import { BuildComboBox } from "../../Components/BuildComboBox";
 
 export const ManagerPage = () => {
   const [managerPage, setManagerPage] = useState("main");
-  const [isBuildings, setIsBuildings] = useState(false);
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
   const [buildingValue, setBuildingValue] = useState(data.buildingName || "");
@@ -39,7 +38,6 @@ export const ManagerPage = () => {
     <ManagerWrap>
       <ManagerTabs
         setManagerPage={setManagerPage}
-        setIsBuildings={setIsBuildings}
         buildingValue={buildingValue}
         setBuildingValue={setBuildingValue}
         isAddBuild={isAddBuild}
@@ -59,7 +57,6 @@ export const ManagerPage = () => {
 
 const ManagerTabs = ({
   setManagerPage,
-  setIsBuildings,
   buildingValue,
   setBuildingValue,
   setIsAddBuild,
@@ -77,7 +74,6 @@ const ManagerTabs = ({
       <Button
         onClick={() => {
           setManagerPage("user");
-          setIsBuildings(false);
         }}
       >
         Add User

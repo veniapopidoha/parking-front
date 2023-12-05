@@ -5,12 +5,8 @@ export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   justify-content: center;
-  background: url(${bg2});
-  min-height: 100vh;
-  /* background-size: cover; */
-  background-position: right;
-  background-repeat: no-repeat;
 `;
 
 export const Title = styled.h1`

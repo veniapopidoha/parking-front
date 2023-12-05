@@ -11,8 +11,7 @@ import {
 } from "../Cars/style";
 import bgImg from "../../images/bg4.png";
 import Bin from "../../images/bin.png";
-import { Icon, IconWrap } from "./style";
-import React, { useState } from "react";
+import { Icon, IconWrap, TableRowContainer } from "./style";
 import axios from "axios";
 import { backLink } from "../../App";
 
@@ -39,16 +38,7 @@ export const Residents = ({ building, isDeleted, setIsDeleted }) => {
           <TableBody>
             {building.users.map((resident) => {
               return (
-                <tr
-                  key={resident.email}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "36px",
-                    width: "100%",
-                    maxWidth: "1000px",
-                  }}
-                >
+                <TableRowContainer key={resident.email}>
                   <TableRow>
                     <TableDataS width="45%">{resident.name}</TableDataS>
                     <TableData width="10%">{resident.unit}</TableData>
@@ -63,7 +53,7 @@ export const Residents = ({ building, isDeleted, setIsDeleted }) => {
                       onClick={() => deleteResident(resident.email)}
                     />
                   </IconWrap>
-                </tr>
+                </TableRowContainer>
               );
             })}
           </TableBody>

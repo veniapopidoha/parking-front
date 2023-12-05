@@ -1,44 +1,5 @@
 import styled from "styled-components";
 
-export const TextWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 46px;
-  margin-bottom: 65px;
-`;
-
-export const Title = styled.h2`
-  color: #616467;
-  font-family: Montserrat;
-  font-size: 35px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.525px;
-`;
-
-export const Status = styled.p`
-  position: relative;
-  padding-bottom: 15px;
-  color: rgba(0, 0, 0, 0.8);
-  font-family: Montserrat;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.36px;
-
-  &:after {
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 2px;
-    left: 0;
-    bottom: 0;
-    background-color: black;
-  }
-`;
-
 export const DropDown = styled.div`
   display: flex;
   flex-direction: column;

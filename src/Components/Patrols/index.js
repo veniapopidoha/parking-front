@@ -30,17 +30,12 @@ export const Patrols = ({ building }) => {
               return (
                 <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
                   <TableDataS width="33%">{patrol.name}</TableDataS>
-<<<<<<< HEAD
                   <TableData width="33%">
                     {formatDate(patrol.startDate)}
                   </TableData>
                   <TableData width="33%">
                     {formatDate(patrol.endDate)}
                   </TableData>
-=======
-                  <TableData width="33%">{patrol.startTime}</TableData>
-                  <TableData width="33%">{patrol.endTime}</TableData>
->>>>>>> c5e83079178813e936955c9140e3b5a865f23da6
                 </TableRow>
               );
             })}
