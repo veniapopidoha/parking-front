@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import { backLink } from '../../../../App';
-import { InputWrap } from '../../../../Components/Input/style';
-import { Button, Container, Title, Wrap } from '../../../Registration/style';
-import { StyledInput, Form } from './style';
-import axios from 'axios';
+import React, { useState } from "react";
+import { backLink } from "../../../../App";
+import { InputWrap } from "../../../../Components/Input/style";
+import { Button, Container, Title, Wrap } from "../../../Registration/style";
+import { StyledInput, Form } from "./style";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const AddPatrol = () => {
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  // const data = useSelector((state) => state);
-  const name = 'userName';
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const data = useSelector((state) => state);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const buildingName = 'Building';
 
     try {
       const response = await axios.post(`${backLink}/add-patrol`, {
-        buildingName,
+        buildingName: data.buildingName,
         startTime,
         endTime,
-        name,
+        name: data.name,
       });
     } catch (error) {
-      console.error('Error loading files', error);
+      console.error("Error loading files", error);
     }
 
-    setStartTime('');
-    setEndTime('');
+    setStartTime("");
+    setEndTime("");
   };
 
   return (
@@ -40,8 +39,8 @@ export const AddPatrol = () => {
               <StyledInput
                 // onBlur={(e) => blurHandler(e)}
                 onChange={(e) => setStartTime(e.target.value)}
-                placeholder='Start time'
-                name='startTime'
+                placeholder="Start time"
+                name="startTime"
                 value={startTime}
                 required
               />
@@ -53,15 +52,15 @@ export const AddPatrol = () => {
               <StyledInput
                 // onBlur={(e) => blurHandler(e)}
                 onChange={(e) => setEndTime(e.target.value)}
-                placeholder='End time'
-                name='endTime'
+                placeholder="End time"
+                name="endTime"
                 value={endTime}
                 required
               />
             </InputWrap>
             {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
           </Container>
-          <Button type='submit'>Add Report</Button>
+          <Button type="submit">Add Report</Button>
         </Form>
       </Wrap>
     </>

@@ -1,26 +1,16 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100vh;
   display: flex;
   align-items: center;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
+  margin-bottom: 20px;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  height: 100vh;
   overflow-y: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   padding: 44px 89px 36px;
   background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid #000;

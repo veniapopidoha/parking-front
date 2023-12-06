@@ -56,9 +56,7 @@ export const AddUser = () => {
   const filteredBuildings = useMemo(() => {
     const filteredBuildings = buildings
       .filter((b) => {
-        if (b.name) {
-          b.name.toLowerCase().includes(building.toLowerCase());
-        }
+        return b.name && b.name.toLowerCase().includes(building.toLowerCase());
       })
       .map((filteredBuilding) => (
         <ComboBoxText

@@ -10,17 +10,20 @@ import {
   Wrap,
   Table,
 } from "../../../../Components/Cars/style";
+import { useSelector } from "react-redux";
 
 export const ReportsPage = () => {
-  const building = "Building";
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const data = useSelector((state) => state);
 
   const getReports = async () => {
     setLoading(true);
-    await axios.get(`${backLink}/reports/${building}`).then((response) => {
-      setReports(response.data);
-    });
+    await axios
+      .get(`${backLink}/reports/${data.buildingName}`)
+      .then((response) => {
+        setReports(response.data);
+      });
     setLoading(false);
   };
 

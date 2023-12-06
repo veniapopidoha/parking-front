@@ -6,6 +6,7 @@ import { StyledInput, Form, TextArea } from "./style";
 import axios from "axios";
 import { Image } from "../../../../Components/Cars/style";
 import bgImg from "../../../../images/bg4.png";
+import { useSelector } from "react-redux";
 
 export const AddReport = () => {
   const [plate, setPlate] = useState("");
@@ -13,6 +14,7 @@ export const AddReport = () => {
   const [notes, setNotes] = useState("");
   const [attachment, setAttachment] = useState(null);
   const inputFile = useRef(null);
+  const data = useSelector((state) => state);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ export const AddReport = () => {
     formData.append("reason", reason);
     formData.append("plate", plate);
     formData.append("notes", notes);
-    formData.append("buildingName", "Building");
+    formData.append("buildingName", data.buildingName);
 
     try {
       const response = await axios.post(`${backLink}/add-report`, formData, {

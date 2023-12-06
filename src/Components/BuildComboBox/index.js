@@ -11,7 +11,7 @@ import {
   ComboBoxText,
   Button,
 } from "./style";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const BuildComboBox = ({
   setBuilding,
@@ -78,7 +78,12 @@ export const BuildComboBox = ({
           <ComboBox>
             {filteredBuildings}
             {user.status === "manager" && (
-              <Button onClick={() => setIsAddBuild(!isAddBuild)}>
+              <Button
+                onClick={() => {
+                  setIsAddBuild(!isAddBuild);
+                  setManagerPage("building");
+                }}
+              >
                 Add object
               </Button>
             )}
