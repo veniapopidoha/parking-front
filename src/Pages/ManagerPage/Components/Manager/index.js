@@ -45,11 +45,13 @@ export const ManagerMain = ({
                 <Patrols building={selectedBuilding} />
               )}
               {managerPage === "reports" && <ReportsPage />}
+              {managerPage === "building" && isAddBuild && (
+                <AddObject setIsAddBuild={setIsAddBuild} />
+              )}
             </>
           )}
         </WrapContent>
       </Container>
-      {isAddBuild && <AddObject setIsAddBuild={setIsAddBuild} />}
     </Wrap>
   );
 };

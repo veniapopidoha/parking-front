@@ -15,7 +15,7 @@ export const ClientPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${backLink}/building/Building`)
+      .get(`${backLink}/building/${data.buildingName}`)
       .then((res) => {
         setBuilding(res.data);
       })
