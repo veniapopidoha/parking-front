@@ -11,6 +11,10 @@ export const Wrap = styled.form`
   border-radius: 30px;
   border: 1px solid #000;
 
+  @media only screen and (max-width: 1200px) {
+    margin-bottom: 20px;
+  }
+
   @media only screen and (max-width: 480px) {
     padding: 20px;
   }

@@ -18,7 +18,7 @@ export const Resident = () => {
   const [make, setMake] = useState("");
   const [startDate, setStartDate] = useState("");
   const [favorite, setFavorite] = useState({});
-  const [isAllVisitors, setIsAllVisitors] = useState([]);
+  const [isAllVisitors, setIsAllVisitors] = useState(false);
 
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
@@ -43,7 +43,7 @@ export const Resident = () => {
             colour,
             make,
             startDate,
-            favorite: false,
+            isFavorite: false,
             residentId: id,
           },
         });

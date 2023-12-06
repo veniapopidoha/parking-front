@@ -4,11 +4,6 @@ import { SignIn } from "../SignIn";
 import { Registration } from "../Registration";
 import { useSelector } from "react-redux";
 import { Auth } from "../Auth";
-import { ManagerPage } from "../ManagerPage";
-import { EmployeePage } from "../EmployeePage";
-import { ClientPage } from "../ClientPage";
-import { Resident } from "../Resident";
-import { Residents } from "../../Components/Residents";
 
 export const MainPage = () => {
   const locationPage = useLocation();

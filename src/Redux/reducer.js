@@ -22,7 +22,7 @@ export const reducer = (state = initialState, action) => {
     case 'TOGGLE_FAVORITE':
       const updatedVisitors = state.visitors.map((visitor) =>
         visitor.plate === action.payload.plate
-          ? { ...visitor, favorite: !visitor.favorite }
+          ? { ...visitor, isFavorite: !visitor.isFavorite }
           : visitor
       );
 

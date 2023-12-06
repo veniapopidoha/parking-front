@@ -16,12 +16,15 @@ import {
 } from "./style";
 import bgImg from "../../../../images/bg4.png";
 import heart from "../../../../images/heart.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../../../utils/formatDate";
 import { Button } from "../../../../Components/Tab/style";
+import axios from "axios";
+import { backLink } from "../../../../App";
 
 export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state);
   const [filteredVisitors, setFilteredVisitors] = useState([]);
 
   useEffect(() => {
@@ -44,6 +47,23 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
 
   const dataToDisplay = isAllVisitors ? visitors : filteredVisitors;
 
+  const handleFavorite = (visitor) => {
+    axios
+      .patch(`${backLink}/visitor-favorite`, {
+        userId: user.id,
+        buildingName: user.buildingName,
+        plate: visitor.plate,
+      })
+      .then(() =>
+        dispatch({
+          type: "TOGGLE_FAVORITE",
+          payload: {
+            plate: visitor.plate,
+          },
+        })
+      );
+  };
+
   return (
     <>
       <Wrap>
@@ -59,15 +79,15 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
           >
             <Button
               style={{ minWidth: "unset" }}
-              onClick={() => setIsAllVisitors(true)}
-            >
-              All
-            </Button>
-            <Button
-              style={{ minWidth: "unset" }}
               onClick={() => setIsAllVisitors(false)}
             >
               Active
+            </Button>
+            <Button
+              style={{ minWidth: "unset" }}
+              onClick={() => setIsAllVisitors(true)}
+            >
+              All
             </Button>
           </div>
         </TopWrap>
@@ -88,16 +108,9 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
                   {formatDate(visitor.startDate)}
                 </TableDataS>
                 <ToggleButton
-                  onClick={() => {
-                    dispatch({
-                      type: "TOGGLE_FAVORITE",
-                      payload: {
-                        plate: visitor.plate,
-                      },
-                    });
-                  }}
+                  onClick={() => handleFavorite(visitor)}
                   style={
-                    visitor.favorite ? { opacity: "1" } : { opacity: "0.5" }
+                    visitor.isFavorite ? { opacity: "1" } : { opacity: "0.5" }
                   }
                 >
                   <ToggleImage src={heart} alt="icon" />
