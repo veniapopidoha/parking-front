@@ -17,7 +17,7 @@ export const Form = styled.form`
   align-items: center;
   position: absolute;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

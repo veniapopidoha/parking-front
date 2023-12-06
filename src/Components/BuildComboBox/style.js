@@ -48,8 +48,6 @@ export const StyledInput = styled.input`
 
 export const ComboBox = styled.div`
   position: absolute;
-  min-height: 200px;
-  height: 100%;
   background-color: white;
   overflow-y: auto;
   -webkit-box-shadow: -7px 10px 37px -24px rgba(0, 0, 0, 0.53);
