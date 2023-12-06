@@ -3,11 +3,11 @@ import { Leftside, Status, TextWrap, Title, Wrap, WrapContent } from "./styles";
 import { Container } from "../../style";
 import { Cars } from "../../../../Components/Cars";
 import { Patrols } from "../../../../Components/Patrols";
-import { AddUserM } from "../AddUser/index";
 import { EditUser } from "../EditUser/index";
 import { AddObject } from "./Components/AddObject/index";
 import { Residents } from "../../../../Components/Residents";
 import { ReportsPage } from "../../../EmployeePage/Components/Reports";
+import { AddUser } from "../../../AddUser";
 
 export const ManagerMain = ({
   setIsAddBuild,
@@ -32,7 +32,7 @@ export const ManagerMain = ({
           </Leftside>
           {selectedBuilding.name && (
             <>
-              {managerPage === "user" && <AddUserM />}
+              {managerPage === "user" && <AddUser />}
               {managerPage === "cars" && <Cars building={selectedBuilding} />}
               {managerPage === "residents" && (
                 <Residents

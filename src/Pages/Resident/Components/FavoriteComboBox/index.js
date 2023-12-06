@@ -8,17 +8,19 @@ export const FavoriteComboBox = ({ setFavorite }) => {
   const user = useSelector((state) => state);
 
   const filteredFavorites = useMemo(() => {
-    const filteredFavorites = user.visitors.map((filteredFavorite) => (
-      <ComboBoxText
-        key={filteredFavorite.plate}
-        onClick={() => {
-          setIsFavoritesOpen(false);
-          setFavorite(filteredFavorite);
-        }}
-      >
-        {filteredFavorite.plate}
-      </ComboBoxText>
-    ));
+    const filteredFavorites = user.visitors
+      .filter((visitor) => visitor.isFavorite === true)
+      .map((filteredFavorite) => (
+        <ComboBoxText
+          key={filteredFavorite.plate}
+          onClick={() => {
+            setIsFavoritesOpen(false);
+            setFavorite(filteredFavorite);
+          }}
+        >
+          {filteredFavorite.plate}
+        </ComboBoxText>
+      ));
 
     return filteredFavorites;
   }, [user.visitors]);

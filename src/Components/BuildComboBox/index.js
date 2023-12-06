@@ -23,7 +23,6 @@ export const BuildComboBox = ({
   const [isBuildingsOpen, setIsBuildingsOpen] = useState(false);
   const [buildings, setBuildings] = useState([]);
   const user = useSelector((state) => state);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
