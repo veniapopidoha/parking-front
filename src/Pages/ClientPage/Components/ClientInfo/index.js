@@ -15,7 +15,7 @@ export const ClientInfo = () => {
       <Wrap>
         <Title>{user.name}</Title>
         <Status>{user.status}</Status>
-        <dl>
+        {/* <dl>
           <DescriptionWrap>
             <DescriptionT>Licence plate</DescriptionT>
             <DescriptionD>СE7248VB</DescriptionD>
@@ -28,7 +28,7 @@ export const ClientInfo = () => {
             <DescriptionT>Colour</DescriptionT>
             <DescriptionD>Wite</DescriptionD>
           </DescriptionWrap>
-        </dl>
+        </dl> */}
       </Wrap>
     </>
   );
