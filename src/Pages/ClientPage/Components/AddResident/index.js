@@ -68,7 +68,7 @@ export const AddResident = () => {
       .post(`${backLink}/add-building-user`, {
         email,
         status,
-        buildingName: data.building.name,
+        buildingName: data.buildingName,
       })
       .then(() => {
         dispatch({

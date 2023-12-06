@@ -32,7 +32,7 @@ export const AddVisitor = () => {
         startDate: startDate.$d,
         endDate: endDate.$d,
         residentId: id,
-        buildingName: data.building.name,
+        buildingName: data.buildingName,
         email: data.email,
       })
       .then(() => {
