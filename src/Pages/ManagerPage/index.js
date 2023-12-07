@@ -12,8 +12,8 @@ export const ManagerPage = () => {
   const [managerPage, setManagerPage] = useState("main");
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
-  const [buildingValue, setBuildingValue] = useState(data.buildingName || "");
-  const [selectedBuilding, setSelectedBuilding] = useState(data.building || []);
+  const [buildingValue, setBuildingValue] = useState(data?.buildingName || "");
+  const [selectedBuilding, setSelectedBuilding] = useState(data?.building || []);
   const [isAddBuild, setIsAddBuild] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
