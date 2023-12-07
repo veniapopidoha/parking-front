@@ -67,9 +67,12 @@ export const Resident = () => {
   }, [favorite]);
 
   useEffect(() => {
-    axios.get(`${backLink}/${data.id}`).then((res) => {
-      setVisitors(res.data.visitors);
-    });
+    axios
+      .get(`${backLink}/${data.id}`)
+      .then((res) => {
+        setVisitors(res.data.visitors);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
