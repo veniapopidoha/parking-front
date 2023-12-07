@@ -9,31 +9,98 @@ import {
   TableRow,
   Wrap,
   Table,
+  TopWrap,
+  Title,
 } from "../../../../Components/Cars/style";
 import { useSelector } from "react-redux";
+import { ConfigProvider, Space, DatePicker } from "antd";
 
 export const ReportsPage = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredReports, setFilteredReports] = useState([]);
+  const [dateRange, setDateRange] = useState([]);
+  const { RangePicker } = DatePicker;
+
   const data = useSelector((state) => state);
 
-  const getReports = async () => {
-    setLoading(true);
-    await axios
-      .get(`${backLink}/reports/${data.buildingName}`)
-      .then((response) => {
-        setReports(response.data);
-      });
-    setLoading(false);
+  const withinDateRange = (report) => {
+    if (!dateRange[0] || !dateRange[1]) {
+      return true;
+    }
+
+    const reportTimestamp = new Date(report.timeStamp);
+
+    return reportTimestamp >= dateRange[0] && reportTimestamp <= dateRange[1];
+  };
+
+  const handleDateRangeChange = (value) => {
+    if (value && value.length === 2 && value[0] !== null && value[1] !== null) {
+      const start = value[0].$d;
+      const end = value[1].$d;
+
+      setDateRange([start, end]);
+    } else {
+      setDateRange([]);
+    }
   };
 
   useEffect(() => {
+    const getReports = async () => {
+      setLoading(true);
+      await axios
+        .get(`${backLink}/reports/${data.buildingName}`)
+        .then((response) => {
+          setReports(response.data);
+        });
+      setLoading(false);
+    };
+
     getReports();
-  }, []);
+  }, [data.buildingName]);
+
+  useEffect(() => {
+    const filteredReports = reports.filter((report) => withinDateRange(report));
+    setFilteredReports(filteredReports);
+  }, [reports, dateRange]);
+
+  const reportsToDisplay =
+    dateRange[0] && dateRange[1] ? filteredReports : reports;
 
   return (
     <Wrap>
       <Table>
+        <TopWrap>
+          <Title>Reports</Title>
+          <ConfigProvider
+            theme={{
+              components: {
+                DatePicker: {
+                  colorLink: "#FECB21",
+                  colorLinkActive: "#000",
+                  colorPrimary: "#FECB21",
+                  colorLinkHover: "#FECB21",
+                  colorPrimary: "#FECB21",
+                  colorPrimaryHover: "#FECB21",
+                },
+              },
+            }}
+          >
+            <Space
+              direction="vertical"
+              size={12}
+              style={{ marginBottom: "10px" }}
+            >
+              <RangePicker
+                showTime={{
+                  format: "HH:mm",
+                }}
+                format="YYYY-MM-DD HH:mm"
+                onOk={handleDateRangeChange}
+              />
+            </Space>
+          </ConfigProvider>
+        </TopWrap>
         <thead>
           <TableHeader>
             <TableHead width="10%">Plate</TableHead>
@@ -44,24 +111,25 @@ export const ReportsPage = () => {
         </thead>
         {!loading ? (
           <TableBody>
-            {Array.from(reports).map((item, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableData width="10%">{item.plate}</TableData>
-                  <TableData width="25%">{item.reason}</TableData>
-                  <TableData width="45%">{item.notes}</TableData>
-                  <TableData width="20%">
-                    {Array.from(item.imageUrls).map((link, index) => {
-                      return (
-                        <a key={index} href={link} target="_blank">
-                          photo {index + 1} &nbsp;
-                        </a>
-                      );
-                    })}
-                  </TableData>
-                </TableRow>
-              );
-            })}
+            {reportsToDisplay.map((item, index) => (
+              <TableRow key={index}>
+                <TableData width="10%">{item.plate}</TableData>
+                <TableData width="25%">{item.reason}</TableData>
+                <TableData width="45%">{item.notes}</TableData>
+                <TableData width="20%">
+                  {item.imageUrls.map((link, i) => (
+                    <a
+                      key={i}
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      photo {i + 1} &nbsp;
+                    </a>
+                  ))}
+                </TableData>
+              </TableRow>
+            ))}
           </TableBody>
         ) : (
           <tbody>
