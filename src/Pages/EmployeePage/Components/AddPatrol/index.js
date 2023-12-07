@@ -5,28 +5,30 @@ import { Button, Container, Title, Wrap } from "../../../Registration/style";
 import { StyledInput, Form } from "./style";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { ConfigProvider, DatePicker, Space } from "antd";
 
 export const AddPatrol = () => {
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [dateRange, setDateRange] = useState([]);
   const data = useSelector((state) => state);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log("Date Range:", dateRange); // Add this line to log the dateRange
 
     try {
-      const response = await axios.post(`${backLink}/add-patrol`, {
-        buildingName: data.buildingName,
-        startTime,
-        endTime,
-        name: data.name,
-      });
+      const response = await axios
+        .post(`${backLink}/add-patrol`, {
+          buildingName: data.buildingName,
+          startDate: dateRange[0].$d,
+          endDate: dateRange[1].$d,
+          name: data.name,
+        })
+        .then(() => setDateRange([]));
     } catch (error) {
       console.error("Error loading files", error);
     }
 
-    setStartTime("");
-    setEndTime("");
+    setDateRange([]);
   };
 
   return (
@@ -36,29 +38,21 @@ export const AddPatrol = () => {
         <Form onSubmit={handleFormSubmit}>
           <Container>
             <InputWrap>
-              <StyledInput
-                // onBlur={(e) => blurHandler(e)}
-                onChange={(e) => setStartTime(e.target.value)}
-                placeholder="Start time"
-                name="startTime"
-                value={startTime}
-                required
-              />
+              <ConfigProvider>
+                <Space direction="vertical" size={12}>
+                  <DatePicker.RangePicker
+                    showTime={{
+                      format: "HH:mm",
+                    }}
+                    format="YYYY-MM-DD HH:mm"
+                    onChange={(values) => {
+                      console.log("Selected Values:", values); // Add this line
+                      setDateRange(values);
+                    }}
+                  />
+                </Space>
+              </ConfigProvider>
             </InputWrap>
-            {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
-          </Container>
-          <Container>
-            <InputWrap>
-              <StyledInput
-                // onBlur={(e) => blurHandler(e)}
-                onChange={(e) => setEndTime(e.target.value)}
-                placeholder="End time"
-                name="endTime"
-                value={endTime}
-                required
-              />
-            </InputWrap>
-            {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
           </Container>
           <Button type="submit">Add Report</Button>
         </Form>

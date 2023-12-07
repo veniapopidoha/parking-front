@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   TableBody,
@@ -17,33 +17,44 @@ import { ConfigProvider, DatePicker, Space } from "antd";
 
 export const Patrols = ({ building }) => {
   const [filteredPatrols, setFilteredPatrols] = useState([]);
-  const [dateRange, setDateRange] = useState(null);
+  const [dateRange, setDateRange] = useState([]);
   const { RangePicker } = DatePicker;
 
   const withinDateRange = (patrol) => {
-    if (!dateRange) {
+    if (!dateRange[0] || !dateRange[1]) {
       return true;
     }
 
-    const startDate = new Date(patrol.startDate);
-    const endDate = new Date(patrol.endDate);
+    const startDatePatrol = new Date(patrol.startTime);
+    const endDatePatrol = new Date(patrol.endTime);
 
-    return startDate >= dateRange[0] && endDate <= dateRange[1];
+    return startDatePatrol >= dateRange[0] && endDatePatrol <= dateRange[1];
   };
-
   const handleDateRangeChange = (value) => {
-    setDateRange(value);
-    filterPatrols(value);
+    if (value && value.length === 2 && value[0] !== null && value[1] !== null) {
+      const start = value[0].$d;
+      const end = value[1].$d;
+
+      setDateRange([start, end]);
+      filterPatrols();
+    } else {
+      setDateRange([]);
+    }
   };
 
-  const filterPatrols = (range) => {
+  useEffect(() => {
+    filterPatrols();
+  }, [dateRange[0], dateRange[1]]);
+
+  const filterPatrols = () => {
     const filteredPatrols = building.patrols.filter((patrol) =>
       withinDateRange(patrol)
     );
     setFilteredPatrols(filteredPatrols);
   };
 
-  const patrolsToDisplay = dateRange ? filteredPatrols : building.patrols;
+  const patrolsToDisplay =
+    dateRange[0] && dateRange[1] ? filteredPatrols : building.patrols;
 
   return (
     <>
@@ -93,12 +104,10 @@ export const Patrols = ({ building }) => {
                 <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
                   <TableDataS width="33%">{patrol.name}</TableDataS>
                   <TableData width="33%">
-                    {/* {formatDate(patrol.startTime)} */}
-                    {patrol.startTime}
+                    {formatDate(patrol.startTime)}
                   </TableData>
                   <TableData width="33%">
-                    {/* {formatDate(patrol.endTime)} */}
-                    {patrol.endTime}
+                    {formatDate(patrol.endTime)}
                   </TableData>
                 </TableRow>
               );

@@ -75,6 +75,12 @@ export const Resident = () => {
       .get(`${backLink}/${data.id}`)
       .then((res) => {
         setVisitors(res.data.visitors);
+        dispatch({
+          type: "ADD_VISITOR_DATA",
+          payload: {
+            ...res.data.visitors,
+          },
+        });
       })
       .catch((err) => console.log(err));
   }, [isSubmitted]);

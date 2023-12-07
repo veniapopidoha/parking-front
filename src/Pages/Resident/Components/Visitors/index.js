@@ -16,7 +16,7 @@ import {
 } from "./style";
 import bgImg from "../../../../images/bg4.png";
 import heart from "../../../../images/heart.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../../../utils/formatDate";
 import { Button } from "../../../../Components/Tab/style";
 import axios from "axios";
@@ -102,17 +102,29 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
 
 const Icon = ({ visitor, user }) => {
   const [isClicked, setIsClicked] = useState(visitor.isFavorite);
+  const dispatch = useDispatch();
   const handleFavorite = (visitor) => {
-    axios.patch(`${backLink}/visitor-favorite`, {
-      userId: user.id,
-      buildingName: user.buildingName,
-      plate: visitor.plate,
-    });
+    axios
+      .patch(`${backLink}/visitor-favorite`, {
+        userId: user.id,
+        buildingName: user.buildingName,
+        plate: visitor.plate,
+      })
+      .then(() => {
+        dispatch({
+          type: "TOGGLE_FAVORITE",
+          payload: {
+            plate: visitor.plate,
+          },
+        });
+      });
     setIsClicked(!isClicked);
   };
   return (
     <ToggleButton
-      onClick={() => handleFavorite(visitor)}
+      onClick={() => {
+        handleFavorite(visitor);
+      }}
       style={isClicked ? { opacity: "1" } : { opacity: "0.5" }}
     >
       <ToggleImage src={heart} alt="icon" />
