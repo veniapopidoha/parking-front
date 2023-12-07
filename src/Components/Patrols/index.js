@@ -28,17 +28,16 @@ export const Patrols = ({ building }) => {
     const startDatePatrol = new Date(patrol.startTime);
     const endDatePatrol = new Date(patrol.endTime);
 
-    return startDatePatrol >= dateRange[0] && endDatePatrol <= dateRange[1];
+    return (
+      startDatePatrol >= dateRange[0].$d && endDatePatrol <= dateRange[1].$d
+    );
   };
   const handleDateRangeChange = (value) => {
     if (value && value.length === 2 && value[0] !== null && value[1] !== null) {
-      const start = value[0].$d;
-      const end = value[1].$d;
-
-      setDateRange([start, end]);
       filterPatrols();
+      setDateRange(value);
     } else {
-      setDateRange([]);
+      setDateRange([null, null]);
     }
   };
 
@@ -85,7 +84,7 @@ export const Patrols = ({ building }) => {
                   format: "HH:mm",
                 }}
                 format="YYYY-MM-DD HH:mm"
-                onOk={handleDateRangeChange}
+                onChange={handleDateRangeChange}
               />
             </Space>
           </ConfigProvider>

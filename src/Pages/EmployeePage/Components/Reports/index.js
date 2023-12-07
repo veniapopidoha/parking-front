@@ -31,17 +31,16 @@ export const ReportsPage = () => {
 
     const reportTimestamp = new Date(report.timeStamp);
 
-    return reportTimestamp >= dateRange[0] && reportTimestamp <= dateRange[1];
+    return (
+      reportTimestamp >= dateRange[0].$d && reportTimestamp <= dateRange[1].$d
+    );
   };
 
   const handleDateRangeChange = (value) => {
     if (value && value.length === 2 && value[0] !== null && value[1] !== null) {
-      const start = value[0].$d;
-      const end = value[1].$d;
-
-      setDateRange([start, end]);
+      setDateRange(value);
     } else {
-      setDateRange([]);
+      setDateRange([null, null]);
     }
   };
 
@@ -96,7 +95,7 @@ export const ReportsPage = () => {
                   format: "HH:mm",
                 }}
                 format="YYYY-MM-DD HH:mm"
-                onOk={handleDateRangeChange}
+                onChange={handleDateRangeChange}
               />
             </Space>
           </ConfigProvider>

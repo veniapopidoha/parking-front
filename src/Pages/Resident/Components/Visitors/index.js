@@ -27,7 +27,7 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
   const [filteredVisitors, setFilteredVisitors] = useState([]);
 
   useEffect(() => {
-    const lessThanADayAgo = (date) => {
+    const within24Hours = (date) => {
       const startDate = new Date(date);
       const currentTime = new Date();
 
@@ -37,9 +37,15 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
       return hoursDifference < 24;
     };
 
-    const filteredVisitors = visitors.filter((visitor) =>
-      lessThanADayAgo(visitor.startDate)
-    );
+    const filteredVisitors = visitors.filter((visitor) => {
+      const isWithin24Hours = within24Hours(visitor.startDate);
+
+      if (!isWithin24Hours) {
+        return Date.now() - new Date(visitor.startDate) < 24 * 60 * 60 * 1000;
+      }
+
+      return true;
+    });
 
     setFilteredVisitors(filteredVisitors);
   }, [visitors]);

@@ -7,7 +7,8 @@ export const Wrap = styled.div`
   border-radius: 30px;
   max-width: 1200px;
   width: 100%;
-  overflow-x: auto;
+  max-height: 100vh;
+  overflow: auto;
   margin: 0 auto;
   margin-bottom: 30px;
 
