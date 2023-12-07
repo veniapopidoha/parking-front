@@ -20,7 +20,9 @@ export const Resident = () => {
   const [favorite, setFavorite] = useState({});
   const [isAllVisitors, setIsAllVisitors] = useState(false);
   const [visitors, setVisitors] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFavoriteAdded, setIsFavoriteAdded] = useState(false);
+
   const [error, setError] = useState("");
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
@@ -53,6 +55,8 @@ export const Resident = () => {
         setMake("");
         setPlate("");
         setStartDate(null);
+        setError("");
+        setIsSubmitted(!isSubmitted);
         setShow(false);
       })
       .catch((error) => {
@@ -73,7 +77,7 @@ export const Resident = () => {
         setVisitors(res.data.visitors);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [isSubmitted]);
 
   return (
     <Wrap>
