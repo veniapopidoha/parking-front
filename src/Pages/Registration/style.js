@@ -6,8 +6,8 @@ export const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 export const Title = styled.h1`

@@ -129,7 +129,7 @@ export const Registration = (props) => {
             name,
             unit,
             email: userData.email,
-            id: userData.id,
+            id: userData._id,
             status: userData.status,
             buildingName: userData.buildingName,
             numberOfRegistration: userData.numberOfRegistration,
@@ -144,6 +144,7 @@ export const Registration = (props) => {
   const getUserInfo = async () => {
     setloading(true);
     await axios.get(`${backLink}/${props.userId}`).then((response) => {
+      console.log(response);
       setUserData(response.data[0] || response.data);
     });
     setloading(false);

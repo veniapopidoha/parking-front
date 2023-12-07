@@ -26,6 +26,7 @@ export const EmployeePage = () => {
             type: "ADD_USER_DATA",
             payload: {
               building: res.data,
+              buildingName: res.data.name,
             },
           });
         })

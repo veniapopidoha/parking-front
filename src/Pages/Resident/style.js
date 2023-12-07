@@ -61,7 +61,7 @@ export const TopWrap = styled.div`
 
 export const BottomWrap = styled.div`
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   width: 100%;
   gap: 80px;

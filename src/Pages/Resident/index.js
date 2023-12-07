@@ -4,7 +4,7 @@ import axios from "axios";
 import { ConfigProvider, DatePicker, Space } from "antd";
 import { backLink } from "../../App";
 import { InputWrap } from "../../Components/Input/style";
-import { Container } from "../Registration/style";
+import { Container, Error } from "../Registration/style";
 import { Form, Wrap, StyledInput, Title, TopWrap, BottomWrap } from "./style";
 import { Button } from "../SignIn/style";
 import { Visitors } from "./Components/Visitors";
@@ -16,10 +16,12 @@ export const Resident = () => {
   const [plate, setPlate] = useState("");
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [startDate, setStartDate] = useState(null);
   const [favorite, setFavorite] = useState({});
   const [isAllVisitors, setIsAllVisitors] = useState(false);
-
+  const [visitors, setVisitors] = useState([]);
+  const [isFavoriteAdded, setIsFavoriteAdded] = useState(false);
+  const [error, setError] = useState("");
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
 
@@ -32,7 +34,7 @@ export const Resident = () => {
         make,
         startDate,
         residentId: data.id,
-        buildingName: "Building",
+        buildingName: data.buildingName,
         email: data.email,
       })
       .then(() => {
@@ -47,10 +49,14 @@ export const Resident = () => {
             residentId: id,
           },
         });
+        setColour("");
+        setMake("");
+        setPlate("");
+        setStartDate(null);
         setShow(false);
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.response.data.message);
       });
   };
 
@@ -59,6 +65,12 @@ export const Resident = () => {
     setMake(favorite.make);
     setColour(favorite.colour);
   }, [favorite]);
+
+  useEffect(() => {
+    axios.get(`${backLink}/${data.id}`).then((res) => {
+      setVisitors(res.data.visitors);
+    });
+  }, []);
 
   return (
     <Wrap>
@@ -71,7 +83,7 @@ export const Resident = () => {
         >
           Add Visitor
         </Button>
-        <FavoriteComboBox setFavorite={setFavorite} />
+        <FavoriteComboBox setFavorite={setFavorite} visitors={visitors} />
       </TopWrap>
       <BottomWrap>
         {show && (
@@ -81,8 +93,8 @@ export const Resident = () => {
               <InputWrap>
                 <StyledInput
                   placeholder="Licence plate"
-                  name="plate"
                   value={plate}
+                  name="plate"
                   onChange={(e) => {
                     setPlate(e.target.value);
                   }}
@@ -93,9 +105,9 @@ export const Resident = () => {
             <Container>
               <InputWrap>
                 <StyledInput
+                  value={make}
                   placeholder="Make"
                   name="make"
-                  value={make}
                   onChange={(e) => {
                     setMake(e.target.value);
                   }}
@@ -107,8 +119,8 @@ export const Resident = () => {
               <InputWrap>
                 <StyledInput
                   placeholder="Colour"
-                  name="colour"
                   value={colour}
+                  name="colour"
                   onChange={(e) => {
                     setColour(e.target.value);
                   }}
@@ -140,16 +152,20 @@ export const Resident = () => {
                   onOk={(value) => {
                     setStartDate(value);
                   }}
+                  value={startDate}
                 />
               </Space>
             </ConfigProvider>
             <Button type="submit">Add Visitor</Button>
+            <Error style={{ marginTop: "10px" }}>{error}</Error>
           </Form>
         )}
         <Visitors
-          visitors={data.visitors}
+          visitors={visitors}
           isAllVisitors={isAllVisitors}
           setIsAllVisitors={setIsAllVisitors}
+          isFavoriteAdded={isFavoriteAdded}
+          setIsFavoriteAdded={setIsFavoriteAdded}
         />
       </BottomWrap>
     </Wrap>

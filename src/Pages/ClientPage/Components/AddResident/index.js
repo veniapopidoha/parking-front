@@ -68,12 +68,12 @@ export const AddResident = () => {
       .post(`${backLink}/add-building-user`, {
         email,
         status,
-        buildingName: data.building.name,
+        buildingName: data.buildingName,
       })
       .then(() => {
         dispatch({
           type: "ADD_USER_DATA",
-          payload: { ...data, building: data.building },
+          payload: { ...data },
         });
         setEmail("");
         setError("");

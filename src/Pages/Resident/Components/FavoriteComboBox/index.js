@@ -1,14 +1,12 @@
 import { useMemo, useState } from "react";
 import { ComboBox, Icon, InputWrap, ComboBoxText } from "./style";
-import { useSelector } from "react-redux";
 import Bars from "../../../../images/bars.svg";
 
-export const FavoriteComboBox = ({ setFavorite }) => {
+export const FavoriteComboBox = ({ setFavorite, visitors }) => {
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
-  const user = useSelector((state) => state);
 
   const filteredFavorites = useMemo(() => {
-    const filteredFavorites = user.visitors
+    const filteredFavorites = visitors
       .filter((visitor) => visitor.isFavorite === true)
       .map((filteredFavorite) => (
         <ComboBoxText
@@ -23,7 +21,7 @@ export const FavoriteComboBox = ({ setFavorite }) => {
       ));
 
     return filteredFavorites;
-  }, [user.visitors]);
+  }, [visitors]);
 
   return (
     <>

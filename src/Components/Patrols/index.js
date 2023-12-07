@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Image,
   TableBody,
@@ -8,15 +9,76 @@ import {
   Wrap,
   TableHeader,
   TableHead,
+  TopWrap,
 } from "../Cars/style";
 import bgImg from "../../images/bg4.png";
 import { formatDate } from "../../utils/formatDate";
+import { ConfigProvider, DatePicker, Space } from "antd";
 
 export const Patrols = ({ building }) => {
+  const [filteredPatrols, setFilteredPatrols] = useState([]);
+  const [dateRange, setDateRange] = useState(null);
+  const { RangePicker } = DatePicker;
+
+  const withinDateRange = (patrol) => {
+    if (!dateRange) {
+      return true;
+    }
+
+    const startDate = new Date(patrol.startDate);
+    const endDate = new Date(patrol.endDate);
+
+    return startDate >= dateRange[0] && endDate <= dateRange[1];
+  };
+
+  const handleDateRangeChange = (value) => {
+    setDateRange(value);
+    filterPatrols(value);
+  };
+
+  const filterPatrols = (range) => {
+    const filteredPatrols = building.patrols.filter((patrol) =>
+      withinDateRange(patrol)
+    );
+    setFilteredPatrols(filteredPatrols);
+  };
+
+  const patrolsToDisplay = dateRange ? filteredPatrols : building.patrols;
+
   return (
     <>
       <Wrap>
-        <Title>Patrols completed</Title>
+        <TopWrap>
+          <Title>Patrols completed</Title>
+          <ConfigProvider
+            theme={{
+              components: {
+                DatePicker: {
+                  colorLink: "#FECB21",
+                  colorLinkActive: "#000",
+                  colorPrimary: "#FECB21",
+                  colorLinkHover: "#FECB21",
+                  colorPrimary: "#FECB21",
+                  colorPrimaryHover: "#FECB21",
+                },
+              },
+            }}
+          >
+            <Space
+              direction="vertical"
+              size={12}
+              style={{ marginBottom: "10px" }}
+            >
+              <RangePicker
+                showTime={{
+                  format: "HH:mm",
+                }}
+                format="YYYY-MM-DD HH:mm"
+                onOk={handleDateRangeChange}
+              />
+            </Space>
+          </ConfigProvider>
+        </TopWrap>
         <table width="100%">
           <thead>
             <TableHeader>
@@ -26,7 +88,7 @@ export const Patrols = ({ building }) => {
             </TableHeader>
           </thead>
           <TableBody>
-            {building.patrols.map((patrol) => {
+            {patrolsToDisplay.map((patrol) => {
               return (
                 <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
                   <TableDataS width="33%">{patrol.name}</TableDataS>

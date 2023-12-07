@@ -6,7 +6,7 @@ import axios from "axios";
 import { Form, Title, StyledInput, DateTitle, Wrap, Image } from "./style";
 import { ConfigProvider, DatePicker, Space } from "antd";
 import { Button } from "../../../SignIn/style";
-import { Container } from "../../../Registration/style";
+import { Container, Error } from "../../../Registration/style";
 import { InputWrap } from "../../../../Components/Input/style";
 import bgImg from "../../../../images/bg2.png";
 
@@ -17,6 +17,7 @@ export const AddVisitor = () => {
   const [make, setMake] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [error, setErorr] = useState("");
   const { RangePicker } = DatePicker;
 
   const id = useSelector((state) => state.id);
@@ -36,6 +37,11 @@ export const AddVisitor = () => {
         email: data.email,
       })
       .then(() => {
+        setColour("");
+        setPlate("");
+        setMake("");
+        setStartDate(null);
+        setEndDate(null);
         dispatch({
           type: "ADD_VISITOR_DATA",
           payload: {
@@ -48,7 +54,7 @@ export const AddVisitor = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        setErorr(error.response.data.message);
       });
   };
 
@@ -63,6 +69,7 @@ export const AddVisitor = () => {
                 <StyledInput
                   placeholder="Licence plate"
                   name="plate"
+                  value={plate}
                   onChange={(e) => {
                     setPlate(e.target.value);
                   }}
@@ -73,6 +80,7 @@ export const AddVisitor = () => {
             <Container>
               <InputWrap>
                 <StyledInput
+                  value={make}
                   placeholder="Make"
                   name="make"
                   onChange={(e) => {
@@ -87,6 +95,7 @@ export const AddVisitor = () => {
                 <StyledInput
                   placeholder="Colour"
                   name="colour"
+                  value={colour}
                   onChange={(e) => {
                     setColour(e.target.value);
                   }}
@@ -125,6 +134,7 @@ export const AddVisitor = () => {
             <Button style={{ display: "block" }} type="submit">
               Add Visitor
             </Button>
+            <Error style={{ marginTop: "10px" }}>{error}</Error>
           </div>
         </Form>
       </Wrap>

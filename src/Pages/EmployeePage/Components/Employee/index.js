@@ -21,10 +21,14 @@ export const EmployeeMain = ({ employeePage, selectedBuilding }) => {
             </TextWrap>
             <EditUser building={selectedBuilding} />
           </Leftside>
-          {employeePage === "cars" && <Cars building={selectedBuilding} />}
-          {employeePage === "report" && <AddReport />}
-          {employeePage === "reports" && <ReportsPage />}
-          {employeePage === "patrol" && <AddPatrol />}
+          {selectedBuilding.name && (
+            <>
+              {employeePage === "cars" && <Cars building={selectedBuilding} />}
+              {employeePage === "report" && <AddReport />}
+              {employeePage === "reports" && <ReportsPage />}
+              {employeePage === "patrol" && <AddPatrol />}
+            </>
+          )}
         </WrapContent>
       </Container>
     </Wrap>

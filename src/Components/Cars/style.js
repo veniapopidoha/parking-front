@@ -20,6 +20,16 @@ export const Wrap = styled.div`
   }
 `;
 
+export const TopWrap = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
 export const Table = styled.table`
   width: 100%;
   min-width: 1000px;
