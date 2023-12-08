@@ -29,39 +29,42 @@ export const Resident = () => {
 
   const Submit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${backLink}/add-building-visitor`, {
-        plate,
-        colour,
-        make,
-        startDate,
-        residentId: data.id,
-        buildingName: data.buildingName,
-        email: data.email,
-      })
-      .then(() => {
-        dispatch({
-          type: "ADD_VISITOR_DATA",
-          payload: {
-            plate,
-            colour,
-            make,
-            startDate,
-            isFavorite: false,
-            residentId: id,
-          },
+    if (startDate) {
+      axios
+        .post(`${backLink}/add-building-visitor`, {
+          plate,
+          colour,
+          make,
+          startDate: startDate.$d,
+          residentId: data.id,
+          buildingName: data.buildingName,
+          email: data.email,
+        })
+        .then(() => {
+          dispatch({
+            type: "ADD_VISITOR_DATA",
+            payload: {
+              plate,
+              colour,
+              make,
+              startDate,
+              isFavorite: false,
+              residentId: id,
+            },
+          });
+          setColour("");
+          setMake("");
+          setPlate("");
+          setError("");
+          setIsSubmitted(!isSubmitted);
+          setShow(false);
+        })
+        .catch((error) => {
+          setError(error.response.data.message);
         });
-        setColour("");
-        setMake("");
-        setPlate("");
-        setStartDate(null);
-        setError("");
-        setIsSubmitted(!isSubmitted);
-        setShow(false);
-      })
-      .catch((error) => {
-        setError(error.response.data.message);
-      });
+    } else {
+      setError("Select a date");
+    }
   };
 
   useEffect(() => {

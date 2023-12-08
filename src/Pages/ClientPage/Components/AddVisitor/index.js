@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { ClientInfo } from "../ClientInfo";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { backLink } from "../../../../App";
 import axios from "axios";
@@ -11,7 +10,6 @@ import { InputWrap } from "../../../../Components/Input/style";
 import bgImg from "../../../../images/bg2.png";
 
 export const AddVisitor = () => {
-  const dispatch = useDispatch();
   const [plate, setPlate] = useState("");
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
@@ -25,37 +23,30 @@ export const AddVisitor = () => {
 
   const Submit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${backLink}/add-building-visitor`, {
-        plate,
-        colour,
-        make,
-        startDate: startDate.$d,
-        endDate: endDate.$d,
-        residentId: id,
-        buildingName: data.buildingName,
-        email: data.email,
-      })
-      .then(() => {
-        setColour("");
-        setPlate("");
-        setMake("");
-        setStartDate(null);
-        setEndDate(null);
-        dispatch({
-          type: "ADD_VISITOR_DATA",
-          payload: {
-            plate,
-            colour,
-            make,
-            startDate,
-            residentId: id,
-          },
+    if (setStartDate && endDate) {
+      axios
+        .post(`${backLink}/add-building-visitor`, {
+          plate,
+          colour,
+          make,
+          startDate: startDate.$d,
+          endDate: endDate.$d,
+          residentId: id,
+          buildingName: data.buildingName,
+          email: data.email,
+        })
+        .then(() => {
+          setColour("");
+          setPlate("");
+          setMake("");
+          setErorr("");
+        })
+        .catch((error) => {
+          setErorr(error.response.data.message);
         });
-      })
-      .catch((error) => {
-        setErorr(error.response.data.message);
-      });
+    } else {
+      setErorr("Select a date");
+    }
   };
 
   return (
