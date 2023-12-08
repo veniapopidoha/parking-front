@@ -54,7 +54,7 @@ export const EditUser = ({ building }) => {
         <Instructions>
           <InstructionsWrap>
             <InstructionsText>Special instructions </InstructionsText>
-            {user.status === "manager" && (
+            {user.status == "manager" && (
               <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
             )}
           </InstructionsWrap>

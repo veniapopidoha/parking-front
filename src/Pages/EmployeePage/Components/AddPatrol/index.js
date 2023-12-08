@@ -13,7 +13,6 @@ export const AddPatrol = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("Date Range:", dateRange); // Add this line to log the dateRange
 
     try {
       const response = await axios
@@ -46,7 +45,6 @@ export const AddPatrol = () => {
                     }}
                     format="YYYY-MM-DD HH:mm"
                     onChange={(values) => {
-                      console.log("Selected Values:", values); // Add this line
                       setDateRange(values);
                     }}
                   />
