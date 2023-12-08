@@ -13,21 +13,17 @@ export const AddPatrol = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await axios
-        .post(`${backLink}/add-patrol`, {
-          buildingName: data.buildingName,
-          startDate: dateRange[0].$d,
-          endDate: dateRange[1].$d,
-          name: data.name,
-        })
-        .then(() => setDateRange([]));
+      await axios.post(`${backLink}/add-patrol`, {
+        buildingName: data.buildingName,
+        startDate: dateRange[0],
+        endDate: dateRange[1],
+        name: data.name,
+      });
+      setDateRange([null, null]);
     } catch (error) {
       console.error("Error loading files", error);
     }
-
-    setDateRange([]);
   };
 
   return (
@@ -47,6 +43,7 @@ export const AddPatrol = () => {
                     onChange={(values) => {
                       setDateRange(values);
                     }}
+                    value={dateRange}
                   />
                 </Space>
               </ConfigProvider>
