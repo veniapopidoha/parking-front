@@ -7,14 +7,19 @@ import {
   Title,
   Wrap,
 } from "./style";
+import { EditUser } from "../../../ManagerPage/Components/EditUser";
+import { TopWrap } from "../../../Resident/style";
 
-export const ClientInfo = () => {
+export const ClientInfo = ({ building }) => {
   const user = useSelector((state) => state);
   return (
     <>
       <Wrap>
-        <Title>{user.name}</Title>
-        <Status>{user.status}</Status>
+        <div style={{ marginBottom: "20px" }}>
+          <Title>{user.name}</Title>
+          <Status>{user.status}</Status>
+          <EditUser building={building} />
+        </div>
         {/* <dl>
           <DescriptionWrap>
             <DescriptionT>Licence plate</DescriptionT>

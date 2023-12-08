@@ -18,7 +18,7 @@ export const ClientMain = ({
     <Wrap>
       <Container>
         <WrapContent>
-          <ClientInfo />
+          <ClientInfo building={building} />
           {clientPage === "visitor" && <AddVisitor />}
           {clientPage === "resident" && <AddResident />}
           {clientPage === "cars" && <Cars building={building} />}

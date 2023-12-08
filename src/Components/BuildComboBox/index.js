@@ -38,7 +38,7 @@ export const BuildComboBox = ({
     setIsBuildingsOpen(false);
   };
 
-  const filteredBuildings = useMemo(() => {
+  let filteredBuildings = useMemo(() => {
     const filteredBuildings = buildings
       .filter((b) => {
         return (
@@ -70,11 +70,15 @@ export const BuildComboBox = ({
             setBuilding(e.target.value);
             setIsBuildingsOpen(true);
           }}
+          onFocus={() => {
+            filteredBuildings = buildings;
+            setIsBuildingsOpen(true);
+          }}
           placeholder="Building"
           name="building"
           value={buildingValue}
         />
-        {buildingValue && isBuildingsOpen && filteredBuildings.length > 0 && (
+        {isBuildingsOpen && filteredBuildings.length > 0 && (
           <ComboBox>
             {filteredBuildings}
             {/* {user.status === "manager" && (
