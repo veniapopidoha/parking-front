@@ -20,7 +20,6 @@ export const MainPage = () => {
       ) : (
         <>
           <SignIn />
-          <AddUser />
         </>
       )}
     </>
