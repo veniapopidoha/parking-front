@@ -5,10 +5,19 @@ import { ConfigProvider, DatePicker, Space } from "antd";
 import { backLink } from "../../App";
 import { InputWrap } from "../../Components/Input/style";
 import { Container, Error } from "../Registration/style";
-import { Form, Wrap, StyledInput, Title, TopWrap, BottomWrap } from "./style";
+import {
+  Form,
+  Wrap,
+  StyledInput,
+  Title,
+  TopWrap,
+  BottomWrap,
+  Status,
+} from "./style";
 import { Button } from "../SignIn/style";
 import { Visitors } from "./Components/Visitors";
 import { FavoriteComboBox } from "./Components/FavoriteComboBox";
+import { Welcome } from "../../Components/Welcome";
 
 export const Resident = () => {
   const dispatch = useDispatch();
@@ -22,6 +31,9 @@ export const Resident = () => {
   const [visitors, setVisitors] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFavoriteAdded, setIsFavoriteAdded] = useState(false);
+  // const [isWelcome, setIsWelcome] = useState(
+  //   localStorage.getItem("isWelcome") !== false
+  // );
 
   const [error, setError] = useState("");
   const id = useSelector((state) => state.id);
@@ -73,6 +85,25 @@ export const Resident = () => {
     setColour(favorite.colour);
   }, [favorite]);
 
+  // useEffect(() => {
+  //   const storedIsWelcome = localStorage.getItem("isWelcome");
+
+  //   if (storedIsWelcome === null || storedIsWelcome === "true") {
+  //     setIsWelcome(true);
+  //     localStorage.setItem("isWelcome", "false");
+
+  //     // Додайте таймер для затримки зміни isWelcome на false
+  //     const timer = setTimeout(() => {
+  //       setIsWelcome(false);
+  //     }, 1000); // Затримка 1 секунда (змініть на бажану вам)
+
+  //     // Забезпечте очищення таймера при розміщенні компонента
+  //     return () => clearTimeout(timer);
+  //   } else {
+  //     setIsWelcome(false);
+  //   }
+  // }, []);
+
   useEffect(() => {
     axios
       .get(`${backLink}/${data.id}`)
@@ -89,101 +120,113 @@ export const Resident = () => {
   }, [isSubmitted]);
 
   return (
-    <Wrap>
-      <TopWrap>
-        <Button
-          style={{ marginTop: "0", padding: "14px 50px", minWidth: "200px" }}
-          onClick={() => {
-            setShow(!show);
-          }}
-        >
-          Add Visitor
-        </Button>
-        <FavoriteComboBox setFavorite={setFavorite} visitors={visitors} />
-      </TopWrap>
-      <BottomWrap>
-        {show && (
-          <Form onSubmit={Submit}>
-            <Title>Visitor car</Title>
-            <Container>
-              <InputWrap>
-                <StyledInput
-                  placeholder="Licence plate"
-                  value={plate}
-                  name="plate"
-                  onChange={(e) => {
-                    setPlate(e.target.value);
-                  }}
-                  required
-                />
-              </InputWrap>
-            </Container>
-            <Container>
-              <InputWrap>
-                <StyledInput
-                  value={make}
-                  placeholder="Make"
-                  name="make"
-                  onChange={(e) => {
-                    setMake(e.target.value);
-                  }}
-                  required
-                />
-              </InputWrap>
-            </Container>
-            <Container>
-              <InputWrap>
-                <StyledInput
-                  placeholder="Colour"
-                  value={colour}
-                  name="colour"
-                  onChange={(e) => {
-                    setColour(e.target.value);
-                  }}
-                  required
-                />
-              </InputWrap>
-            </Container>
-            <Title>Select date</Title>
-            <ConfigProvider
-              theme={{
-                components: {
-                  DatePicker: {
-                    colorLink: "#FECB21",
-                    colorLinkActive: "#000",
-                    colorPrimary: "#FECB21",
-                    colorLinkHover: "#FECB21",
-                    colorPrimary: "#FECB21",
-                    colorPrimaryHover: "#FECB21",
+    <>
+      <Wrap>
+        <TopWrap>
+          <Button
+            style={{
+              marginTop: "0",
+              padding: "14px 50px",
+              minWidth: "200px",
+            }}
+            onClick={() => {
+              setShow(!show);
+            }}
+          >
+            Add Visitor
+          </Button>
+          <FavoriteComboBox setFavorite={setFavorite} visitors={visitors} />
+        </TopWrap>
+        <BottomWrap>
+          {show && (
+            <Form onSubmit={Submit}>
+              <Title>Visitor car</Title>
+              <Container>
+                <InputWrap>
+                  <StyledInput
+                    placeholder="Licence plate"
+                    value={plate}
+                    name="plate"
+                    onChange={(e) => {
+                      setPlate(e.target.value);
+                    }}
+                    required
+                  />
+                </InputWrap>
+              </Container>
+              <Container>
+                <InputWrap>
+                  <StyledInput
+                    value={make}
+                    placeholder="Make"
+                    name="make"
+                    onChange={(e) => {
+                      setMake(e.target.value);
+                    }}
+                    required
+                  />
+                </InputWrap>
+              </Container>
+              <Container>
+                <InputWrap>
+                  <StyledInput
+                    placeholder="Colour"
+                    value={colour}
+                    name="colour"
+                    onChange={(e) => {
+                      setColour(e.target.value);
+                    }}
+                    required
+                  />
+                </InputWrap>
+              </Container>
+              <Title>Select date</Title>
+              <ConfigProvider
+                theme={{
+                  components: {
+                    DatePicker: {
+                      colorLink: "#FECB21",
+                      colorLinkActive: "#000",
+                      colorPrimary: "#FECB21",
+                      colorLinkHover: "#FECB21",
+                      colorPrimary: "#FECB21",
+                      colorPrimaryHover: "#FECB21",
+                    },
                   },
-                },
-              }}
-            >
-              <Space direction="vertical" size={12}>
-                <DatePicker
-                  showTime={{
-                    format: "HH:mm",
-                  }}
-                  format="YYYY-MM-DD HH:mm"
-                  onOk={(value) => {
-                    setStartDate(value);
-                  }}
-                  value={startDate}
-                />
-              </Space>
-            </ConfigProvider>
-            <Button type="submit">Add Visitor</Button>
-            <Error style={{ marginTop: "10px" }}>{error}</Error>
-          </Form>
-        )}
-        <Visitors
-          visitors={visitors}
-          isAllVisitors={isAllVisitors}
-          setIsAllVisitors={setIsAllVisitors}
-          isFavoriteAdded={isFavoriteAdded}
-          setIsFavoriteAdded={setIsFavoriteAdded}
-        />
-      </BottomWrap>
-    </Wrap>
+                }}
+              >
+                <Space direction="vertical" size={12}>
+                  <DatePicker
+                    showTime={{
+                      format: "HH:mm",
+                    }}
+                    format="YYYY-MM-DD HH:mm"
+                    onOk={(value) => {
+                      setStartDate(value);
+                    }}
+                    value={startDate}
+                  />
+                </Space>
+              </ConfigProvider>
+              <Button type="submit">Add Visitor</Button>
+              <Error style={{ marginTop: "10px" }}>{error}</Error>
+            </Form>
+          )}
+          <div>
+            <Title>{data.name}</Title>
+            <Status>{data.status}</Status>
+            <p>{data.numberOfRegistration}</p>
+          </div>
+          <Visitors
+            visitors={visitors}
+            isAllVisitors={isAllVisitors}
+            setIsAllVisitors={setIsAllVisitors}
+            isFavoriteAdded={isFavoriteAdded}
+            setIsFavoriteAdded={setIsFavoriteAdded}
+          />
+        </BottomWrap>
+      </Wrap>
+      )
+    </>
   );
 };

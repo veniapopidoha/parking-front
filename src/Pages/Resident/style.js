@@ -70,3 +70,28 @@ export const BottomWrap = styled.div`
     flex-direction: column;
   }
 `;
+
+export const Status = styled.p`
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+
+  &:after {
+    position: absolute;
+    content: "";
+    width: 35px;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
+`;
