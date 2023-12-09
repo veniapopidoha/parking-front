@@ -5,7 +5,15 @@ import { ConfigProvider, DatePicker, Space } from "antd";
 import { backLink } from "../../App";
 import { InputWrap } from "../../Components/Input/style";
 import { Container, Error } from "../Registration/style";
-import { Form, Wrap, StyledInput, Title, TopWrap, BottomWrap } from "./style";
+import {
+  Form,
+  Wrap,
+  StyledInput,
+  Title,
+  TopWrap,
+  BottomWrap,
+  Status,
+} from "./style";
 import { Button } from "../SignIn/style";
 import { Visitors } from "./Components/Visitors";
 import { FavoriteComboBox } from "./Components/FavoriteComboBox";
@@ -204,6 +212,11 @@ export const Resident = () => {
               <Error style={{ marginTop: "10px" }}>{error}</Error>
             </Form>
           )}
+          <div>
+            <Title>{data.name}</Title>
+            <Status>{data.status}</Status>
+            <p>{data.numberOfRegistration}</p>
+          </div>
           <Visitors
             visitors={visitors}
             isAllVisitors={isAllVisitors}
