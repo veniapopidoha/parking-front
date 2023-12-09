@@ -213,9 +213,9 @@ export const Resident = () => {
             </Form>
           )}
           <div>
-            <Title>{data.name}</Title>
+            {/* <Title>{data.name}</Title>
             <Status>{data.status}</Status>
-            <p>{data.numberOfRegistration}</p>
+            <p>number of Registration: {data.numberOfRegistration}</p> */}
           </div>
           <Visitors
             visitors={visitors}
