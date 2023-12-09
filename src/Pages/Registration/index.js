@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { SignIn } from "../SignIn";
 import { useDispatch, useSelector } from "react-redux";
-import { backLink } from "../../App";
+import { backLink, frontLink } from "../../App";
 
 export const Registration = (props) => {
   const dispatch = useDispatch();
@@ -121,7 +121,6 @@ export const Registration = (props) => {
         buildingName: userData.buildingName,
       })
       .then(() => {
-        window.location.replace("http://localhost:3000/");
         dispatch({ type: "AUTH", payload: true });
         dispatch({
           type: "ADD_USER_DATA",
