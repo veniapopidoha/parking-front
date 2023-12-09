@@ -7,6 +7,7 @@ import { AddVisitor } from "../AddVisitor";
 import { ClientInfo } from "../ClientInfo";
 import { Wrap, Container, WrapContent, Image } from "./style";
 import bgImg from "../../../../images/bg4.png";
+import { Offenders } from "../../../../Components/Offenders";
 
 export const ClientMain = ({
   building,
@@ -22,6 +23,7 @@ export const ClientMain = ({
           {clientPage === "visitor" && <AddVisitor />}
           {clientPage === "resident" && <AddResident />}
           {clientPage === "cars" && <Cars building={building} />}
+          {clientPage === "offenders" && <Offenders building={building} />}
           {clientPage === "residents" && (
             <Residents
               building={building}
