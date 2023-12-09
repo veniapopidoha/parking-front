@@ -134,6 +134,7 @@ export const Registration = (props) => {
             numberOfRegistration: userData.numberOfRegistration,
           },
         });
+        window.location.replace('/')
       })
       .catch((error) => {
         console.log(error);

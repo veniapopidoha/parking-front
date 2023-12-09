@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import {
   DropDown,
   Instructions,
@@ -8,27 +8,27 @@ import {
   InstructionsText,
   TextArea,
   Button,
-} from "./style";
-import Pencil from "../../../../images/pencil.svg";
-import bgImg from "../../../../images/bg4.png";
-import { Checkbox } from "./Components/Checkbox";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { backLink } from "../../../../App";
+} from './style';
+import Pencil from '../../../../images/pencil.svg';
+import bgImg from '../../../../images/bg4.png';
+import { Checkbox } from './Components/Checkbox';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { backLink } from '../../../../App';
 
 export const EditUser = ({ building }) => {
   const user = useSelector((state) => state);
   const [isToEdit, setIsToEdit] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [isSubmited, setIsSubmited] = useState(false);
 
   useEffect(() => {
-    if (value !== "") {
-      localStorage.setItem("instructions", value);
+    if (value !== '') {
+      localStorage.setItem('instructions', value);
       axios
         .patch(`${backLink}/building-instructions`, {
           buildingName: building.name,
-          instructions: localStorage.getItem("instructions") || value,
+          instructions: localStorage.getItem('instructions') || value,
         })
         .then((res) => setValue(res.data.instructions));
     }
@@ -37,16 +37,16 @@ export const EditUser = ({ building }) => {
   return (
     <>
       <div>
-        {user.status === "manager" && (
+        {user.status === 'manager' && (
           <DropDown>
             <Checkbox
-              text={"See reports"}
-              value={"reports"}
+              text={'See reports'}
+              value={'reports'}
               building={building}
             />
             <Checkbox
-              text={"See patrol reports"}
-              value={"patrols"}
+              text={'See patrol reports'}
+              value={'patrols'}
               building={building}
             />
           </DropDown>
@@ -54,8 +54,8 @@ export const EditUser = ({ building }) => {
         <Instructions>
           <InstructionsWrap>
             <InstructionsText>Special instructions </InstructionsText>
-            {user.status == "manager" ||
-              (user.status == "client" && (
+            {user.status == 'manager' ||
+              (user.status == 'client' && (
                 <PencilIcon
                   src={Pencil}
                   onClick={() => setIsToEdit(!isToEdit)}
@@ -75,13 +75,13 @@ export const EditUser = ({ building }) => {
               </Button>
             </>
           ) : (
-            <InstructionsText style={{ lineHeight: "24px" }}>
+            <InstructionsText style={{ lineHeight: '24px' }}>
               {value || building.instructions}
             </InstructionsText>
           )}
         </Instructions>
       </div>
-      <Image src={bgImg} alt="bg" />
+      <Image src={bgImg} alt='bg' />
     </>
   );
 };
