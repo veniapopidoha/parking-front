@@ -126,7 +126,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           onChange={(e) => setVisitorsPerMonth(e.target.value)}
         />
         <Input
-          placeholder="How long? ( 3 - if once in three day)"
+          placeholder="How often? ( 3 - if once in three day)"
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
         />
