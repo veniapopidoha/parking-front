@@ -21,6 +21,10 @@ export const Title = styled.h1`
   line-height: 24px; /* 53.333% */
   letter-spacing: -0.675px;
   margin-bottom: 30px;
+
+  @media only screen and (max-width: 480px) {
+    font-size: 36px;
+  }
 `;
 
 export const Form = styled.form`
@@ -57,6 +61,7 @@ export const Button = styled.button`
 
   @media only screen and (max-width: 480px) {
     padding: 15px 30px;
+    font-size: 15px;
   }
 `;
 
@@ -71,4 +76,5 @@ export const Error = styled.h3`
 
 export const Container = styled.div`
   margin-bottom: 15px;
+  width: 100%;
 `;

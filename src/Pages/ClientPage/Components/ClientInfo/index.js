@@ -8,7 +8,7 @@ import {
   Wrap,
 } from "./style";
 import { EditUser } from "../../../ManagerPage/Components/EditUser";
-import { TopWrap } from "../../../Resident/style";
+import { EditName } from "../../../../Components/EditName";
 
 export const ClientInfo = ({ building }) => {
   const user = useSelector((state) => state);
@@ -16,7 +16,7 @@ export const ClientInfo = ({ building }) => {
     <>
       <Wrap>
         <div style={{ marginBottom: "20px" }}>
-          <Title>{user.name}</Title>
+          <EditName />
           <Status>{user.status}</Status>
           <EditUser building={building} />
         </div>

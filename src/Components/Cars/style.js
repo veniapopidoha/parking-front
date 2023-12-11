@@ -33,7 +33,7 @@ export const TopWrap = styled.div`
 
 export const Table = styled.table`
   width: 100%;
-  min-width: 1000px;
+  min-width: 1200px;
 
   a {
     text-decoration: none;

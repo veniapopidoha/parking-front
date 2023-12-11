@@ -88,6 +88,18 @@ const ManagerTabs = ({
       </Button>
       <Button
         onClick={() => {
+          setManagerPage("visitor");
+        }}
+      >
+        Add Visitor
+        <img
+          src={Pencil}
+          alt="icon"
+          style={{ width: "34px", height: "34px" }}
+        />
+      </Button>
+      <Button
+        onClick={() => {
           setManagerPage("building");
         }}
       >
@@ -98,6 +110,7 @@ const ManagerTabs = ({
       <Button onClick={() => setManagerPage("patrols")}>
         Patrols completed
       </Button>
+      <Button onClick={() => setManagerPage("allPatrols")}>All Patrols</Button>
       <Button onClick={() => setManagerPage("reports")}>Reports</Button>
     </Wrap>
   );

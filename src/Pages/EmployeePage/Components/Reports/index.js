@@ -14,6 +14,7 @@ import {
 } from "../../../../Components/Cars/style";
 import { useSelector } from "react-redux";
 import { ConfigProvider, Space, DatePicker } from "antd";
+import { formatDate } from "../../../../utils/formatDate";
 
 export const ReportsPage = () => {
   const [reports, setReports] = useState([]);
@@ -103,9 +104,12 @@ export const ReportsPage = () => {
         <thead>
           <TableHeader>
             <TableHead width="10%">Plate</TableHead>
-            <TableHead width="25%">Reason</TableHead>
-            <TableHead width="45%">Notes</TableHead>
-            <TableHead width="20%">Attachment</TableHead>
+            <TableHead width="16%">Reason</TableHead>
+            <TableHead width="20%">Date</TableHead>
+            <TableHead width="20%">Name</TableHead>
+            <TableHead width="15%">Status</TableHead>
+            <TableHead width="20%">Notes</TableHead>
+            <TableHead width="14%">Attachment</TableHead>
           </TableHeader>
         </thead>
         {!loading ? (
@@ -113,9 +117,12 @@ export const ReportsPage = () => {
             {reportsToDisplay.map((item, index) => (
               <TableRow key={index}>
                 <TableData width="10%">{item.plate}</TableData>
-                <TableData width="25%">{item.reason}</TableData>
-                <TableData width="45%">{item.notes}</TableData>
-                <TableData width="20%">
+                <TableData width="16%">{item.reason}</TableData>
+                <TableData width="20%">{formatDate(item.timeStamp)}</TableData>
+                <TableData width="20%">{item.name}</TableData>
+                <TableData width="15%">{item.status}</TableData>
+                <TableData width="20%">{item.notes}</TableData>
+                <TableData width="14%">
                   {item.imageUrls.map((link, i) => (
                     <a
                       key={i}

@@ -33,23 +33,25 @@ export const Cars = ({ building }) => {
   return (
     <>
       <Wrap>
-        <Title>Car List</Title>
+        <Title>Visitor List</Title>
         <Table>
           <thead>
             <TableHeader>
-              <TableHead width="25%">License plate</TableHead>
-              <TableHead width="25%">Make</TableHead>
-              <TableHead width="25%">Start Date</TableHead>
-              <TableHead width="25%">End Date</TableHead>
+              <TableHead width="20%">License plate</TableHead>
+              <TableHead width="20%">Make</TableHead>
+              <TableHead width="20%">Unit</TableHead>
+              <TableHead width="20%">Start Date</TableHead>
+              <TableHead width="20%">End Date</TableHead>
             </TableHeader>
           </thead>
           <TableBody>
             {filteredCars.map((car) => (
               <TableRow key={`car.plate ${Math.random() * 999}`}>
-                <TableData width="25%">{car.plate}</TableData>
-                <TableDataS width="25%">{car.make}</TableDataS>
-                <TableDataS width="25%">{formatDate(car.startDate)}</TableDataS>
-                <TableDataS width="25%">{formatDate(car.endDate)}</TableDataS>
+                <TableData width="20%">{car.plate}</TableData>
+                <TableDataS width="20%">{car.make}</TableDataS>
+                <TableDataS width="20%">{car.residentUnit}</TableDataS>
+                <TableDataS width="20%">{formatDate(car.startDate)}</TableDataS>
+                <TableDataS width="20%">{formatDate(car.endDate)}</TableDataS>
               </TableRow>
             ))}
           </TableBody>

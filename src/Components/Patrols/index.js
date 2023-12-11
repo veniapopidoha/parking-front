@@ -15,7 +15,7 @@ import bgImg from "../../images/bg4.png";
 import { formatDate } from "../../utils/formatDate";
 import { ConfigProvider, DatePicker, Space } from "antd";
 
-export const Patrols = ({ building }) => {
+export const Patrols = ({ building, isAllPatrols }) => {
   const [filteredPatrols, setFilteredPatrols] = useState([]);
   const [dateRange, setDateRange] = useState([]);
   const { RangePicker } = DatePicker;
@@ -59,7 +59,7 @@ export const Patrols = ({ building }) => {
     <>
       <Wrap>
         <TopWrap>
-          <Title>Patrols completed</Title>
+          <Title>{isAllPatrols ? building.name : "Patrols completed"}</Title>
           <ConfigProvider
             theme={{
               components: {

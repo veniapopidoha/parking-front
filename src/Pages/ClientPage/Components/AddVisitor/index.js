@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { backLink } from "../../../../App";
 import axios from "axios";
@@ -9,7 +9,7 @@ import { Container, Error } from "../../../Registration/style";
 import { InputWrap } from "../../../../Components/Input/style";
 import bgImg from "../../../../images/bg2.png";
 
-export const AddVisitor = () => {
+export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   const [plate, setPlate] = useState("");
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
@@ -18,12 +18,13 @@ export const AddVisitor = () => {
   const [error, setErorr] = useState("");
   const { RangePicker } = DatePicker;
 
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.id);
   const data = useSelector((state) => state);
 
   const Submit = (e) => {
     e.preventDefault();
-    if (setStartDate && endDate) {
+    if (startDate && endDate) {
       axios
         .post(`${backLink}/add-building-visitor`, {
           plate,
@@ -40,6 +41,18 @@ export const AddVisitor = () => {
           setPlate("");
           setMake("");
           setErorr("");
+          setIsSubmitted(!isSubmitted);
+          dispatch({
+            type: "ADD_VISITOR_DATA",
+            payload: {
+              plate,
+              colour,
+              make,
+              startDate,
+              isFavorite: false,
+              residentId: id,
+            },
+          });
         })
         .catch((error) => {
           setErorr(error.response.data.message);

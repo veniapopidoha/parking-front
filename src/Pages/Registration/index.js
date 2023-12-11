@@ -27,7 +27,6 @@ export const Registration = (props) => {
   const [errors, setErrors] = useState({
     nameError: "Please fill your name",
     passwordError: "Please fill your password",
-    unitError: "Please fill your unit",
   });
   const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
@@ -40,14 +39,15 @@ export const Registration = (props) => {
       case "name":
         setNameEmpty(true);
         break;
-      case "unit":
-        setUnitEmpty(true);
-        break;
     }
   };
 
   useEffect(() => {
-    if (errors.passwordError || errors.nameError || errors.unitError) {
+    if (
+      userData.status === "resident"
+        ? errors.passwordError
+        : errors.passwordError || errors.nameError
+    ) {
       setFormValid(false);
     } else {
       setFormValid(true);
@@ -65,16 +65,16 @@ export const Registration = (props) => {
     setName(temp);
   };
 
-  const handleUnit = (e) => {
-    let temp = e.target.value.replace(/[A-z]/g, "");
+  // const handleUnit = (e) => {
+  //   let temp = e.target.value.replace(/[A-z]/g, "");
 
-    if (temp === "") {
-      setErrors({ ...errors, unitError: "Please fill your name" });
-    } else {
-      setErrors({ ...errors, unitError: "" });
-    }
-    setUnit(temp);
-  };
+  //   if (temp === "") {
+  //     setErrors({ ...errors, unitError: "Please fill your name" });
+  //   } else {
+  //     setErrors({ ...errors, unitError: "" });
+  //   }
+  //   setUnit(temp);
+  // };
 
   const handlePassword = (e) => {
     let temp = e.target.value;
@@ -113,8 +113,7 @@ export const Registration = (props) => {
     e.preventDefault();
     axios
       .put(`${backLink}/add-user-info/${props.userId}`, {
-        name: name,
-        unit: unit,
+        name: name || userData.name,
         password: password,
         email: userData.email,
         status: userData.status,
@@ -125,8 +124,8 @@ export const Registration = (props) => {
         dispatch({
           type: "ADD_USER_DATA",
           payload: {
-            name,
-            unit,
+            name: name || userData.name,
+            unit: userData.unit,
             email: userData.email,
             id: userData._id,
             status: userData.status,
@@ -157,46 +156,50 @@ export const Registration = (props) => {
     <>
       {loading ? (
         <>loading...</>
-      ) : userData?.name != undefined ? (
+      ) : userData?.password != undefined ? (
         <SignIn />
       ) : (
         <Wrap>
           <Title>Registration</Title>
           <Form onSubmit={setUser}>
-            <Container>
-              <InputWrap>
-                <IconContainer>
-                  <Icon src={user} />
-                </IconContainer>
-                <StyledInput
-                  onBlur={(e) => blurHandler(e)}
-                  onChange={handleName}
-                  placeholder="Name"
-                  name="name"
-                  value={name}
-                />
-              </InputWrap>
-              {nameEmpty && errors.nameError && (
-                <Error>{errors.nameError}</Error>
-              )}
-            </Container>
-            <Container>
-              <InputWrap>
-                <IconContainer>
-                  <Icon src={home} />
-                </IconContainer>
-                <StyledInput
-                  onBlur={(e) => blurHandler(e)}
-                  onChange={handleUnit}
-                  placeholder="Unit"
-                  name="unit"
-                  value={unit}
-                />
-              </InputWrap>
-              {unitEmpty && errors.unitError && (
-                <Error>{errors.unitError}</Error>
-              )}
-            </Container>
+            {userData.status !== "resident" && (
+              <Container>
+                <InputWrap>
+                  <IconContainer>
+                    <Icon src={user} />
+                  </IconContainer>
+                  <StyledInput
+                    onBlur={(e) => blurHandler(e)}
+                    onChange={handleName}
+                    placeholder="Name"
+                    name="name"
+                    value={name}
+                  />
+                </InputWrap>
+                {nameEmpty && errors.nameError && (
+                  <Error>{errors.nameError}</Error>
+                )}
+              </Container>
+            )}
+            {/* {userData.status !== "resident" && (
+              <Container>
+                <InputWrap>
+                  <IconContainer>
+                    <Icon src={home} />
+                  </IconContainer>
+                  <StyledInput
+                    onBlur={(e) => blurHandler(e)}
+                    onChange={handleUnit}
+                    placeholder="Unit"
+                    name="unit"
+                    value={unit}
+                  />
+                </InputWrap>
+                {unitEmpty && errors.unitError && (
+                  <Error>{errors.unitError}</Error>
+                )}
+              </Container>
+            )} */}
             <Container>
               <InputWrap>
                 <IconContainer>

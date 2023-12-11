@@ -7,12 +7,14 @@ import axios from "axios";
 import { Image } from "../../../../Components/Cars/style";
 import bgImg from "../../../../images/bg4.png";
 import { useSelector } from "react-redux";
+import { Checkbox, CheckboxWrap } from "../../../AddUser/style";
 
 export const AddReport = () => {
   const [plate, setPlate] = useState("");
   const [reason, setReason] = useState("");
   const [notes, setNotes] = useState("");
   const [attachment, setAttachment] = useState(null);
+  const [status, setStatus] = useState("");
   const inputFile = useRef(null);
   const data = useSelector((state) => state);
 
@@ -28,6 +30,8 @@ export const AddReport = () => {
     formData.append("plate", plate);
     formData.append("notes", notes);
     formData.append("buildingName", data.buildingName);
+    formData.append("name", data.name);
+    formData.append("status", status);
 
     try {
       const response = await axios.post(`${backLink}/add-report`, formData, {
@@ -43,13 +47,47 @@ export const AddReport = () => {
     setNotes("");
     setPlate("");
     setReason("");
+    setStatus("");
+  };
+
+  const setChecked = (e) => {
+    setStatus(e.target.value);
   };
 
   return (
     <>
-      <Wrap>
+      <Wrap style={{ justifyContent: "normal" }}>
         <Title>Report</Title>
         <Form onSubmit={handleFormSubmit}>
+          <CheckboxWrap>
+            <label>
+              <Checkbox
+                type="radio"
+                name="status"
+                onChange={setChecked}
+                value="tiketed"
+              />
+              Tiketed
+            </label>
+            <label>
+              <Checkbox
+                type="radio"
+                name="status"
+                onChange={setChecked}
+                value="warned"
+              />
+              Warned
+            </label>
+            <label>
+              <Checkbox
+                type="radio"
+                name="status"
+                onChange={setChecked}
+                value="towed"
+              />
+              Towed
+            </label>
+          </CheckboxWrap>
           <Container>
             <InputWrap>
               <StyledInput
@@ -106,7 +144,6 @@ export const AddReport = () => {
             </InputWrap>
             {/* {nameEmpty && errors.nameError && <Error>{errors.nameError}</Error>} */}
           </Container>
-
           <Button type="submit">Add Report</Button>
         </Form>
       </Wrap>

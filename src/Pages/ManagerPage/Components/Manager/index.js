@@ -8,6 +8,8 @@ import { AddObject } from "./Components/AddObject/index";
 import { Residents } from "../../../../Components/Residents";
 import { ReportsPage } from "../../../EmployeePage/Components/Reports";
 import { AddUser } from "../../../AddUser";
+import { AddVisitor } from "../../../ClientPage/Components/AddVisitor";
+import { EditName } from "../../../../Components/EditName";
 
 export const ManagerMain = ({
   setIsAddBuild,
@@ -25,7 +27,7 @@ export const ManagerMain = ({
         <WrapContent>
           <Leftside>
             <TextWrap>
-              <Title>{user?.name}</Title>
+              <EditName />
               <Status>{user?.status}</Status>
             </TextWrap>
             <EditUser building={selectedBuilding} />
@@ -33,6 +35,7 @@ export const ManagerMain = ({
           {selectedBuilding.name && (
             <>
               {managerPage === "user" && <AddUser />}
+              {managerPage === "visitor" && <AddVisitor />}
               {managerPage === "cars" && <Cars building={selectedBuilding} />}
               {managerPage === "residents" && (
                 <Residents
@@ -43,6 +46,9 @@ export const ManagerMain = ({
               )}
               {managerPage === "patrols" && (
                 <Patrols building={selectedBuilding} />
+              )}
+              {managerPage === "allPatrols" && (
+                <Patrols building={selectedBuilding} isAllPatrols={true} />
               )}
               {managerPage === "reports" && <ReportsPage />}
             </>

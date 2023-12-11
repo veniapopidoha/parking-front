@@ -17,6 +17,7 @@ export const AddObject = ({ setIsAddBuild }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [residentInstructions, setResidentInstructions] = useState("");
   const [visitorsPerMonth, setVisitorsPerMonth] = useState("");
   const [duration, setDuration] = useState("");
   const [limitType, setLimitType] = useState("");
@@ -67,6 +68,11 @@ export const AddObject = ({ setIsAddBuild }) => {
           placeholder="Notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
+        />
+        <Input
+          placeholder="Resident instructions"
+          value={residentInstructions}
+          onChange={(e) => setResidentInstructions(e.target.value)}
         />
         <LimitWrap>
           <Label htmlFor="calendar" style={{ margin: 0 }}>

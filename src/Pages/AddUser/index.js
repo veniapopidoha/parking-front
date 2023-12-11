@@ -7,6 +7,7 @@ import {
 import { Checkbox, CheckboxWrap, ComboBox, ComboBoxText, Wrap } from "./style";
 import mail from "../../images/mail.svg";
 import home from "../../images/home.png";
+import user from "../../images/user.svg";
 import { Button, Container, Error } from "../Registration/style";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
@@ -17,6 +18,8 @@ export const AddUser = () => {
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [building, setBuilding] = useState("");
+  const [name, setName] = useState("");
+  const [unit, setUnit] = useState("");
   const [isBuildingsOpen, setIsBuildingsOpen] = useState(false);
   const [buildings, setBuildings] = useState([]);
   const [emailEmpty, setEmailEmpty] = useState(false);
@@ -104,6 +107,8 @@ export const AddUser = () => {
         email,
         status,
         buildingName: building,
+        name,
+        unit,
       })
       .then(() => {
         dispatch({
@@ -112,6 +117,8 @@ export const AddUser = () => {
         });
         setEmail("");
         setBuilding("");
+        setUnit("");
+        setName("");
         setError("");
       })
       .catch((error) => {
@@ -173,6 +180,38 @@ export const AddUser = () => {
           />
         </InputWrap>
         {emailEmpty && errors.emailError && <Error>{errors.emailError}</Error>}
+        <InputWrap>
+          <IconContainer>
+            <Icon src={home} />
+          </IconContainer>
+          <StyledInput
+            onChange={(e) => {
+              setUnit(e.target.value);
+              setIsBuildingsOpen(false);
+            }}
+            placeholder="Unit"
+            name="unit"
+            value={unit}
+          />
+        </InputWrap>
+        {status === "resident" && (
+          <>
+            <InputWrap style={{ minWidth: "66px" }}>
+              <IconContainer>
+                <Icon src={user} />
+              </IconContainer>
+              <StyledInput
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setIsBuildingsOpen(false);
+                }}
+                placeholder="Name"
+                name="name"
+                value={name}
+              />
+            </InputWrap>
+          </>
+        )}
         {status === "resident" || status === "client" ? (
           <>
             <InputWrap>

@@ -67,6 +67,18 @@ const EmployeeTabs = ({
         isAddBuild={isAddBuild}
         setIsAddBuild={setIsAddBuild}
       />
+      <Button
+        onClick={() => {
+          setEmployeePage("visitor");
+        }}
+      >
+        Add Visitor
+        <img
+          src={Pencil}
+          alt="icon"
+          style={{ width: "34px", height: "34px" }}
+        />
+      </Button>
       <Button onClick={() => setEmployeePage("cars")}>Car list</Button>
       <Button onClick={() => setEmployeePage("reports")}>Reports</Button>
       <Button onClick={() => setEmployeePage("report")}>Add Report</Button>

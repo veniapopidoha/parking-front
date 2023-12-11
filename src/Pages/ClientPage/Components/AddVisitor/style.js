@@ -27,6 +27,14 @@ export const Form = styled.form`
   align-items: start;
   gap: 26px;
   justify-content: center;
+
+  @media only screen and (max-width: 1200px) {
+    margin-bottom: 30px;
+  }
+
+  @media only screen and (max-width: 360px) {
+    flex-direction: column;
+  }
 `;
 
 export const Title = styled.h2`

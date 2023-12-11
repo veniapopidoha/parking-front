@@ -16,6 +16,18 @@ export const Form = styled.form`
   border: 1px solid #000;
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   border-radius: 20px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 22px 44px 20px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    padding: 16px 32px 14px;
+  }
+
+  @media only screen and (max-width: 380px) {
+    padding: 16px 20px 14px;
+  }
 `;
 
 export const Input = styled.input`
@@ -32,6 +44,10 @@ export const Input = styled.input`
   line-height: 24px;
   letter-spacing: -0.225px;
   font-family: Montserrat;
+
+  @media only screen and (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 export const RadioButton = styled.input`
@@ -49,6 +65,7 @@ export const LimitWrap = styled.div`
 
 export const Textarea = styled.textarea`
   padding: 24px 24px 210px;
+  max-width: 360px;
   width: 100%;
   resize: none;
   border-radius: 30px;
@@ -61,6 +78,10 @@ export const Textarea = styled.textarea`
   letter-spacing: -0.225px;
   font-family: Montserrat;
   margin-bottom: 27px;
+
+  @media only screen and (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 export const Label = styled.label`
@@ -90,6 +111,11 @@ export const FormButton = styled.button`
   letter-spacing: -0.27px;
   width: 100%;
   cursor: pointer;
+
+  @media only screen and (max-width: 480px) {
+    padding: 16px 60px;
+    font-size: 16px;
+  }
 `;
 
 export const ErrorText = styled.p`

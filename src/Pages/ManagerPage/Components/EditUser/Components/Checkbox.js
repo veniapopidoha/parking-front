@@ -11,8 +11,15 @@ export const Checkbox = ({ text, value, building }) => {
       setChecked(building.reportsAllowed);
     } else if (value === "patrols") {
       setChecked(building.patrolsAllowed);
+    } else {
+      setChecked(building.instructionsAllowed);
     }
-  }, [building.reportsAllowed, building.patrolsAllowed, value]);
+  }, [
+    building.reportsAllowed,
+    building.patrolsAllowed,
+    building.instructionsAllowed,
+    value,
+  ]);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
@@ -22,12 +29,18 @@ export const Checkbox = ({ text, value, building }) => {
           buildingName: building.name,
         })
         .then((res) => setChecked(res.data.patrolsAllowed));
-    } else {
+    } else if (value === "reports") {
       axios
         .patch(`${backLink}/building-reports`, {
           buildingName: building.name,
         })
         .then((res) => setChecked(res.data.reportsAllowed));
+    } else {
+      axios
+        .patch(`${backLink}/building-edit-instructions`, {
+          buildingName: building.name,
+        })
+        .then((res) => setChecked(res.data.instructionsAllowed));
     }
   };
 

@@ -6,6 +6,8 @@ import { AddPatrol } from "../AddPatrol";
 import { AddReport } from "../AddReport";
 import { EditUser } from "../../../ManagerPage/Components/EditUser";
 import { Container } from "../../../ManagerPage/style";
+import { AddVisitor } from "../../../ClientPage/Components/AddVisitor";
+import { EditName } from "../../../../Components/EditName";
 
 export const EmployeeMain = ({ employeePage, selectedBuilding }) => {
   const user = useSelector((state) => state);
@@ -16,13 +18,14 @@ export const EmployeeMain = ({ employeePage, selectedBuilding }) => {
         <WrapContent>
           <Leftside>
             <TextWrap>
-              <Title>{user?.name}</Title>
+              <EditName />
               <Status>{user?.status}</Status>
             </TextWrap>
             <EditUser building={selectedBuilding} />
           </Leftside>
           {selectedBuilding.name && (
             <>
+              {employeePage === "visitor" && <AddVisitor />}
               {employeePage === "cars" && <Cars building={selectedBuilding} />}
               {employeePage === "report" && <AddReport />}
               {employeePage === "reports" && <ReportsPage />}

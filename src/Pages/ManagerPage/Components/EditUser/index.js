@@ -37,7 +37,7 @@ export const EditUser = ({ building }) => {
   return (
     <>
       <div>
-        {user.status === "manager" && (
+        {user.status === "manager" && building.name && (
           <DropDown>
             <Checkbox
               text={"See reports"}
@@ -49,15 +49,24 @@ export const EditUser = ({ building }) => {
               value={"patrols"}
               building={building}
             />
+            <Checkbox
+              text={"Edit instructions"}
+              value={"edit"}
+              building={building}
+            />
           </DropDown>
         )}
         <Instructions>
           <InstructionsWrap>
-            <InstructionsText>Special instructions </InstructionsText>
+            <InstructionsText>
+              {user.status === "employee"
+                ? "Employee Instructions"
+                : "Special instructions"}
+            </InstructionsText>
             {user.status === "manager" && (
               <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
             )}
-            {user.status === "client" && (
+            {user.status === "client" && building.instructionsAllowed && (
               <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
             )}
           </InstructionsWrap>
@@ -75,7 +84,9 @@ export const EditUser = ({ building }) => {
             </>
           ) : (
             <InstructionsText style={{ lineHeight: "24px" }}>
-              {value || building.instructions}
+              {user.status === "employee"
+                ? building.residentInstructions
+                : value || building.instructions}
             </InstructionsText>
           )}
         </Instructions>

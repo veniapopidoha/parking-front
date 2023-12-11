@@ -25,11 +25,18 @@ export const Form = styled.form`
 `;
 
 export const Title = styled.h2`
-  color: #000;
-  font-family: "Jost", sans-serif;
-  font-size: 20px;
+  color: #616467;
+  font-family: Montserrat;
+  font-size: 35px;
   font-style: normal;
   font-weight: 600;
+  line-height: 35px;
+  letter-spacing: -0.525px;
+  word-wrap: break-word;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -64,10 +71,41 @@ export const BottomWrap = styled.div`
   align-items: start;
   justify-content: center;
   width: 100%;
-  gap: 80px;
 
   @media only screen and (max-width: 1200px) {
     flex-direction: column;
+  }
+`;
+
+export const Leftside = styled.div`
+  max-width: 300px;
+  width: 100%;
+  margin-right: 50px;
+
+  @media only screen and (max-width: 1200px) {
+    margin-bottom: 30px;
+    order: 2;
+  }
+
+  @media only screen and (max-width: 768px) {
+    max-width: 400px;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    max-width: 300px;
+  }
+`;
+
+export const TextWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-bottom: 40px;
+
+  @media only screen and (max-width: 1200px) {
+    gap: 16px;
   }
 `;
 
@@ -79,7 +117,6 @@ export const Status = styled.p`
   letter-spacing: -0.36px;
   position: relative;
   padding-bottom: 15px;
-  margin-bottom: 25px;
 
   &:after {
     position: absolute;

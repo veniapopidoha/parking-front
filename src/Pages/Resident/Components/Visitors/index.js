@@ -82,18 +82,22 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
         <Table>
           <thead>
             <TableHeader>
-              <TableHead width="33%">License plate</TableHead>
-              <TableHead width="33%">Model</TableHead>
-              <TableHead width="33%">Start Date</TableHead>
+              <TableHead width="25%">License plate</TableHead>
+              <TableHead width="25%">Model</TableHead>
+              <TableHead width="25%">Start Date</TableHead>
+              <TableHead width="25%">End Date</TableHead>
             </TableHeader>
           </thead>
           <TableBody>
             {dataToDisplay.map((visitor) => (
               <TableRow key={visitor.plate}>
-                <TableData width="33%">{visitor.plate}</TableData>
-                <TableDataS width="33%">{visitor.make}</TableDataS>
-                <TableDataS width="33%">
+                <TableData width="25%">{visitor.plate}</TableData>
+                <TableDataS width="25%">{visitor.make}</TableDataS>
+                <TableDataS width="25%">
                   {formatDate(visitor.startDate)}
+                </TableDataS>
+                <TableDataS width="25%">
+                  {formatDate(visitor.endDate)}
                 </TableDataS>
                 <Icon visitor={visitor} user={user} />
               </TableRow>

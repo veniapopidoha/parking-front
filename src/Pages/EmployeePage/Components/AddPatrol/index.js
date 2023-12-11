@@ -28,7 +28,13 @@ export const AddPatrol = () => {
 
   return (
     <>
-      <Wrap>
+      <Wrap
+        style={{
+          justifyContent: "normal",
+          height: "unset",
+          margin: "0 0 30px 0",
+        }}
+      >
         <Title>Patrol report</Title>
         <Form onSubmit={handleFormSubmit}>
           <Container>
@@ -44,6 +50,7 @@ export const AddPatrol = () => {
                       setDateRange(values);
                     }}
                     value={dateRange}
+                    size={2}
                   />
                 </Space>
               </ConfigProvider>

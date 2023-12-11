@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .ant-picker-datetime-panel {
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .ant-picker-range-wrapper {
+    min-width: none;
+  }
+
+  .ant-picker-dropdown {
+    position: absolute;
+    left: 0 !important;
+  }
+}

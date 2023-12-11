@@ -7,12 +7,17 @@ export const Wrap = styled.form`
   padding: 40px;
   filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.25));
   background-color: rgba(0, 0, 0, 0.2);
-  width: fit-content;
   border-radius: 30px;
   border: 1px solid #000;
 
   @media only screen and (max-width: 1200px) {
     margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    max-width: 400px;
+    width: 100%;
+    overflow-x: auto;
   }
 
   @media only screen and (max-width: 480px) {
@@ -36,13 +41,9 @@ export const CheckboxWrap = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
     gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-width: 380px;
     margin: 10px;
+    width: 100%;
   }
 `;
 
