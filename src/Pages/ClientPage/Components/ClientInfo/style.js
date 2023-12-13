@@ -96,3 +96,43 @@ export const DescriptionWrap = styled.div`
     max-width: 280px;
   }
 `;
+
+export const Label = styled.label`
+  color: #616467;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+`;
+
+export const StyledCheckbox = styled.div`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  background: ${(props) => (props.checked ? "#FECB21;" : "none")};
+  transition: all 150ms;
+`;
+
+export const Input = styled.input`
+  border: 0;
+  clip: rect(0 0 0 0);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+
+  width: 1px;
+  acity: 1;
+`;

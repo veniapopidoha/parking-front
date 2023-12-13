@@ -19,6 +19,7 @@ export const AddObject = ({ setIsAddBuild }) => {
   const [notes, setNotes] = useState("");
   const [residentInstructions, setResidentInstructions] = useState("");
   const [visitorsPerMonth, setVisitorsPerMonth] = useState("");
+  const [numberOfDays, setNumberOfDays] = useState("");
   const [duration, setDuration] = useState("");
   const [limitType, setLimitType] = useState("");
   const [limitPerUse, setLimitPerUse] = useState(false);
@@ -35,6 +36,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           instructions: notes,
           limitType,
           limitPerUse,
+          numberOfDays,
           visitorsPerMonth,
           duration,
         });
@@ -43,6 +45,8 @@ export const AddObject = ({ setIsAddBuild }) => {
         setName("");
         setNotes("");
         setVisitorsPerMonth("");
+        setResidentInstructions("");
+        setNumberOfDays("");
       } catch (error) {
         setError(error.response.data.message);
         console.log(error);
@@ -73,6 +77,11 @@ export const AddObject = ({ setIsAddBuild }) => {
           placeholder="Resident instructions"
           value={residentInstructions}
           onChange={(e) => setResidentInstructions(e.target.value)}
+        />
+        <Input
+          placeholder="Number of days"
+          value={numberOfDays}
+          onChange={(e) => setNumberOfDays(e.target.value)}
         />
         <LimitWrap>
           <Label htmlFor="calendar" style={{ margin: 0 }}>

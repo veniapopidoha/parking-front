@@ -24,15 +24,38 @@ export const Offenders = ({ building }) => {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
 
-    const filteredReports = reports.filter((report) => {
+    // Підрахунок кількості порушень для кожного порушника
+    const offendersCount = {};
+    const result = [];
+    reports.forEach((report) => {
       const reportDate = new Date(report.timeStamp);
       const reportYear = reportDate.getFullYear();
       const reportMonth = reportDate.getMonth() + 1;
 
-      return reportYear === currentYear && reportMonth === currentMonth;
+      if (reportYear === currentYear && reportMonth === currentMonth) {
+        const plate = report.plate;
+
+        if (offendersCount[plate]) {
+          offendersCount[plate]++;
+        } else {
+          offendersCount[plate] = 1;
+        }
+      }
     });
 
-    setRecentReports(filteredReports);
+    const filteredOffenders = reports.filter((report) => {
+      const plate = report.plate;
+      if (
+        offendersCount[plate] &&
+        offendersCount[plate] >= 3 &&
+        !result.includes(plate)
+      ) {
+        result.push(plate);
+        return true;
+      }
+    });
+
+    setRecentReports(filteredOffenders);
   }, [building.reports]);
 
   return (

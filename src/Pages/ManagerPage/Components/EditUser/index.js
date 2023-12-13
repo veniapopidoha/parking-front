@@ -19,11 +19,11 @@ import { backLink } from "../../../../App";
 export const EditUser = ({ building }) => {
   const user = useSelector((state) => state);
   const [isToEdit, setIsToEdit] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(localStorage.getItem("instructions"));
   const [isSubmited, setIsSubmited] = useState(false);
 
   useEffect(() => {
-    if (value !== "") {
+    if (value !== "" && value !== null && !!building.name !== false) {
       localStorage.setItem("instructions", value);
       axios
         .patch(`${backLink}/building-instructions`, {

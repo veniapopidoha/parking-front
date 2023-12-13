@@ -2,12 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { backLink } from "../../App";
-import { Wrap, TopWrap, BottomWrap, Status, TextWrap, Leftside } from "./style";
+import {
+  Wrap,
+  TopWrap,
+  BottomWrap,
+  Status,
+  TextWrap,
+  Leftside,
+  ResidentLeft,
+} from "./style";
 import { Button } from "../SignIn/style";
 import { Visitors } from "./Components/Visitors";
 import { FavoriteComboBox } from "./Components/FavoriteComboBox";
-import { AddVisitor } from "../ClientPage/Components/AddVisitor";
 import { EditName } from "../../Components/EditName";
+import { AddVisitor } from "./Components/AddVisitor";
 
 export const Resident = () => {
   const dispatch = useDispatch();
@@ -62,19 +70,21 @@ export const Resident = () => {
           <FavoriteComboBox setFavorite={setFavorite} visitors={visitors} />
         </TopWrap>
         <BottomWrap>
-          {show && (
-            <AddVisitor
-              setIsSubmitted={setIsSubmitted}
-              isSubmitted={isSubmitted}
-            />
-          )}
-          <Leftside>
-            <TextWrap>
-              <EditName />
-              <Status>{data.status}</Status>
-              <p>Number of registration:{data.numberOfRegistration}</p>
-            </TextWrap>
-          </Leftside>
+          <ResidentLeft>
+            {show && (
+              <AddVisitor
+                setIsSubmitted={setIsSubmitted}
+                isSubmitted={isSubmitted}
+              />
+            )}
+            <Leftside>
+              <TextWrap>
+                <EditName />
+                <Status>{data.status}</Status>
+                <p>Number of registration:{data.numberOfRegistration}</p>
+              </TextWrap>
+            </Leftside>
+          </ResidentLeft>
           <Visitors
             visitors={visitors}
             isAllVisitors={isAllVisitors}

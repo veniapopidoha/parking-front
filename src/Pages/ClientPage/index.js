@@ -54,7 +54,7 @@ export const ClientTabs = ({ setClientPage, building }) => {
           style={{ width: "34px", height: "34px" }}
         />
       </Button>
-      <Button onClick={() => setClientPage("cars")}>Car list</Button>
+      <Button onClick={() => setClientPage("cars")}>Visitor list</Button>
       <Button onClick={() => setClientPage("offenders")}>Offenders</Button>
       <Button onClick={() => setClientPage("residents")}>Resident list</Button>
       <Button

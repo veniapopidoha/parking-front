@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { AddUser } from "../AddUser";
 import { SignIn } from "../SignIn";
 import { Registration } from "../Registration";
 import { useSelector } from "react-redux";
@@ -24,4 +23,4 @@ export const MainPage = () => {
       )}
     </>
   );
-}
+};

@@ -105,7 +105,7 @@ const ManagerTabs = ({
       >
         Add Building
       </Button>
-      <Button onClick={() => setManagerPage("cars")}>Car list</Button>
+      <Button onClick={() => setManagerPage("cars")}>Visitor list</Button>
       <Button onClick={() => setManagerPage("residents")}>Resident list</Button>
       <Button onClick={() => setManagerPage("patrols")}>
         Patrols completed

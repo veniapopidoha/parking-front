@@ -119,3 +119,22 @@ export const Residents = ({ building, isDeleted, setIsDeleted }) => {
     </>
   );
 };
+
+const Input = ({ resident, setEditedData, setIsChangesMade, handleBlur }) => {
+  const [value, setValue] = useState("");
+
+  const handleEdit = (field, email, value) => {
+    setEditedData({ field, email, value });
+    setValue(value);
+    setIsChangesMade(true);
+  };
+
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => handleEdit("unit", resident.email, e.target.value)}
+      onBlur={() => handleBlur("name")}
+    />
+  );
+};

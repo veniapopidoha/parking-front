@@ -4,6 +4,7 @@ export const Wrap = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
 `;
 
 export const Form = styled.form`
@@ -23,6 +24,7 @@ export const Form = styled.form`
 
   @media only screen and (max-width: 480px) {
     padding: 16px 32px 14px;
+    width: 100%;
   }
 
   @media only screen and (max-width: 380px) {
@@ -32,9 +34,8 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   padding: 17px 18px 14px;
-  max-width: 360px;
-  width: 100%;
   border-radius: 30px;
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0);
   margin-bottom: 12px;
   background: #fff;
@@ -65,7 +66,6 @@ export const LimitWrap = styled.div`
 
 export const Textarea = styled.textarea`
   padding: 24px 24px 210px;
-  max-width: 360px;
   width: 100%;
   resize: none;
   border-radius: 30px;

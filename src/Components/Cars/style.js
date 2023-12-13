@@ -51,10 +51,8 @@ export const TableHeader = styled.tr`
   padding: 0 20px;
   gap: 25px;
   margin-bottom: 50px;
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-
+  overflow-x: auto;
+  min-width: 600px;
   @media only screen and (max-width: 1400px) {
     gap: 10px;
   }

@@ -72,7 +72,7 @@ export const BottomWrap = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1400px) {
     flex-direction: column;
   }
 `;
@@ -131,4 +131,12 @@ export const Status = styled.p`
   @media only screen and (max-width: 1200px) {
     font-size: 16px;
   }
+`;
+
+export const ResidentLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  max-width: 600px;
+  width: 100%;
 `;

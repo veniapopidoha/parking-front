@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { backLink } from "../../../../App";
 import axios from "axios";
 import { Form, Title, StyledInput, DateTitle, Wrap, Image } from "./style";
@@ -9,14 +9,14 @@ import { Container, Error } from "../../../Registration/style";
 import { InputWrap } from "../../../../Components/Input/style";
 import bgImg from "../../../../images/bg2.png";
 
-export const AddVisitor = () => {
+export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   const [plate, setPlate] = useState("");
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(null);
   const [error, setErorr] = useState("");
-  const { RangePicker } = DatePicker;
+  const [numberOfDaysOptions, setNumberOfDaysOptions] = useState([]);
+  const [selectedNumberOfDays, setSelectedNumberOfDays] = useState("");
 
   const dispatch = useDispatch();
   const id = useSelector((state) => state.id);
@@ -24,14 +24,18 @@ export const AddVisitor = () => {
 
   const Submit = (e) => {
     e.preventDefault();
-    if (startDate && endDate) {
+    if (startDate && selectedNumberOfDays) {
+      const calculatedEndDate = calculateEndDate(
+        startDate,
+        Number(selectedNumberOfDays)
+      );
       axios
         .post(`${backLink}/add-building-visitor`, {
           plate,
           colour,
           make,
-          startDate: startDate.$d,
-          endDate: endDate.$d,
+          startDate: startDate,
+          endDate: calculatedEndDate,
           residentId: id,
           buildingName: data.buildingName,
           email: data.email,
@@ -41,6 +45,8 @@ export const AddVisitor = () => {
           setPlate("");
           setMake("");
           setErorr("");
+          setIsSubmitted(!isSubmitted);
+
           dispatch({
             type: "ADD_VISITOR_DATA",
             payload: {
@@ -59,6 +65,23 @@ export const AddVisitor = () => {
     } else {
       setErorr("Select a date");
     }
+  };
+
+  useEffect(() => {
+    axios.get(`${backLink}/building/NumberOfDays`).then((response) => {
+      const numberOfDays = response.data.numberOfDays;
+
+      // Generate a list of options based on numberOfDays
+      const options = Array.from(
+        { length: numberOfDays },
+        (_, index) => index + 1
+      );
+      setNumberOfDaysOptions(options);
+    });
+  }, []);
+
+  const handleNumberOfDaysChange = (value) => {
+    setSelectedNumberOfDays(value);
   };
 
   return (
@@ -122,17 +145,29 @@ export const AddVisitor = () => {
               }}
             >
               <Space direction="vertical" size={12}>
-                <RangePicker
+                <DatePicker
                   showTime={{
                     format: "HH:mm",
                   }}
                   format="YYYY-MM-DD HH:mm"
                   onOk={(value) => {
-                    setStartDate(value[0]);
-                    setEndDate(value[1]);
+                    setStartDate(new Date(value));
                   }}
                 />
               </Space>
+              <select
+                value={selectedNumberOfDays}
+                onChange={(e) => handleNumberOfDaysChange(e.target.value)}
+              >
+                <option value="" disabled>
+                  Select number of days
+                </option>
+                {numberOfDaysOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </ConfigProvider>
             <Button style={{ display: "block" }} type="submit">
               Add Visitor
@@ -144,4 +179,10 @@ export const AddVisitor = () => {
       <Image src={bgImg} alt="bg" />
     </>
   );
+};
+
+const calculateEndDate = (startDate, numberOfDays) => {
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + numberOfDays);
+  return endDate;
 };

@@ -8,11 +8,11 @@ import { TextArea, Title } from "./style";
 import { Error } from "../../Pages/Registration/style";
 
 export const EditName = () => {
-  const [value, setValue] = useState("");
+  const data = useSelector((state) => state);
+  const [value, setValue] = useState(data.name);
   const [isEditName, setIsEditName] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const data = useSelector((state) => state);
 
   const handleName = () => {
     axios

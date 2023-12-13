@@ -79,7 +79,7 @@ const EmployeeTabs = ({
           style={{ width: "34px", height: "34px" }}
         />
       </Button>
-      <Button onClick={() => setEmployeePage("cars")}>Car list</Button>
+      <Button onClick={() => setEmployeePage("cars")}>Visitor list</Button>
       <Button onClick={() => setEmployeePage("reports")}>Reports</Button>
       <Button onClick={() => setEmployeePage("report")}>Add Report</Button>
       <Button onClick={() => setEmployeePage("patrol")}>Add Patrol</Button>

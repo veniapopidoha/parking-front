@@ -180,22 +180,22 @@ export const AddUser = () => {
           />
         </InputWrap>
         {emailEmpty && errors.emailError && <Error>{errors.emailError}</Error>}
-        <InputWrap>
-          <IconContainer>
-            <Icon src={home} />
-          </IconContainer>
-          <StyledInput
-            onChange={(e) => {
-              setUnit(e.target.value);
-              setIsBuildingsOpen(false);
-            }}
-            placeholder="Unit"
-            name="unit"
-            value={unit}
-          />
-        </InputWrap>
         {status === "resident" && (
           <>
+            <InputWrap>
+              <IconContainer>
+                <Icon src={home} />
+              </IconContainer>
+              <StyledInput
+                onChange={(e) => {
+                  setUnit(e.target.value);
+                  setIsBuildingsOpen(false);
+                }}
+                placeholder="Unit"
+                name="unit"
+                value={unit}
+              />
+            </InputWrap>
             <InputWrap style={{ minWidth: "66px" }}>
               <IconContainer>
                 <Icon src={user} />

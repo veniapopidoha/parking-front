@@ -109,6 +109,19 @@ export const SignIn = () => {
       .catch((error) => console.log(error));
   };
 
+  const handleForgorPassword = () => {
+    if (email.length > 1 && !errors.emailError) {
+      axios.post(`${backLink}/forgot-pass`, {
+        email,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        emailError: emailEmpty ? "Please fill your email" : "",
+      });
+    }
+  };
+
   return (
     <Wrap>
       <Title>Sign In</Title>
@@ -147,7 +160,9 @@ export const SignIn = () => {
             <Error>{errors.passwordError}</Error>
           )}
         </Container>
-
+        <p onClick={handleForgorPassword} style={{ cursor: "pointer" }}>
+          Forgot password
+        </p>
         <Button disabled={!formValid} type="submit">
           Sign In
         </Button>
