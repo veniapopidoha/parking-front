@@ -8,15 +8,17 @@ import { Button } from "../../../SignIn/style";
 import { Container, Error } from "../../../Registration/style";
 import { InputWrap } from "../../../../Components/Input/style";
 import bgImg from "../../../../images/bg2.png";
+import { Checkbox, CheckboxWrap } from "../../../AddUser/style";
 
 export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   const [plate, setPlate] = useState("");
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
   const [startDate, setStartDate] = useState(null);
-  const [error, setErorr] = useState("");
+  const [error, setError] = useState("");
   const [numberOfDaysOptions, setNumberOfDaysOptions] = useState([]);
   const [selectedNumberOfDays, setSelectedNumberOfDays] = useState("");
+  const [checked, setChecked] = useState("");
 
   const dispatch = useDispatch();
   const id = useSelector((state) => state.id);
@@ -24,17 +26,19 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
 
   const Submit = (e) => {
     e.preventDefault();
-    if (startDate && selectedNumberOfDays) {
+
+    if (startDate && (selectedNumberOfDays || checked === "Custom")) {
       const calculatedEndDate = calculateEndDate(
         startDate,
         Number(selectedNumberOfDays)
       );
+
       axios
         .post(`${backLink}/add-building-visitor`, {
           plate,
           colour,
           make,
-          startDate: startDate,
+          startDate,
           endDate: calculatedEndDate,
           residentId: id,
           buildingName: data.buildingName,
@@ -44,7 +48,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
           setColour("");
           setPlate("");
           setMake("");
-          setErorr("");
+          setError("");
           setIsSubmitted(!isSubmitted);
 
           dispatch({
@@ -60,18 +64,17 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
           });
         })
         .catch((error) => {
-          setErorr(error.response.data.message);
+          setError(error.response.data.message);
         });
     } else {
-      setErorr("Select a date");
+      setError("Select a date");
     }
   };
 
   useEffect(() => {
-    axios.get(`${backLink}/building/NumberOfDays`).then((response) => {
+    axios.get(`${backLink}/building/${data.buildingName}`).then((response) => {
       const numberOfDays = response.data.numberOfDays;
 
-      // Generate a list of options based on numberOfDays
       const options = Array.from(
         { length: numberOfDays },
         (_, index) => index + 1
@@ -82,6 +85,11 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
 
   const handleNumberOfDaysChange = (value) => {
     setSelectedNumberOfDays(value);
+    setStartDate(new Date());
+  };
+
+  const handleCheckboxChange = (e) => {
+    setChecked(e.target.value);
   };
 
   return (
@@ -129,32 +137,57 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
                 />
               </InputWrap>
             </Container>
-            <DateTitle>Select date</DateTitle>
-            <ConfigProvider
-              theme={{
-                components: {
-                  DatePicker: {
-                    colorLink: "#FECB21",
-                    colorLinkActive: "#000",
-                    colorPrimary: "#FECB21",
-                    colorLinkHover: "#FECB21",
-                    colorPrimary: "#FECB21",
-                    colorPrimaryHover: "#FECB21",
-                  },
-                },
-              }}
-            >
-              <Space direction="vertical" size={12}>
-                <DatePicker
-                  showTime={{
-                    format: "HH:mm",
-                  }}
-                  format="YYYY-MM-DD HH:mm"
-                  onOk={(value) => {
-                    setStartDate(new Date(value));
-                  }}
+            <CheckboxWrap>
+              <label>
+                <Checkbox
+                  type="radio"
+                  name="status"
+                  onChange={handleCheckboxChange}
+                  value="Daily"
+                  checked={checked === "Daily"}
                 />
-              </Space>
+                Daily
+              </label>
+              <label>
+                <Checkbox
+                  type="radio"
+                  name="status"
+                  onChange={handleCheckboxChange}
+                  value="Custom"
+                  checked={checked === "Custom"}
+                />
+                Custom
+              </label>
+            </CheckboxWrap>
+            {checked === "Custom" && (
+              <ConfigProvider
+                theme={{
+                  components: {
+                    DatePicker: {
+                      colorLink: "#FECB21",
+                      colorLinkActive: "#000",
+                      colorPrimary: "#FECB21",
+                      colorLinkHover: "#FECB21",
+                      colorPrimary: "#FECB21",
+                      colorPrimaryHover: "#FECB21",
+                    },
+                  },
+                }}
+              >
+                <Space direction="vertical" size={12}>
+                  <DatePicker
+                    showTime={{
+                      format: "HH:mm",
+                    }}
+                    format="YYYY-MM-DD HH:mm"
+                    onOk={(value) => {
+                      setStartDate(new Date(value));
+                    }}
+                  />
+                </Space>
+              </ConfigProvider>
+            )}
+            {(checked === "Custom" || checked === "Daily") && (
               <select
                 value={selectedNumberOfDays}
                 onChange={(e) => handleNumberOfDaysChange(e.target.value)}
@@ -168,7 +201,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
                   </option>
                 ))}
               </select>
-            </ConfigProvider>
+            )}
             <Button style={{ display: "block" }} type="submit">
               Add Visitor
             </Button>
