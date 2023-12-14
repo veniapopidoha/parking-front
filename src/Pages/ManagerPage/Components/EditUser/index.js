@@ -58,11 +58,7 @@ export const EditUser = ({ building }) => {
         )}
         <Instructions>
           <InstructionsWrap>
-            <InstructionsText>
-              {user.status === "employee"
-                ? "Employee Instructions"
-                : "Special instructions"}
-            </InstructionsText>
+            <InstructionsText>Employee Instructions</InstructionsText>
             {user.status === "manager" && (
               <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
             )}

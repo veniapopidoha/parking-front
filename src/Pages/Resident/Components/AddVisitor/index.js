@@ -72,7 +72,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   };
 
   useEffect(() => {
-    axios.get(`${backLink}/building/${data.buildingName}`).then((response) => {
+    axios.get(`${backLink}/building/NumberOfDays`).then((response) => {
       const numberOfDays = response.data.numberOfDays;
 
       const options = Array.from(
@@ -85,11 +85,15 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
 
   const handleNumberOfDaysChange = (value) => {
     setSelectedNumberOfDays(value);
-    setStartDate(new Date());
   };
 
   const handleCheckboxChange = (e) => {
     setChecked(e.target.value);
+
+    if (checked === "Daily") {
+      setSelectedNumberOfDays("1");
+      setStartDate(new Date());
+    }
   };
 
   return (
@@ -187,7 +191,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
                 </Space>
               </ConfigProvider>
             )}
-            {(checked === "Custom" || checked === "Daily") && (
+            {checked === "Custom" && (
               <select
                 value={selectedNumberOfDays}
                 onChange={(e) => handleNumberOfDaysChange(e.target.value)}

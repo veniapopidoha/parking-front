@@ -11,45 +11,19 @@ import {
 } from "../Cars/style";
 import bgImg from "../../images/bg4.png";
 import Bin from "../../images/bin.png";
+import Pencil from "../../images/pencil.svg";
 import { Icon, IconWrap, TableRowContainer } from "./style";
 import axios from "axios";
 import { backLink } from "../../App";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const Residents = ({ building, isDeleted, setIsDeleted }) => {
-  const [editedData, setEditedData] = useState({});
-
-  const deleteResident = (email) => {
-    axios
-      .delete(
-        `${backLink}/delete-resident?buildingName=${building.name}&email=${email}`
-      )
-      .then(() => setIsDeleted(!isDeleted));
-  };
-
-  const handleEdit = (field, email, value) => {
-    setEditedData({ field, email, value });
-  };
-
-  const handleBlur = async () => {
-    if (editedData.email) {
-      await saveEditedData(editedData);
-      setEditedData({});
-    }
-  };
-
-  const saveEditedData = async ({ field, email, value }) => {
-    try {
-      await axios.put(`${backLink}/update-resident`, {
-        buildingName: building.name,
-        email,
-        [field]: value,
-      });
-    } catch (error) {
-      console.error("Error updating resident data:", error);
-    }
-  };
-
+export const Residents = ({
+  building,
+  isDeleted,
+  setIsDeleted,
+  isChangesMade,
+  setIsChangesMade,
+}) => {
   return (
     <>
       <Wrap>
@@ -65,51 +39,15 @@ export const Residents = ({ building, isDeleted, setIsDeleted }) => {
           <TableBody>
             {building.users.map((resident) => {
               return (
-                <TableRowContainer key={resident.email}>
-                  <TableRow>
-                    <TableDataS
-                      width="45%"
-                      contentEditable="true"
-                      onBlur={() => handleBlur()}
-                      onInput={(e) =>
-                        handleEdit("name", resident.email, e.target.textContent)
-                      }
-                    >
-                      {resident.name}
-                    </TableDataS>
-                    <TableData
-                      width="10%"
-                      contentEditable="true"
-                      onBlur={() => handleBlur()}
-                      onInput={(e) =>
-                        handleEdit("unit", resident.email, e.target.textContent)
-                      }
-                    >
-                      {resident.unit}
-                    </TableData>
-                    <TableDataS
-                      width="45%"
-                      contentEditable="true"
-                      onBlur={() => handleBlur()}
-                      onInput={(e) =>
-                        handleEdit(
-                          "numberOfRegistration",
-                          resident.email,
-                          e.target.textContent
-                        )
-                      }
-                    >
-                      {resident.numberOfRegistration}
-                    </TableDataS>
-                  </TableRow>
-                  <IconWrap>
-                    <Icon
-                      src={Bin}
-                      alt="bucket"
-                      onClick={() => deleteResident(resident.email)}
-                    />
-                  </IconWrap>
-                </TableRowContainer>
+                <TableRowComponent
+                  resident={resident}
+                  isDeleted={isDeleted}
+                  setIsDeleted={setIsDeleted}
+                  isChangesMade={isChangesMade}
+                  setIsChangesMade={setIsChangesMade}
+                  building={building}
+                  key={resident.email}
+                />
               );
             })}
           </TableBody>
@@ -120,21 +58,173 @@ export const Residents = ({ building, isDeleted, setIsDeleted }) => {
   );
 };
 
-const Input = ({ resident, setEditedData, setIsChangesMade, handleBlur }) => {
+export const Input = ({ resident, editedData, setEditedData, field }) => {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(editedData.value || "");
+  }, [editedData.value]);
 
   const handleEdit = (field, email, value) => {
     setEditedData({ field, email, value });
     setValue(value);
-    setIsChangesMade(true);
   };
 
   return (
     <input
       type="text"
       value={value}
-      onChange={(e) => handleEdit("unit", resident.email, e.target.value)}
-      onBlur={() => handleBlur("name")}
+      onChange={(e) => handleEdit(field, resident.email, e.target.value)}
     />
+  );
+};
+
+const TableRowComponent = ({
+  resident,
+  building,
+  isDeleted,
+  setIsDeleted,
+  isChangesMade,
+  setIsChangesMade,
+}) => {
+  const [editedData, setEditedData] = useState({});
+
+  const saveEditedData = async ({ field, email, value }) => {
+    try {
+      await axios.put(`${backLink}/update-resident`, {
+        buildingName: building.name,
+        email,
+        [field]: value,
+      });
+    } catch (error) {
+      console.error("Error updating resident data:", error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (editedData.email) {
+      await saveEditedData(editedData);
+      setIsChangesMade(!isChangesMade);
+      setEditedData({});
+    }
+  };
+  const deleteResident = (email) => {
+    axios
+      .delete(
+        `${backLink}/delete-resident?buildingName=${building.name}&email=${email}`
+      )
+      .then(() => setIsDeleted(!isDeleted));
+  };
+
+  const handleEdit = (field, email, value) => {
+    setEditedData({ field, email, value });
+  };
+
+  return (
+    <TableRowContainer>
+      <TableRow>
+        <TableDataS width="45%">
+          {editedData.field === "name" ? (
+            <>
+              <Input
+                resident={resident}
+                editedData={editedData}
+                setEditedData={setEditedData}
+                field="name"
+              />
+              <button
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                Submit
+              </button>
+            </>
+          ) : (
+            <>
+              {resident.name}
+              <Icon
+                src={Pencil}
+                alt="icon"
+                onClick={() =>
+                  handleEdit("name", resident.email, resident.name)
+                }
+              />
+            </>
+          )}
+        </TableDataS>
+        <TableData width="10%">
+          {editedData.field === "unit" ? (
+            <>
+              <Input
+                resident={resident}
+                editedData={editedData}
+                setEditedData={setEditedData}
+                field="unit"
+              />
+              <button
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                Submit
+              </button>
+            </>
+          ) : (
+            <>
+              {resident.unit}
+              <Icon
+                src={Pencil}
+                alt="icon"
+                onClick={() =>
+                  handleEdit("unit", resident.email, resident.unit)
+                }
+              />
+            </>
+          )}
+        </TableData>
+        <TableDataS width="45%">
+          {editedData.field === "numberOfRegistration" ? (
+            <>
+              <Input
+                resident={resident}
+                editedData={editedData}
+                setEditedData={setEditedData}
+                field="numberOfRegistration"
+              />
+              <button
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                Submit
+              </button>
+            </>
+          ) : (
+            <>
+              {resident.numberOfRegistration}
+              <Icon
+                src={Pencil}
+                alt="icon"
+                onClick={() =>
+                  handleEdit(
+                    "numberOfRegistration",
+                    resident.email,
+                    resident.numberOfRegistration
+                  )
+                }
+              />
+            </>
+          )}
+        </TableDataS>
+      </TableRow>
+      <IconWrap>
+        <Icon
+          src={Bin}
+          alt="bucket"
+          onClick={() => deleteResident(resident.email)}
+        />
+      </IconWrap>
+    </TableRowContainer>
   );
 };

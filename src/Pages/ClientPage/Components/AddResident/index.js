@@ -1,23 +1,26 @@
-import { ClientInfo } from "../ClientInfo";
-import { Checkbox, CheckboxWrap, Image, Wrap } from "./style";
-import bgImg from "../../../../images/bg2.png";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { backLink } from "../../../../App";
+import axios from "axios";
+import { Container, Button, Error } from "../../../Registration/style";
 import {
   InputWrap,
   Icon,
   IconContainer,
   StyledInput,
 } from "../../../../Components/Input/style";
-import { Container, Button, Error } from "../../../Registration/style";
+import { Checkbox, CheckboxWrap, Image, Wrap } from "./style";
+import bgImg from "../../../../images/bg2.png";
 import mail from "../../../../images/mail.svg";
+import home from "../../../../images/home.png";
+import user from "../../../../images/user.svg";
+import { backLink } from "../../../../App";
 
 export const AddResident = () => {
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [emailEmpty, setEmailEmpty] = useState(false);
+  const [name, setName] = useState("");
+  const [unit, setUnit] = useState("");
   const [errors, setErrors] = useState({
     emailError: "Please fill your email",
     checkError: "Please fill your checkbox",
@@ -39,6 +42,8 @@ export const AddResident = () => {
     switch (e.target.name) {
       case "email":
         setEmailEmpty(true);
+        break;
+      default:
         break;
     }
   };
@@ -69,6 +74,8 @@ export const AddResident = () => {
         email,
         status,
         buildingName: data.buildingName,
+        name,
+        unit,
       })
       .then(() => {
         dispatch({
@@ -76,6 +83,8 @@ export const AddResident = () => {
           payload: { ...data },
         });
         setEmail("");
+        setName("");
+        setUnit("");
         setError("");
       })
       .catch((error) => {
@@ -112,15 +121,44 @@ export const AddResident = () => {
               <Icon src={mail} />
             </IconContainer>
             <StyledInput
-              onBlur={(e) => blurHandler(e)}
+              onBlur={blurHandler}
               onChange={handleEmail}
               placeholder="Email"
               name="email"
               value={email}
+              required
             />
           </InputWrap>
           {emailEmpty && errors.emailError && (
             <Error>{errors.emailError}</Error>
+          )}
+          {status === "resident" && (
+            <>
+              <InputWrap>
+                <IconContainer>
+                  <Icon src={home} />
+                </IconContainer>
+                <StyledInput
+                  onChange={(e) => setUnit(e.target.value)}
+                  placeholder="Unit"
+                  name="unit"
+                  value={unit}
+                  required
+                />
+              </InputWrap>
+              <InputWrap style={{ minWidth: "66px" }}>
+                <IconContainer>
+                  <Icon src={user} />
+                </IconContainer>
+                <StyledInput
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Name"
+                  name="name"
+                  value={name}
+                  required
+                />
+              </InputWrap>
+            </>
           )}
           <Error>{error}</Error>
         </Container>

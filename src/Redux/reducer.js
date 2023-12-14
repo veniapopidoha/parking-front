@@ -39,6 +39,7 @@ export const reducer = (state = initialState, action) => {
         name: "",
         status: "",
         buildingName: "",
+        numberOfRegistration: "",
         email: "",
         id: "",
         unit: "",

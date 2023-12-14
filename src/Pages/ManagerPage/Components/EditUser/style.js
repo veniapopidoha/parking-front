@@ -48,6 +48,8 @@ export const TextArea = styled.textarea`
   min-height: 200px;
   width: 100%;
   border-radius: 5px;
+  font-family: Montserrat;
+  font-weight: 600;
   background: #ddd;
   padding: 15px;
   font-size: 20px;

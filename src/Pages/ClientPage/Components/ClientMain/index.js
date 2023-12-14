@@ -14,6 +14,8 @@ export const ClientMain = ({
   clientPage,
   isDeleted,
   setIsDeleted,
+  isChangesMade,
+  setIsChangesMade,
 }) => {
   return (
     <Wrap>
@@ -29,6 +31,8 @@ export const ClientMain = ({
               building={building}
               isDeleted={isDeleted}
               setIsDeleted={setIsDeleted}
+              isChangesMade={isChangesMade}
+              setIsChangesMade={setIsChangesMade}
             />
           )}
           {clientPage === "patrols" && <Patrols building={building} />}

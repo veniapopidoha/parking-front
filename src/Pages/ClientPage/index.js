@@ -11,6 +11,7 @@ export const ClientPage = () => {
   const [clientPage, setClientPage] = useState("main");
   const [building, setBuilding] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isChangesMade, setIsChangesMade] = useState(false);
   const data = useSelector((state) => state);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const ClientPage = () => {
         setBuilding(res.data);
       })
       .catch((err) => console.log(err));
-  }, [isDeleted, data]);
+  }, [isDeleted, , isChangesMade, data]);
 
   return (
     <ClientWrap>
@@ -30,6 +31,8 @@ export const ClientPage = () => {
         clientPage={clientPage}
         isDeleted={isDeleted}
         setIsDeleted={setIsDeleted}
+        isChangesMade={isChangesMade}
+        setIsChangesMade={setIsChangesMade}
       />
     </ClientWrap>
   );

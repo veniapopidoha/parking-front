@@ -1,4 +1,4 @@
-import { Button, Container, Error, Form, Title, Wrap } from "./style";
+import { Button, Container, Error, Form, Text, Title, Wrap } from "./style";
 import {
   Icon,
   IconContainer,
@@ -160,12 +160,10 @@ export const SignIn = () => {
             <Error>{errors.passwordError}</Error>
           )}
         </Container>
-        <p onClick={handleForgorPassword} style={{ cursor: "pointer" }}>
-          Forgot password
-        </p>
         <Button disabled={!formValid} type="submit">
           Sign In
         </Button>
+        <Text onClick={handleForgorPassword}>Forgot password?</Text>
         <Error>{error}</Error>
       </Form>
     </Wrap>

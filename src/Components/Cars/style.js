@@ -39,8 +39,11 @@ export const Table = styled.table`
     text-decoration: none;
   }
 
+  @media only screen and (max-width: 1200px) {
+    min-width: unset;
+  }
+
   @media only screen and (max-width: 768px) {
-    min-width: 700px;
     overflow-x: scroll;
   }
 `;
@@ -55,6 +58,14 @@ export const TableHeader = styled.tr`
   min-width: 600px;
   @media only screen and (max-width: 1400px) {
     gap: 10px;
+  }
+
+  @media only screen and (max-width: 920px) {
+    max-width: 800px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    max-width: 600px;
   }
 `;
 

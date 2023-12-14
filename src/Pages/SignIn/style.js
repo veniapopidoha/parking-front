@@ -23,6 +23,14 @@ export const Title = styled.h1`
   margin-bottom: 30px;
 `;
 
+export const Text = styled.p`
+  align-self: end;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;

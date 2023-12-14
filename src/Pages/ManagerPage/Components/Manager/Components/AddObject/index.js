@@ -79,7 +79,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           onChange={(e) => setResidentInstructions(e.target.value)}
         />
         <Input
-          placeholder="Number of days"
+          placeholder="Max number of days for visitors"
           value={numberOfDays}
           onChange={(e) => setNumberOfDays(e.target.value)}
         />
