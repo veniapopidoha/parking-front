@@ -12,6 +12,7 @@ import {
   Textarea,
   Wrap,
 } from "./style";
+import { ConfigProvider, DatePicker, Space } from "antd";
 
 export const AddObject = ({ setIsAddBuild }) => {
   const [name, setName] = useState("");
@@ -21,8 +22,10 @@ export const AddObject = ({ setIsAddBuild }) => {
   const [visitorsPerMonth, setVisitorsPerMonth] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
   const [duration, setDuration] = useState("");
-  const [limitType, setLimitType] = useState("");
+  const [limitType, setLimitType] = useState("calendar");
   const [limitPerUse, setLimitPerUse] = useState(false);
+  const [limitCustom, setLimitCustom] = useState(false);
+  const [limitCustomTime, setLimitCustomTime] = useState(null);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -36,6 +39,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           instructions: notes,
           limitType,
           limitPerUse,
+          limitCustomTime,
           numberOfDays,
           visitorsPerMonth,
           duration,
@@ -127,6 +131,59 @@ export const AddObject = ({ setIsAddBuild }) => {
             onChange={() => setLimitPerUse(false)}
           />
         </LimitWrap>
+        <LimitWrap>
+          <Label htmlFor="custom" style={{ margin: 0 }}>
+            Custom
+          </Label>
+          <RadioButton
+            type="radio"
+            name="custom"
+            value="custom"
+            checked={limitCustom === true}
+            onChange={() => setLimitCustom(true)}
+          />
+          <Label htmlFor="daily" style={{ margin: 0 }}>
+            Daily
+          </Label>
+          <RadioButton
+            type="radio"
+            name="daily"
+            value="Daily"
+            checked={limitCustom === false}
+            onChange={() => {
+              setLimitCustomTime(new Date());
+              setLimitCustom(false);
+            }}
+          />
+        </LimitWrap>
+        {limitCustom && (
+          <ConfigProvider
+            theme={{
+              components: {
+                DatePicker: {
+                  colorLink: "#FECB21",
+                  colorLinkActive: "#000",
+                  colorPrimary: "#FECB21",
+                  colorLinkHover: "#FECB21",
+                  colorPrimary: "#FECB21",
+                  colorPrimaryHover: "#FECB21",
+                },
+              },
+            }}
+          >
+            <Space direction="vertical" size={12}>
+              <DatePicker
+                showTime={{
+                  format: "HH:mm",
+                }}
+                format="YYYY-MM-DD HH:mm"
+                onOk={(value) => {
+                  setLimitCustomTime(value);
+                }}
+              />
+            </Space>
+          </ConfigProvider>
+        )}
         <Label htmlFor="visitors">Limits:</Label>
         <Input
           placeholder="Number of Visitors per month"

@@ -8,6 +8,7 @@ import {
   TableData,
   TableDataS,
   TableBody,
+  TopWrap,
 } from "../Cars/style";
 import bgImg from "../../images/bg4.png";
 import Bin from "../../images/bin.png";
@@ -16,6 +17,7 @@ import { Icon, IconWrap, TableRowContainer } from "./style";
 import axios from "axios";
 import { backLink } from "../../App";
 import { useEffect, useState } from "react";
+import { Button } from "../../Pages/SignIn/style";
 
 export const Residents = ({
   building,
@@ -24,10 +26,19 @@ export const Residents = ({
   isChangesMade,
   setIsChangesMade,
 }) => {
+  const [editing, setEditing] = useState(false);
+  const handleSubmit = async () => {
+    setIsChangesMade(!isChangesMade);
+    setEditing(false);
+  };
+
   return (
     <>
       <Wrap>
-        <Title>Resident list</Title>
+        <TopWrap>
+          <Title>Resident list</Title>
+          <Icon onClick={() => setEditing(!editing)} src={Pencil} alt="icon" />
+        </TopWrap>
         <table width="100%">
           <thead>
             <TableHeader>
@@ -37,45 +48,23 @@ export const Residents = ({
             </TableHeader>
           </thead>
           <TableBody>
-            {building.users.map((resident) => {
-              return (
-                <TableRowComponent
-                  resident={resident}
-                  isDeleted={isDeleted}
-                  setIsDeleted={setIsDeleted}
-                  isChangesMade={isChangesMade}
-                  setIsChangesMade={setIsChangesMade}
-                  building={building}
-                  key={resident.email}
-                />
-              );
-            })}
+            {building.users.map((resident) => (
+              <TableRowComponent
+                resident={resident}
+                isDeleted={isDeleted}
+                setIsDeleted={setIsDeleted}
+                isChangesMade={isChangesMade}
+                building={building}
+                editing={editing}
+                key={resident.email}
+              />
+            ))}
           </TableBody>
         </table>
+        {editing && <Button onClick={handleSubmit}>Submit</Button>}
       </Wrap>
       <Image src={bgImg} alt="bg" />
     </>
-  );
-};
-
-export const Input = ({ resident, editedData, setEditedData, field }) => {
-  const [value, setValue] = useState("");
-
-  useEffect(() => {
-    setValue(editedData.value || "");
-  }, [editedData.value]);
-
-  const handleEdit = (field, email, value) => {
-    setEditedData({ field, email, value });
-    setValue(value);
-  };
-
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => handleEdit(field, resident.email, e.target.value)}
-    />
   );
 };
 
@@ -85,29 +74,8 @@ const TableRowComponent = ({
   isDeleted,
   setIsDeleted,
   isChangesMade,
-  setIsChangesMade,
+  editing,
 }) => {
-  const [editedData, setEditedData] = useState({});
-
-  const saveEditedData = async ({ field, email, value }) => {
-    try {
-      await axios.put(`${backLink}/update-resident`, {
-        buildingName: building.name,
-        email,
-        [field]: value,
-      });
-    } catch (error) {
-      console.error("Error updating resident data:", error);
-    }
-  };
-
-  const handleSubmit = async () => {
-    if (editedData.email) {
-      await saveEditedData(editedData);
-      setIsChangesMade(!isChangesMade);
-      setEditedData({});
-    }
-  };
   const deleteResident = (email) => {
     axios
       .delete(
@@ -116,105 +84,40 @@ const TableRowComponent = ({
       .then(() => setIsDeleted(!isDeleted));
   };
 
-  const handleEdit = (field, email, value) => {
-    setEditedData({ field, email, value });
-  };
-
   return (
     <TableRowContainer>
       <TableRow>
         <TableDataS width="45%">
-          {editedData.field === "name" ? (
-            <>
-              <Input
-                resident={resident}
-                editedData={editedData}
-                setEditedData={setEditedData}
-                field="name"
-              />
-              <button
-                onClick={() => {
-                  handleSubmit();
-                }}
-              >
-                Submit
-              </button>
-            </>
+          {editing ? (
+            <Input
+              resident={resident}
+              field="name"
+              isChangesMade={isChangesMade}
+            />
           ) : (
-            <>
-              {resident.name}
-              <Icon
-                src={Pencil}
-                alt="icon"
-                onClick={() =>
-                  handleEdit("name", resident.email, resident.name)
-                }
-              />
-            </>
+            <>{resident.name}</>
           )}
         </TableDataS>
         <TableData width="10%">
-          {editedData.field === "unit" ? (
-            <>
-              <Input
-                resident={resident}
-                editedData={editedData}
-                setEditedData={setEditedData}
-                field="unit"
-              />
-              <button
-                onClick={() => {
-                  handleSubmit();
-                }}
-              >
-                Submit
-              </button>
-            </>
+          {editing ? (
+            <Input
+              resident={resident}
+              field="unit"
+              isChangesMade={isChangesMade}
+            />
           ) : (
-            <>
-              {resident.unit}
-              <Icon
-                src={Pencil}
-                alt="icon"
-                onClick={() =>
-                  handleEdit("unit", resident.email, resident.unit)
-                }
-              />
-            </>
+            <>{resident.unit}</>
           )}
         </TableData>
         <TableDataS width="45%">
-          {editedData.field === "numberOfRegistration" ? (
-            <>
-              <Input
-                resident={resident}
-                editedData={editedData}
-                setEditedData={setEditedData}
-                field="numberOfRegistration"
-              />
-              <button
-                onClick={() => {
-                  handleSubmit();
-                }}
-              >
-                Submit
-              </button>
-            </>
+          {editing ? (
+            <Input
+              resident={resident}
+              field="numberOfRegistration"
+              isChangesMade={isChangesMade}
+            />
           ) : (
-            <>
-              {resident.numberOfRegistration}
-              <Icon
-                src={Pencil}
-                alt="icon"
-                onClick={() =>
-                  handleEdit(
-                    "numberOfRegistration",
-                    resident.email,
-                    resident.numberOfRegistration
-                  )
-                }
-              />
-            </>
+            <>{resident.numberOfRegistration}</>
           )}
         </TableDataS>
       </TableRow>
@@ -226,5 +129,45 @@ const TableRowComponent = ({
         />
       </IconWrap>
     </TableRowContainer>
+  );
+};
+
+export const Input = ({ resident, field, isChangesMade }) => {
+  const [value, setValue] = useState("");
+  const [editedData, setEditedData] = useState({});
+
+  useEffect(() => {
+    try {
+      axios.put(`${backLink}/update-resident`, {
+        buildingName: resident.buildingName,
+        email: editedData.email,
+        name: editedData.field === "name" ? editedData.value : resident.name,
+        numberOfRegistration:
+          editedData.field === "numberOfRegistration"
+            ? editedData.value
+            : resident.numberOfRegistration,
+        unit: editedData.field === "unit" ? editedData.value : resident.unit,
+      });
+    } catch (error) {
+      console.error("Error updating resident data:", error);
+    }
+  }, [isChangesMade, value]);
+
+  useEffect(() => {
+    setValue(editedData.value);
+  }, [editedData.value]);
+
+  const handleEdit = async (field, email, value) => {
+    setEditedData({ field, email, value });
+    setValue(value);
+  };
+
+  return (
+    <input
+      type={field === "numberOfRegistration" ? "number" : "text"}
+      value={value || resident[field]}
+      style={{ width: "100%" }}
+      onChange={(e) => handleEdit(field, resident.email, e.target.value)}
+    />
   );
 };

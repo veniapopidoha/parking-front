@@ -72,7 +72,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   };
 
   useEffect(() => {
-    axios.get(`${backLink}/building/NumberOfDays`).then((response) => {
+    axios.get(`${backLink}/building/${data.buildingName}`).then((response) => {
       const numberOfDays = response.data.numberOfDays;
 
       const options = Array.from(
@@ -142,16 +142,6 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
               </InputWrap>
             </Container>
             <CheckboxWrap>
-              <label>
-                <Checkbox
-                  type="radio"
-                  name="status"
-                  onChange={handleCheckboxChange}
-                  value="Daily"
-                  checked={checked === "Daily"}
-                />
-                Daily
-              </label>
               <label>
                 <Checkbox
                   type="radio"
