@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { backLink } from "../../../../App";
 import axios from "axios";
 import { Form, Title, StyledInput, DateTitle, Wrap, Image } from "./style";
-import { ConfigProvider, DatePicker, Space } from "antd";
+import { ConfigProvider, DatePicker, Space, TimePicker } from "antd";
 import { Button } from "../../../SignIn/style";
 import { Container, Error } from "../../../Registration/style";
 import { InputWrap } from "../../../../Components/Input/style";
@@ -27,10 +27,10 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   const Submit = (e) => {
     e.preventDefault();
 
-    if (startDate && (selectedNumberOfDays || checked === "Custom")) {
+    if (startDate) {
       const calculatedEndDate = calculateEndDate(
         startDate,
-        Number(selectedNumberOfDays)
+        Number(selectedNumberOfDays) || 1
       );
 
       axios
@@ -88,7 +88,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
   };
 
   const handleCheckboxChange = (e) => {
-    setChecked(e.target.value);
+    setChecked(!checked);
 
     if (checked === "Daily") {
       setSelectedNumberOfDays("1");
@@ -144,44 +144,24 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
             <CheckboxWrap>
               <label>
                 <Checkbox
-                  type="radio"
+                  type="checkbox"
                   name="status"
                   onChange={handleCheckboxChange}
-                  value="Custom"
-                  checked={checked === "Custom"}
+                  value={checked}
+                  checked={checked}
                 />
                 Custom
               </label>
             </CheckboxWrap>
-            {checked === "Custom" && (
-              <ConfigProvider
-                theme={{
-                  components: {
-                    DatePicker: {
-                      colorLink: "#FECB21",
-                      colorLinkActive: "#000",
-                      colorPrimary: "#FECB21",
-                      colorLinkHover: "#FECB21",
-                      colorPrimary: "#FECB21",
-                      colorPrimaryHover: "#FECB21",
-                    },
-                  },
+            {checked && (
+              <TimePicker
+                format="HH:mm"
+                onChange={(value) => {
+                  setStartDate(value);
                 }}
-              >
-                <Space direction="vertical" size={12}>
-                  <DatePicker
-                    showTime={{
-                      format: "HH:mm",
-                    }}
-                    format="YYYY-MM-DD HH:mm"
-                    onOk={(value) => {
-                      setStartDate(new Date(value));
-                    }}
-                  />
-                </Space>
-              </ConfigProvider>
+              />
             )}
-            {checked === "Custom" && (
+            {checked && (
               <select
                 value={selectedNumberOfDays}
                 onChange={(e) => handleNumberOfDaysChange(e.target.value)}
@@ -209,7 +189,8 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
 };
 
 const calculateEndDate = (startDate, numberOfDays) => {
-  const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + numberOfDays);
+  const startDateObj = new Date(startDate);
+  const endDate = new Date(startDateObj.getTime());
+  endDate.setDate(startDateObj.getDate() + numberOfDays);
   return endDate;
 };

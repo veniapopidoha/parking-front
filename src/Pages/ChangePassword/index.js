@@ -85,11 +85,17 @@ export const ChangePassword = () => {
     }
   };
 
-  const Submit = () => {
-    axios.patch(`${backLink}/change-pass`, {
-      email,
-      password,
-    });
+  const Submit = (e) => {
+    e.preventDefault();
+
+    axios
+      .patch(`${backLink}/change-pass`, {
+        email,
+        password,
+      })
+      .then(() => {
+        window.location.replace("/");
+      });
   };
 
   return (
