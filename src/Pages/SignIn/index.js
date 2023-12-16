@@ -164,7 +164,7 @@ export const SignIn = () => {
         <Button disabled={!formValid} type="submit">
           Sign In
         </Button>
-        <Text onClick={handleForgorPassword}>Forgot password?</Text>
+        <Text onClick={() => {window.location.replace('/password')}}>Forgot password?</Text>
         <Error>{error}</Error>
       </Form>
     </Wrap>

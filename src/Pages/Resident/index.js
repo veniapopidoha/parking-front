@@ -30,6 +30,7 @@ export const Resident = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFavoriteAdded, setIsFavoriteAdded] = useState(false);
   const data = useSelector((state) => state);
+  const [numOfReg, setNumOfReg] = useState(data.numberOfRegistration)
 
   useEffect(() => {
     setPlate(favorite.plate);
@@ -42,6 +43,7 @@ export const Resident = () => {
       .get(`${backLink}/${data.id}`)
       .then((res) => {
         setVisitors(res.data.visitors);
+        setNumOfReg(res.data.numberOfRegistration)
         dispatch({
           type: 'ADD_VISITOR_DATA',
           payload: {
@@ -82,7 +84,7 @@ export const Resident = () => {
               <TextWrap>
                 <EditName />
                 <Status>{data.status}</Status>
-                <p>Number of registration:{data.numberOfRegistration}</p>
+                <p>Number of registration:{numOfReg}</p>
               </TextWrap>
               <Instructions>
                 <InstructionsWrap>
