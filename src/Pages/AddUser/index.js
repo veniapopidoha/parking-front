@@ -4,7 +4,7 @@ import {
   InputWrap,
   StyledInput,
 } from "../../Components/Input/style";
-import { Checkbox, CheckboxWrap, ComboBox, ComboBoxText, Wrap,Row } from "./style";
+import { Checkbox, CheckboxWrap, ComboBox, ComboBoxText, Wrap,Row,Result,Loading,FileError } from "./style";
 import mail from "../../images/mail.svg";
 import home from "../../images/home.png";
 import user from "../../images/user.svg";
@@ -25,7 +25,10 @@ export const AddUser = () => {
   const [buildings, setBuildings] = useState([]);
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [file, setFile] = useState();
-  const [fileError, showFileError] = useState(false);
+  const [fileMessage, setFileMessage] = useState({
+    message:'',
+    isError:0
+  });  
   const [buildingEmpty, setBuildingEmpty] = useState(false);
   const [errors, setErrors] = useState({
     emailError: "Please fill your email",
@@ -86,11 +89,12 @@ export const AddUser = () => {
 
   const sendFile = (e) => {
     if(!file){
-     showFileError(true);
+      setFileMessage({message:'Please select file.',isError:-1});
      return;
     }
      const formData = new FormData();
      formData.append("file", file);
+     setFileMessage({message:'loading...',isError:0});
      axios
        .post(`${backLink}/add-users-from-file`, formData,{
          headers: {
@@ -98,6 +102,7 @@ export const AddUser = () => {
          },
        })
        .then((res) => {
+        setFileMessage({message:res.data.message,isError:1});
          dispatch({
            type: "ADD_USER_DATA",
            payload: { ...data },
@@ -107,7 +112,6 @@ export const AddUser = () => {
          setUnit("");
          setError("");
          setFile(null);
-         showFileError(false);
        })
        .catch((error) => {
          setError(error.response.data.message);
@@ -132,6 +136,7 @@ export const AddUser = () => {
     setEmail(temp);
   };
   const saveFile = (e) => {
+    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   };
   const addUser = (e) => {
@@ -288,7 +293,9 @@ export const AddUser = () => {
             />
           </InputWrap>
           <FileButton onClick={sendFile}  >Send</FileButton>
-        </Row>{fileError?<Error>Please select file</Error>:<></>}</div> }
+        </Row>{fileMessage.isError===-1?<FileError>{fileMessage.message}</FileError>:<></>}
+        {fileMessage.isError===0?<Loading>{fileMessage.message}</Loading>:<></>}
+        {fileMessage.isError===1?<Result>{fileMessage.message}</Result>:<></>}</div> }
     </Wrap>
   );
 };

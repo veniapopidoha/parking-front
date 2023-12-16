@@ -102,3 +102,24 @@ export const ComboBoxText = styled.p`
   transition: all 0.5s;
   margin: 5px 0;
 `;
+export const Result = styled.p`
+  font-weight: 600;
+  padding: 10px;
+  transition: all 0.5s;
+  margin: 5px 0;
+  color:green
+`;
+export const Loading = styled.p`
+  font-weight: 600;
+  padding: 10px;
+  transition: all 0.5s;
+  margin: 5px 0;
+  color:gray;
+`;
+export const FileError = styled.p`
+  font-weight: 600;
+  padding: 10px;
+  transition: all 0.5s;
+  margin: 5px 0;
+  color:red;
+`;
