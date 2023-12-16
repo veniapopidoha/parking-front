@@ -34,4 +34,10 @@ export const StyledInput = styled.input`
   border: 0;
   background-color: #f4f4f4;
   margin-top: 5px;
+  &[type="file"]{
+    cursor:pointer;
+  }
+  &::file-selector-button{
+    display:none;
+  }
 `;

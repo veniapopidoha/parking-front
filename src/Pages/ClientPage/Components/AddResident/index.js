@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { Container, Button, Error } from "../../../Registration/style";
+import { Container, Button, Error,FileButton } from "../../../Registration/style";
 import {
   InputWrap,
   Icon,
   IconContainer,
   StyledInput,
 } from "../../../../Components/Input/style";
-import { Checkbox, CheckboxWrap, Image, Wrap } from "./style";
+import { Checkbox, CheckboxWrap, Image, Wrap,Row } from "./style";
 import bgImg from "../../../../images/bg2.png";
 import mail from "../../../../images/mail.svg";
 import home from "../../../../images/home.png";
+import fileIcon from "../../../../images/file.png";
 import user from "../../../../images/user.svg";
 import { backLink } from "../../../../App";
 
@@ -21,6 +22,8 @@ export const AddResident = () => {
   const [emailEmpty, setEmailEmpty] = useState(false);
   const [name, setName] = useState("");
   const [unit, setUnit] = useState("");
+  const [file, setFile] = useState();
+  const [fileError, showFileError] = useState(false);  
   const [errors, setErrors] = useState({
     emailError: "Please fill your email",
     checkError: "Please fill your checkbox",
@@ -37,6 +40,10 @@ export const AddResident = () => {
       setFormValid(true);
     }
   }, [errors]);
+
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const blurHandler = (e) => {
     switch (e.target.name) {
@@ -92,6 +99,36 @@ export const AddResident = () => {
       });
   };
 
+  const sendFile = (e) => {
+   if(!file){
+    showFileError(true);
+    return;
+   }
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("buildingName", data.buildingName);
+    axios
+      .post(`${backLink}/add-building-users-from-file`, formData,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: "ADD_USER_DATA",
+          payload: { ...data },
+        });
+        setEmail("");
+        setName("");
+        setUnit("");
+        setError("");
+        setFile(null);
+        showFileError(false);
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
+      });
+  };
   return (
     <>
       <Wrap onSubmit={addUser}>
@@ -163,6 +200,23 @@ export const AddResident = () => {
           <Error>{error}</Error>
         </Container>
         <Button type="submit">Add User</Button>
+        {status === "resident" &&<div>
+          
+           <Row>
+        <InputWrap>
+            <IconContainer>
+              <Icon src={fileIcon} />
+            </IconContainer>
+            <StyledInput
+              onBlur={blurHandler}
+              onChange={saveFile}
+              placeholder="File"
+              type="file"
+              name="uploadfile"
+            />
+          </InputWrap>
+          <FileButton onClick={sendFile}  >Send</FileButton>
+        </Row>{fileError?<Error>Please select file</Error>:<></>}</div> }
       </Wrap>
       <Image src={bgImg} alt="bg" />
     </>
