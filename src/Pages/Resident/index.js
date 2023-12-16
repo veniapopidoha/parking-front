@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { backLink } from "../../App";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { backLink } from '../../App';
 import {
   Wrap,
   TopWrap,
@@ -10,19 +10,20 @@ import {
   TextWrap,
   Leftside,
   ResidentLeft,
-} from "./style";
-import { Button } from "../SignIn/style";
-import { Visitors } from "./Components/Visitors";
-import { FavoriteComboBox } from "./Components/FavoriteComboBox";
-import { EditName } from "../../Components/EditName";
-import { AddVisitor } from "./Components/AddVisitor";
+} from './style';
+import { Button } from '../SignIn/style';
+import { Visitors } from './Components/Visitors';
+import { FavoriteComboBox } from './Components/FavoriteComboBox';
+import { EditName } from '../../Components/EditName';
+import { AddVisitor } from './Components/AddVisitor';
+import { Instructions, InstructionsText, InstructionsWrap } from '../ManagerPage/Components/EditUser/style';
 
 export const Resident = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [plate, setPlate] = useState("");
-  const [colour, setColour] = useState("");
-  const [make, setMake] = useState("");
+  const [plate, setPlate] = useState('');
+  const [colour, setColour] = useState('');
+  const [make, setMake] = useState('');
   const [favorite, setFavorite] = useState({});
   const [isAllVisitors, setIsAllVisitors] = useState(false);
   const [visitors, setVisitors] = useState([]);
@@ -42,7 +43,7 @@ export const Resident = () => {
       .then((res) => {
         setVisitors(res.data.visitors);
         dispatch({
-          type: "ADD_VISITOR_DATA",
+          type: 'ADD_VISITOR_DATA',
           payload: {
             ...res.data.visitors,
           },
@@ -57,9 +58,9 @@ export const Resident = () => {
         <TopWrap>
           <Button
             style={{
-              marginTop: "0",
-              padding: "14px 50px",
-              minWidth: "200px",
+              marginTop: '0',
+              padding: '14px 50px',
+              minWidth: '200px',
             }}
             onClick={() => {
               setShow(!show);
@@ -83,6 +84,15 @@ export const Resident = () => {
                 <Status>{data.status}</Status>
                 <p>Number of registration:{data.numberOfRegistration}</p>
               </TextWrap>
+              <Instructions>
+                <InstructionsWrap>
+                  <InstructionsText>Resident Instructions</InstructionsText>
+                </InstructionsWrap>
+
+                <InstructionsText >
+                  {data?.residentInstructions}
+                </InstructionsText>
+              </Instructions>
             </Leftside>
           </ResidentLeft>
           <Visitors

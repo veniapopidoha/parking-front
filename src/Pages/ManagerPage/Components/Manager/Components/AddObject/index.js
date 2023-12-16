@@ -37,6 +37,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           name,
           address,
           instructions: notes,
+          residentInstructions,
           limitType,
           limitPerUse,
           limitCustomTime,
