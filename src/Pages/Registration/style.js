@@ -64,7 +64,26 @@ export const Button = styled.button`
     font-size: 15px;
   }
 `;
+export const FileButton = styled.span`
+  border-radius: 30px;
+  border: none;
+  padding: 15px 20px;
+  background-color: #fecb21;
+  cursor: pointer;
+  color: #626060;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  text-align:center;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.27px;
+  width:28%;
 
+  @media only screen and (max-width: 480px) {
+    font-size: 15px;
+  }
+`;
 export const Error = styled.h3`
   color: red;
   font-family: "Montserrat", sans-serif;

@@ -4,11 +4,12 @@ import {
   InputWrap,
   StyledInput,
 } from "../../Components/Input/style";
-import { Checkbox, CheckboxWrap, ComboBox, ComboBoxText, Wrap } from "./style";
+import { Checkbox, CheckboxWrap, ComboBox, ComboBoxText, Wrap,Row } from "./style";
 import mail from "../../images/mail.svg";
 import home from "../../images/home.png";
 import user from "../../images/user.svg";
-import { Button, Container, Error } from "../Registration/style";
+import fileIcon from "../../images/file.png";
+import { Button, Container, Error,FileButton} from "../Registration/style";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { backLink } from "../../App";
@@ -23,6 +24,8 @@ export const AddUser = () => {
   const [isBuildingsOpen, setIsBuildingsOpen] = useState(false);
   const [buildings, setBuildings] = useState([]);
   const [emailEmpty, setEmailEmpty] = useState(false);
+  const [file, setFile] = useState();
+  const [fileError, showFileError] = useState(false);
   const [buildingEmpty, setBuildingEmpty] = useState(false);
   const [errors, setErrors] = useState({
     emailError: "Please fill your email",
@@ -81,6 +84,35 @@ export const AddUser = () => {
     }
   };
 
+  const sendFile = (e) => {
+    if(!file){
+     showFileError(true);
+     return;
+    }
+     const formData = new FormData();
+     formData.append("file", file);
+     axios
+       .post(`${backLink}/add-users-from-file`, formData,{
+         headers: {
+           "Content-Type": "multipart/form-data",
+         },
+       })
+       .then((res) => {
+         dispatch({
+           type: "ADD_USER_DATA",
+           payload: { ...data },
+         });
+         setEmail("");
+         setName("");
+         setUnit("");
+         setError("");
+         setFile(null);
+         showFileError(false);
+       })
+       .catch((error) => {
+         setError(error.response.data.message);
+       });
+   };
   const setChecked = (e) => {
     setError("");
     setStatus(e.target.value);
@@ -99,7 +131,9 @@ export const AddUser = () => {
     }
     setEmail(temp);
   };
-
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
+  };
   const addUser = (e) => {
     e.preventDefault();
     axios
@@ -238,6 +272,23 @@ export const AddUser = () => {
         <Error>{error}</Error>
       </Container>
       <Button type="submit">Add User</Button>
+      {status === "resident" &&<div>
+          
+           <Row>
+        <InputWrap>
+            <IconContainer>
+              <Icon src={fileIcon} />
+            </IconContainer>
+            <StyledInput
+              onBlur={blurHandler}
+              onChange={saveFile}
+              placeholder="File"
+              type="file"
+              name="uploadfile"
+            />
+          </InputWrap>
+          <FileButton onClick={sendFile}  >Send</FileButton>
+        </Row>{fileError?<Error>Please select file</Error>:<></>}</div> }
     </Wrap>
   );
 };

@@ -37,6 +37,23 @@ export const Wrap = styled.form`
   }
 `;
 
+export const Row = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+  margin-top:15px;
+  width: 100%;
+  max-width:360px;
+  &>div{
+    width:70%;
+  }
+  &>span{
+    padding:15px 20px;
+  }
+  }
+`;
+
 export const CheckboxWrap = styled.div`
   display: flex;
   flex-direction: row;
