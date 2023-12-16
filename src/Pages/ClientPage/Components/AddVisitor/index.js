@@ -124,9 +124,9 @@ export const AddVisitor = () => {
               <Space direction="vertical" size={12}>
                 <RangePicker
                   showTime={{
-                    format: "HH:mm",
+                    format: "HH",
                   }}
-                  format="YYYY-MM-DD HH:mm"
+                  format="YYYY-MM-DD HH"
                   onOk={(value) => {
                     setStartDate(value[0]);
                     setEndDate(value[1]);

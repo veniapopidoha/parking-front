@@ -128,7 +128,7 @@ export const ChangePassword = () => {
               <StyledInput
                 onBlur={(e) => blurHandler(e)}
                 onChange={handlePassword}
-                placeholder="Password"
+                placeholder="New Password"
                 name="password"
                 value={password}
               />

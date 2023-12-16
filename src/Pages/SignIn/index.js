@@ -24,7 +24,7 @@ export const SignIn = () => {
   });
   const [error, setError] = useState("");
   const [formValid, setFormValid] = useState(false);
-  const data = useSelector((state) => state);
+
 
   const blurHandler = (e) => {
     switch (e.target.name) {
@@ -121,6 +121,7 @@ export const SignIn = () => {
       });
     }
   };
+
 
   return (
     <Wrap>

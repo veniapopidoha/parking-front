@@ -12,7 +12,7 @@ import {
   Textarea,
   Wrap,
 } from "./style";
-import { ConfigProvider, DatePicker, Space } from "antd";
+import { ConfigProvider, DatePicker, Space, TimePicker } from "antd";
 
 export const AddObject = ({ setIsAddBuild }) => {
   const [name, setName] = useState("");
@@ -172,11 +172,9 @@ export const AddObject = ({ setIsAddBuild }) => {
             }}
           >
             <Space direction="vertical" size={12}>
-              <DatePicker
-                showTime={{
-                  format: "HH:mm",
-                }}
-                format="YYYY-MM-DD HH:mm"
+              <TimePicker
+                use12Hours 
+                format="h"
                 onOk={(value) => {
                   setLimitCustomTime(value);
                 }}

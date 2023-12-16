@@ -81,9 +81,9 @@ export const AllPatrols = () => {
             >
               <DatePicker.RangePicker
                 showTime={{
-                  format: "HH:mm",
+                  format: "HH",
                 }}
-                format="YYYY-MM-DD HH:mm"
+                format="YYYY-MM-DD HH"
                 onChange={handleDateRangeChange}
                 value={dateRange}
               />

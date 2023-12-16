@@ -93,9 +93,9 @@ export const ReportsPage = () => {
             >
               <RangePicker
                 showTime={{
-                  format: "HH:mm",
+                  format: "HH",
                 }}
-                format="YYYY-MM-DD HH:mm"
+                format="YYYY-MM-DD HH"
                 onChange={handleDateRangeChange}
               />
             </Space>
