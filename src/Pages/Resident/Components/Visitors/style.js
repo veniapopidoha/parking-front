@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrap = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
@@ -17,12 +17,18 @@ export const Wrap = styled.div`
   @media only screen and (min-width: 768px) {
     padding: 45px 64px 45px 35px;
   }
+  @media only screen and (max-width: 480px) {
+    padding: 20px 30px 20px 20px;
+    overflow: scroll;
+  }
 `;
 
 export const Table = styled.table`
   width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  @media only screen and (max-width: 480px) {
+    width: 420px;
+  }
 
   a {
     text-decoration: none;
@@ -77,26 +83,27 @@ export const TableBody = styled.tbody`
   flex-direction: column;
   gap: 17px;
   max-width: 1200px;
+  width: 100%;
 
-  @media only screen and (max-width: 768px) {
+  /* @media only screen and (max-width: 768px) {
     max-width: 500px;
   }
 
   @media only screen and (max-width: 590px) {
     max-width: 400px;
-  }
+  } */
 
   @media only screen and (max-width: 480px) {
-    max-width: 320px;
-  }
+    min-width: 400px;
+  } 
 
-  @media only screen and (max-width: 400px) {
-    max-width: 250px;
-  }
+  /* @media only screen and (max-width: 400px) {
+    max-width: 350px;
+  } */
 
-  @media only screen and (max-width: 360px) {
+  /* @media only screen and (max-width: 360px) {
     max-width: 220px;
-  }
+  } */
 `;
 
 export const TableRow = styled.tr`
@@ -164,12 +171,12 @@ export const Title = styled.h3`
 `;
 
 export const ToggleButton = styled.td`
-  position: absolute;
+  /* position: absolute; */
   background: transparent;
   border: none;
   right: 45px;
 
-  @media only screen and (max-width: 1520px) {
+  /* @media only screen and (max-width: 1520px) {
     right: 20px;
   }
 
@@ -178,21 +185,22 @@ export const ToggleButton = styled.td`
   }
 
   @media only screen and (max-width: 480px) {
-    right: 32px;
+    right: -90px;
   }
 
-  @media only screen and (max-width: 360px) {
-    right: 12px;
-  }
+  @media only screen and (max-width: 400px) {
+    right: -120px;
+  } */
 `;
 
 export const ToggleImage = styled.img`
-  width: 42px;
-  height: 42px;
+  width: 30px;
+  height: 30px;
+  margin: 0 15px;
 
   @media only screen and (max-width: 768px) {
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 22px;
   }
 
   @media only screen and (max-width: 480px) {
