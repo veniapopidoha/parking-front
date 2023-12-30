@@ -10,10 +10,10 @@ import { InputWrap } from '../../../../Components/Input/style';
 import bgImg from '../../../../images/bg2.png';
 import { Checkbox, CheckboxWrap } from '../../../AddUser/style';
 
-export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
-  const [plate, setPlate] = useState('');
-  const [colour, setColour] = useState('');
-  const [make, setMake] = useState('');
+export const AddVisitor = ({ isSubmitted, setIsSubmitted, favorite }) => {
+  const [plate, setPlate] = useState(favorite.plate);
+  const [colour, setColour] = useState(favorite.colour);
+  const [make, setMake] = useState(favorite.make);
   const [startDate, setStartDate] = useState(null);
   const [error, setError] = useState('');
   const [numberOfDaysOptions, setNumberOfDaysOptions] = useState([]);

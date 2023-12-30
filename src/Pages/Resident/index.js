@@ -78,6 +78,7 @@ export const Resident = () => {
               <AddVisitor
                 setIsSubmitted={setIsSubmitted}
                 isSubmitted={isSubmitted}
+                favorite={favorite}
               />
             )}
             <Leftside>
