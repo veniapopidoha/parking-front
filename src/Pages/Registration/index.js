@@ -143,7 +143,6 @@ export const Registration = (props) => {
   const getUserInfo = async () => {
     setloading(true);
     await axios.get(`${backLink}/${props.userId}`).then((response) => {
-      console.log(response);
       setUserData(response.data[0] || response.data);
     });
     setloading(false);

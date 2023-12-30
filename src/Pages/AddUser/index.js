@@ -136,7 +136,6 @@ export const AddUser = () => {
     setEmail(temp);
   };
   const saveFile = (e) => {
-    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   };
   const addUser = (e) => {

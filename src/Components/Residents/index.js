@@ -18,6 +18,7 @@ import axios from "axios";
 import { backLink } from "../../App";
 import { useEffect, useState } from "react";
 import { Button } from "../../Pages/SignIn/style";
+import { useSelector } from 'react-redux';
 
 export const Residents = ({
   building,
@@ -31,13 +32,14 @@ export const Residents = ({
     setIsChangesMade(!isChangesMade);
     setEditing(false);
   };
+  const status = useSelector((state) => state.status);
 
   return (
     <>
       <Wrap>
         <TopWrap>
           <Title>Resident list</Title>
-          <Icon onClick={() => setEditing(!editing)} src={Pencil} alt="icon" />
+          {status === "client" && <Icon onClick={() => setEditing(!editing)} src={Pencil} alt="icon" />}
         </TopWrap>
         <table width="100%">
           <thead>

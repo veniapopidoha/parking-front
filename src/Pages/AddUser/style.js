@@ -38,7 +38,6 @@ export const Row = styled.form`
   &>span{
     padding:15px 20px;
   }
-  }
 `;
 export const CheckboxWrap = styled.div`
   display: flex;

@@ -184,20 +184,19 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
               </Space>
             </ConfigProvider>
 
-
-              <select
-                value={selectedNumberOfDays}
-                onChange={(e) => handleNumberOfDaysChange(e.target.value)}
-              >
-                <option value='' disabled>
-                  Select number of days
+            <select
+              value={selectedNumberOfDays}
+              onChange={(e) => handleNumberOfDaysChange(e.target.value)}
+            >
+              <option value='' disabled>
+                Select number of days
+              </option>
+              {numberOfDaysOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
                 </option>
-                {numberOfDaysOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              ))}
+            </select>
 
             <Button style={{ display: 'block' }} type='submit'>
               Add Visitor
@@ -214,7 +213,7 @@ export const AddVisitor = ({ isSubmitted, setIsSubmitted }) => {
 const calculateEndDate = (startDate, limitCustomTime, numberOfDays) => {
   if (limitCustomTime) {
     const startDateObj = new Date(startDate);
-    const limit = new Date(limitCustomTime)
+    const limit = new Date(limitCustomTime);
     const endDate = new Date(startDateObj.getTime());
     endDate.setDate(startDateObj.getDate() + numberOfDays);
     endDate.setHours(limit.getHours());
