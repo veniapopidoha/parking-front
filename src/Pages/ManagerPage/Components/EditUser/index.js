@@ -54,6 +54,32 @@ export const EditUser = ({ building }) => {
               value={"edit"}
               building={building}
             />
+            Notifications
+            <Checkbox
+              text={"Patrols notification"}
+              value={"patrol-notif"}
+              building={building}
+            />
+            <Checkbox
+              text={"Instractions for Manager"}
+              value={"instruct-for-manage"}
+              building={building}
+            />
+            <Checkbox
+              text={"Instractions for Client"}
+              value={"instruct-for-client"}
+              building={building}
+            />
+            <Checkbox
+              text={"Limit Notification"}
+              value={"limit-notif"}
+              building={building}
+            />
+            <Checkbox
+              text={"New visitor"}
+              value={"visitor-notif"}
+              building={building}
+            />
           </DropDown>
         )}
         <Instructions>

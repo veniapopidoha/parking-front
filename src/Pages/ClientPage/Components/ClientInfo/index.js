@@ -39,7 +39,7 @@ export const ClientInfo = ({ building }) => {
         <div style={{ marginBottom: "20px" }}>
           <EditName />
           <Status>{user.status}</Status>
-          <Label>
+          {/* <Label>
             <Input
               type="checkbox"
               name="notification"
@@ -48,7 +48,7 @@ export const ClientInfo = ({ building }) => {
             />
             <span>Notification Allowed</span>
             <StyledCheckbox checked={checked}></StyledCheckbox>
-          </Label>
+          </Label> */}
           <EditUser building={building} />
         </div>
         {/* <dl>
