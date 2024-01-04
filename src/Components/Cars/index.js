@@ -50,8 +50,8 @@ export const Cars = ({ building }) => {
                 <TableData width="20%">{car.plate}</TableData>
                 <TableDataS width="20%">{car.make}</TableDataS>
                 <TableDataS width="20%">{car.residentUnit}</TableDataS>
-                <TableDataS width="20%">{formatDate(car.startDate)}</TableDataS>
-                <TableDataS width="20%">{formatDate(car.endDate)}</TableDataS>
+                <TableDataS width="20%">{new Date(car.startDate).toDateString().slice(4) + " " + new Date(car.startDate).toLocaleTimeString()}</TableDataS>
+                <TableDataS width="20%">{new Date(car.endDate).toDateString().slice(4) + " " + new Date(car.endDate).toLocaleTimeString()}</TableDataS>
               </TableRow>
             ))}
           </TableBody>

@@ -1,6 +1,6 @@
-import axios from "axios";
-import { backLink } from "../../../../App";
-import { useEffect, useState } from "react";
+import axios from 'axios';
+import { backLink } from '../../../../App';
+import { useEffect, useState } from 'react';
 import {
   TableBody,
   TableData,
@@ -11,10 +11,10 @@ import {
   Table,
   TopWrap,
   Title,
-} from "../../../../Components/Cars/style";
-import { useSelector } from "react-redux";
-import { ConfigProvider, Space, DatePicker } from "antd";
-import { formatDate } from "../../../../utils/formatDate";
+} from '../../../../Components/Cars/style';
+import { useSelector } from 'react-redux';
+import { ConfigProvider, Space, DatePicker } from 'antd';
+import { formatDate } from '../../../../utils/formatDate';
 
 export const ReportsPage = () => {
   const [reports, setReports] = useState([]);
@@ -62,6 +62,7 @@ export const ReportsPage = () => {
   useEffect(() => {
     const filteredReports = reports.filter((report) => withinDateRange(report));
     setFilteredReports(filteredReports);
+    console.log();
   }, [reports, dateRange]);
 
   const reportsToDisplay =
@@ -76,26 +77,26 @@ export const ReportsPage = () => {
             theme={{
               components: {
                 DatePicker: {
-                  colorLink: "#FECB21",
-                  colorLinkActive: "#000",
-                  colorPrimary: "#FECB21",
-                  colorLinkHover: "#FECB21",
-                  colorPrimary: "#FECB21",
-                  colorPrimaryHover: "#FECB21",
+                  colorLink: '#FECB21',
+                  colorLinkActive: '#000',
+                  colorPrimary: '#FECB21',
+                  colorLinkHover: '#FECB21',
+                  colorPrimary: '#FECB21',
+                  colorPrimaryHover: '#FECB21',
                 },
               },
             }}
           >
             <Space
-              direction="vertical"
+              direction='vertical'
               size={12}
-              style={{ marginBottom: "10px" }}
+              style={{ marginBottom: '10px' }}
             >
               <RangePicker
                 showTime={{
-                  format: "HH",
+                  format: 'HH',
                 }}
-                format="YYYY-MM-DD HH"
+                format='YYYY-MM-DD'
                 onChange={handleDateRangeChange}
               />
             </Space>
@@ -103,32 +104,34 @@ export const ReportsPage = () => {
         </TopWrap>
         <thead>
           <TableHeader>
-            <TableHead width="10%">Plate</TableHead>
-            <TableHead width="16%">Reason</TableHead>
-            <TableHead width="20%">Date</TableHead>
-            <TableHead width="20%">Name</TableHead>
-            <TableHead width="15%">Status</TableHead>
-            <TableHead width="20%">Notes</TableHead>
-            <TableHead width="14%">Attachment</TableHead>
+            <TableHead width='10%'>Plate</TableHead>
+            <TableHead width='16%'>Reason</TableHead>
+            <TableHead width='20%'>Date</TableHead>
+            <TableHead width='20%'>Name</TableHead>
+            <TableHead width='15%'>Status</TableHead>
+            <TableHead width='20%'>Notes</TableHead>
+            <TableHead width='14%'>Attachment</TableHead>
           </TableHeader>
         </thead>
         {!loading ? (
           <TableBody>
             {reportsToDisplay.map((item, index) => (
               <TableRow key={index}>
-                <TableData width="10%">{item.plate}</TableData>
-                <TableData width="16%">{item.reason}</TableData>
-                <TableData width="20%">{formatDate(item.timeStamp)}</TableData>
-                <TableData width="20%">{item.name}</TableData>
-                <TableData width="15%">{item.status}</TableData>
-                <TableData width="20%">{item.notes}</TableData>
-                <TableData width="14%">
+                <TableData width='10%'>{item.plate}</TableData>
+                <TableData width='16%'>{item.reason}</TableData>
+                <TableData width='20%'>
+                  {new Date(item.timeStamp).toDateString().slice(4)}
+                </TableData>
+                <TableData width='20%'>{item.name}</TableData>
+                <TableData width='15%'>{item.status}</TableData>
+                <TableData width='20%'>{item.notes}</TableData>
+                <TableData width='14%'>
                   {item.imageUrls.map((link, i) => (
                     <a
                       key={i}
                       href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                     >
                       photo {i + 1} &nbsp;
                     </a>

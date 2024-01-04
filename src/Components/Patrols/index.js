@@ -103,10 +103,10 @@ export const Patrols = ({ building }) => {
                 <TableRow key={`${patrol.name} ${Math.random() * 9999}`}>
                   <TableDataS width="33%">{patrol.name}</TableDataS>
                   <TableData width="33%">
-                    {formatDate(patrol.startTime)}
+                    {new Date(patrol.startTime).toDateString().slice(4) + " " + new Date(patrol.startTime).toLocaleTimeString()}
                   </TableData>
                   <TableData width="33%">
-                    {formatDate(patrol.endTime)}
+                    {new Date(patrol.endTime).toDateString().slice(4) + " " + new Date(patrol.endTime).toLocaleTimeString()}
                   </TableData>
                 </TableRow>
               );

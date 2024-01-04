@@ -84,7 +84,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           onChange={(e) => setResidentInstructions(e.target.value)}
         />
         <Input
-          placeholder="Max number of days for visitors"
+          placeholder="Maximum Consecutive Registrations"
           value={numberOfDays}
           onChange={(e) => setNumberOfDays(e.target.value)}
         />
@@ -185,7 +185,7 @@ export const AddObject = ({ setIsAddBuild }) => {
         )}
         <Label htmlFor="visitors">Limits:</Label>
         <Input
-          placeholder="Number of Visitors per month"
+          placeholder="Maximum Monthly Registrations"
           name="visitors"
           value={visitorsPerMonth}
           onChange={(e) => setVisitorsPerMonth(e.target.value)}
