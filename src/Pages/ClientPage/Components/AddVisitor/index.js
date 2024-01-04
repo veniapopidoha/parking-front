@@ -13,6 +13,7 @@ export const AddVisitor = () => {
   const [plate, setPlate] = useState("");
   const [colour, setColour] = useState("");
   const [make, setMake] = useState("");
+  const [unit, setUnit] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [error, setErorr] = useState("");
@@ -35,11 +36,13 @@ export const AddVisitor = () => {
           residentId: id,
           buildingName: data.buildingName,
           email: data.email,
+          unit,
         })
         .then(() => {
           setColour("");
           setPlate("");
           setMake("");
+          setUnit("");
           setErorr("");
           dispatch({
             type: "ADD_VISITOR_DATA",
@@ -101,6 +104,19 @@ export const AddVisitor = () => {
                   value={colour}
                   onChange={(e) => {
                     setColour(e.target.value);
+                  }}
+                  required
+                />
+              </InputWrap>
+            </Container>
+            <Container>
+              <InputWrap>
+                <StyledInput
+                  placeholder="Unit"
+                  name="unit"
+                  value={unit}
+                  onChange={(e) => {
+                    setUnit(e.target.value);
                   }}
                   required
                 />

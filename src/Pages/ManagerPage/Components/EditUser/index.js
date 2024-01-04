@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import {
   DropDown,
   Instructions,
@@ -8,76 +8,80 @@ import {
   InstructionsText,
   TextArea,
   Button,
-} from "./style";
-import Pencil from "../../../../images/pencil.svg";
-import bgImg from "../../../../images/bg4.png";
-import { Checkbox } from "./Components/Checkbox";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { backLink } from "../../../../App";
+  Status,
+} from './style';
+import Pencil from '../../../../images/pencil.svg';
+import bgImg from '../../../../images/bg4.png';
+import { Checkbox } from './Components/Checkbox';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { backLink } from '../../../../App';
 
 export const EditUser = ({ building }) => {
   const user = useSelector((state) => state);
   const [isToEdit, setIsToEdit] = useState(false);
-  const [value, setValue] = useState(localStorage.getItem("instructions"));
+  const [value, setValue] = useState(localStorage.getItem('instructions'));
   const [isSubmited, setIsSubmited] = useState(false);
 
-  useEffect(() => {
-    if (value !== "" && value !== null && !!building.name !== false) {
-      localStorage.setItem("instructions", value);
+  const ChangeInstruction = () => {
+    if (value !== '' && value !== null && !!building.name !== false) {
+      localStorage.setItem('instructions', value);
       axios
         .patch(`${backLink}/building-instructions`, {
           buildingName: building.name,
-          instructions: localStorage.getItem("instructions") || value,
+          instructions: localStorage.getItem('instructions') || value,
         })
-        .then((res) => setValue(res.data.instructions));
+        .then((res) => {
+          setValue(res.data.instructions);
+          setIsSubmited(!isSubmited);
+        });
     }
-  }, [isSubmited]);
+  };
 
   return (
     <>
       <div>
-        {user.status === "manager" && building.name && (
+        {user.status === 'manager' && building.name && (
           <DropDown>
             <Checkbox
-              text={"See reports"}
-              value={"reports"}
+              text={'See reports'}
+              value={'reports'}
               building={building}
             />
             <Checkbox
-              text={"See patrol reports"}
-              value={"patrols"}
+              text={'See patrol reports'}
+              value={'patrols'}
               building={building}
             />
             <Checkbox
-              text={"Edit instructions"}
-              value={"edit"}
+              text={'Edit instructions'}
+              value={'edit'}
               building={building}
             />
-            Notifications
+            <Status>Notifications</Status>
             <Checkbox
-              text={"Patrols notification"}
-              value={"patrol-notif"}
-              building={building}
-            />
-            <Checkbox
-              text={"Instractions for Manager"}
-              value={"instruct-for-manage"}
+              text={'Patrols notification'}
+              value={'patrol-notif'}
               building={building}
             />
             <Checkbox
-              text={"Instractions for Client"}
-              value={"instruct-for-client"}
+              text={'Instractions for Manager'}
+              value={'instruct-for-manage'}
               building={building}
             />
             <Checkbox
-              text={"Limit Notification"}
-              value={"limit-notif"}
+              text={'Instractions for Client'}
+              value={'instruct-for-client'}
               building={building}
             />
             <Checkbox
-              text={"New visitor"}
-              value={"visitor-notif"}
+              text={'Limit Notification'}
+              value={'limit-notif'}
+              building={building}
+            />
+            <Checkbox
+              text={'New visitor'}
+              value={'visitor-notif'}
               building={building}
             />
           </DropDown>
@@ -85,10 +89,10 @@ export const EditUser = ({ building }) => {
         <Instructions>
           <InstructionsWrap>
             <InstructionsText>Employee Instructions</InstructionsText>
-            {user.status === "manager" && (
+            {user.status === 'manager' && (
               <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
             )}
-            {user.status === "client" && building.instructionsAllowed && (
+            {user.status === 'client' && building.instructionsAllowed && (
               <PencilIcon src={Pencil} onClick={() => setIsToEdit(!isToEdit)} />
             )}
           </InstructionsWrap>
@@ -97,7 +101,7 @@ export const EditUser = ({ building }) => {
               <TextAreaComponent value={value} setValue={setValue} />
               <Button
                 onClick={() => {
-                  setIsSubmited(!isSubmited);
+                  ChangeInstruction();
                   setIsToEdit(false);
                 }}
               >
@@ -105,15 +109,15 @@ export const EditUser = ({ building }) => {
               </Button>
             </>
           ) : (
-            <InstructionsText style={{ lineHeight: "24px" }}>
-              {user.status === "employee"
+            <InstructionsText style={{ lineHeight: '24px' }}>
+              {user.status === 'employee'
                 ? building.residentInstructions
                 : value || building.instructions}
             </InstructionsText>
           )}
         </Instructions>
       </div>
-      <Image src={bgImg} alt="bg" />
+      <Image src={bgImg} alt='bg' />
     </>
   );
 };

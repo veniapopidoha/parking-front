@@ -69,6 +69,33 @@ export const Instructions = styled.div`
   max-width: 540px;
 `;
 
+export const Status = styled.p`
+  position: relative;
+  padding-bottom: 15px;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  margin-top: 15px;
+
+  &:after {
+    position: absolute;
+    content: ""; /* Add a value here */
+    width: 30px;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
+`;
+
 export const InstructionsWrap = styled.div`
   display: flex;
   align-items: center;
