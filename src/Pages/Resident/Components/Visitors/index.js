@@ -93,12 +93,9 @@ export const Visitors = ({ visitors, isAllVisitors, setIsAllVisitors }) => {
               <TableRow key={visitor.plate}>
                 <TableData width="25%">{visitor.plate}</TableData>
                 <TableDataS width="25%">{visitor.make}</TableDataS>
-                <TableDataS width="25%">
-                  {formatDate(visitor.startDate)}
-                </TableDataS>
-                <TableDataS width="25%">
-                  {formatDate(visitor.endDate)}
-                </TableDataS>
+                <TableDataS width="25%">{new Date(visitor.startDate).toDateString().slice(4) + " " + new Date(visitor.startDate).toLocaleTimeString()}</TableDataS>
+                <TableDataS width="25%">{new Date(visitor.endDate).toDateString().slice(4) + " " + new Date(visitor.endDate).toLocaleTimeString()}</TableDataS>
+
                 <Icon visitor={visitor} user={user} />
               </TableRow>
             ))}

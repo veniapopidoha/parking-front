@@ -6,7 +6,7 @@ import { MainPage } from './Pages/MainPage';
 import { persistor, store } from './Redux/store';
 import { ChangePassword } from './Pages/ChangePassword';
 
-export const backLink = 'http://localhost:5000'
+export const backLink = 'https://parking-server-6bdb10e251c8.herokuapp.com'
 
 function App() {
   return (
