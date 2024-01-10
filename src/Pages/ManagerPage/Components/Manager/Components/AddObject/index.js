@@ -74,7 +74,7 @@ export const AddObject = ({ setIsAddBuild }) => {
           onChange={(e) => setAddress(e.target.value)}
         />
         <Textarea
-          placeholder="Notes"
+          placeholder="Employee instructions"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
         />
